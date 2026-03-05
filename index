@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Les Vacances de Mar et Ben ✈️</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;0,700;1,300;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+:root{
+  --bg:#f5f3ef;--card:#fff;--dark:#1a1a2e;--slate:#5a6a7a;
+  --teal:#0d9488;--teal2:#14b8a6;--gold:#c8943a;--white:#fff;
+  --border:#e8e0d5;--shadow:0 4px 24px rgba(0,0,0,.09);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--dark);overflow-x:hidden}
+img{display:block;width:100%;object-fit:cover}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:#f0ede8}
+::-webkit-scrollbar-thumb{background:var(--teal);border-radius:3px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;
+  justify-content:space-between;padding:.8rem 2.5rem;
+  background:rgba(245,243,239,.93);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border)}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:500;
+  color:var(--dark);display:flex;align-items:center;gap:.5rem}
+.nav-logo span{color:var(--teal)}
+nav ul{display:flex;gap:1.5rem;list-style:none}
+nav a{font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;color:var(--slate);
+  transition:color .2s;font-weight:500;text-decoration:none}
+nav a:hover{color:var(--teal)}
+
+/* HERO */
+.hero{height:100vh;position:relative;display:flex;align-items:flex-end;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;
+  animation:hzoom 25s ease-in-out infinite alternate}
+@keyframes hzoom{from{transform:scale(1.03)}to{transform:scale(1.09)}}
+.hero-ov{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(26,26,46,.95) 0%,rgba(26,26,46,.5) 50%,rgba(26,26,46,.1) 100%)}
+.hero-body{position:relative;z-index:2;padding:5rem 3rem;width:100%;max-width:1300px;display:flex;align-items:flex-end;gap:3rem;flex-wrap:wrap}
+.hero-chip{display:inline-block;background:var(--teal);color:#fff;font-size:.68rem;
+  font-weight:600;letter-spacing:.16em;text-transform:uppercase;padding:.3rem .9rem;margin-bottom:1.5rem}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3.5rem,8vw,6.5rem);
+  font-weight:300;line-height:.93;color:#fff;margin-bottom:1.2rem}
+.hero h1 em{font-style:italic;color:var(--teal2)}
+.hero-sub{font-size:1rem;color:rgba(255,255,255,.65);max-width:480px;line-height:1.7;margin-bottom:2rem}
+.hero-pills{display:flex;flex-wrap:wrap;gap:.6rem}
+.hpill{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);
+  color:rgba(255,255,255,.7);font-size:.75rem;padding:.3rem .8rem}
+.scroll-hint{position:absolute;bottom:2rem;right:3rem;z-index:2;
+  display:flex;flex-direction:column;align-items:center;gap:.4rem;
+  color:rgba(255,255,255,.35);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;
+  animation:sbounce 2s ease-in-out infinite}
+.scroll-hint::after{content:'';width:1px;height:38px;
+  background:linear-gradient(rgba(255,255,255,.35),transparent)}
+@keyframes sbounce{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+
+/* PROFILES */
+.profiles-section{background:var(--dark);padding:4.5rem 3rem}
+.profiles-inner{max-width:1100px;margin:0 auto;display:grid;
+  grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+.profiles-inner h2{font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.8rem,3.5vw,3rem);font-weight:300;color:#fff;line-height:1.1}
+.profiles-inner h2 strong{font-weight:600;color:var(--teal2)}
+.profiles-inner p{margin-top:.8rem;color:rgba(255,255,255,.45);font-size:.88rem;line-height:1.65}
+.profile-cards{display:flex;flex-direction:column;gap:.8rem;margin-top:.3rem}
+.pcard{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);
+  padding:1rem 1.3rem;border-left:3px solid var(--teal)}
+.pcard h4{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--teal2);margin-bottom:.35rem}
+.pcard p{font-size:.85rem;color:rgba(255,255,255,.62);line-height:1.5}
+.conv-bar{background:rgba(13,148,136,.1);border:1px solid rgba(13,148,136,.25);
+  padding:.8rem 1.1rem;font-size:.82rem;color:var(--teal2);line-height:1.55}
+.excl-bar{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);
+  padding:.65rem 1.1rem;font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.6rem}
+
+/* FILTER */
+.filter-section{padding:3rem 3rem 1.5rem;max-width:1200px;margin:0 auto}
+.filter-section h2{font-family:'Cormorant Garamond',serif;font-size:2rem;
+  font-weight:500;color:var(--dark);margin-bottom:1.5rem}
+.filter-tabs{display:flex;flex-wrap:wrap;gap:.5rem}
+.ftab{background:var(--card);border:1.5px solid var(--border);padding:.45rem 1.1rem;
+  font-size:.78rem;font-weight:500;letter-spacing:.04em;cursor:pointer;
+  transition:all .2s;color:var(--slate)}
+.ftab:hover{border-color:var(--teal);color:var(--teal)}
+.ftab.active{background:var(--teal);border-color:var(--teal);color:#fff}
+.ftab .cnt{background:rgba(255,255,255,.25);padding:0 .35rem;
+  font-size:.7rem;margin-left:.3rem;border-radius:2px}
+.ftab:not(.active) .cnt{background:var(--border);color:var(--slate)}
+
+/* CARDS GRID */
+.cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;
+  padding:1.5rem 3rem 4rem;max-width:1200px;margin:0 auto}
+.dest-card{background:var(--card);overflow:hidden;cursor:pointer;
+  box-shadow:var(--shadow);transition:transform .3s,box-shadow .3s;position:relative}
+.dest-card:hover{transform:translateY(-5px);box-shadow:0 12px 40px rgba(0,0,0,.14)}
+.dest-card.hidden{display:none}
+.card-photo{height:220px;overflow:hidden;position:relative}
+.card-photo img{height:100%;transition:transform .6s ease}
+.dest-card:hover .card-photo img{transform:scale(1.06)}
+.card-photo-ov{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.55) 0%,transparent 60%)}
+.card-num{position:absolute;top:.8rem;left:.8rem;width:30px;height:30px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.65rem;font-weight:700;color:#fff}
+.card-badges{position:absolute;top:.7rem;right:.7rem;
+  display:flex;flex-direction:column;align-items:flex-end;gap:.3rem}
+.badge-visited{background:rgba(30,41,59,.85);color:rgba(255,255,255,.7);
+  font-size:.6rem;letter-spacing:.08em;padding:.2rem .55rem;text-transform:uppercase}
+.badge-marion{background:rgba(239,68,68,.8);color:#fff;
+  font-size:.6rem;letter-spacing:.08em;padding:.2rem .55rem;text-transform:uppercase}
+.card-flag{position:absolute;bottom:.7rem;left:.8rem;font-size:1.5rem;line-height:1}
+.card-body{padding:1.1rem 1.2rem 1.3rem}
+.card-body h3{font-family:'Cormorant Garamond',serif;font-size:1.35rem;
+  font-weight:600;color:var(--dark);margin-bottom:.1rem}
+.card-sub{font-size:.8rem;color:var(--slate);margin-bottom:.75rem}
+.card-budget{display:inline-flex;align-items:center;gap:.35rem;
+  font-size:.78rem;font-weight:600;padding:.3rem .75rem;margin-bottom:.8rem}
+.card-tagline{font-size:.82rem;color:var(--slate);line-height:1.5;margin-bottom:.9rem}
+.card-tags{display:flex;flex-wrap:wrap;gap:.3rem}
+.ctag{font-size:.68rem;border:1px solid;padding:.2rem .55rem;letter-spacing:.03em}
+.card-cta{width:100%;background:var(--dark);color:#fff;border:none;padding:.7rem;
+  font-family:'Outfit',sans-serif;font-size:.78rem;font-weight:500;
+  letter-spacing:.08em;text-transform:uppercase;cursor:pointer;margin-top:1rem;
+  transition:background .2s;display:flex;align-items:center;justify-content:center;gap:.5rem}
+.card-cta:hover{background:var(--teal)}
+
+/* MODAL */
+.modal-bg{display:none;position:fixed;inset:0;z-index:800;
+  background:rgba(20,20,35,.6);backdrop-filter:blur(5px)}
+.modal-bg.open{display:flex;align-items:flex-start;justify-content:center;
+  overflow-y:auto;padding:1.5rem}
+.modal{background:var(--bg);width:100%;max-width:1050px;
+  margin:auto;position:relative;animation:mslide .35s ease}
+@keyframes mslide{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.modal-close{position:absolute;top:1rem;right:1rem;z-index:10;width:36px;height:36px;
+  background:rgba(0,0,0,.5);border:none;cursor:pointer;
+  color:#fff;font-size:1rem;display:flex;align-items:center;justify-content:center}
+.modal-hero{height:380px;overflow:hidden;position:relative}
+.modal-hero img{height:100%}
+.modal-hero-ov{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(26,26,46,.85) 0%,transparent 60%)}
+.modal-hero-body{position:absolute;bottom:0;left:0;right:0;padding:2rem}
+.modal-hero-body h2{font-family:'Cormorant Garamond',serif;font-size:2.8rem;
+  font-weight:300;color:#fff;line-height:.95}
+.mhsub{font-size:.95rem;color:rgba(255,255,255,.7);margin-top:.4rem}
+.modal-tags{display:flex;flex-wrap:wrap;gap:.4rem;padding:1rem 1.5rem;background:var(--dark)}
+.mtag{font-size:.72rem;border:1px solid rgba(255,255,255,.2);
+  color:rgba(255,255,255,.75);padding:.22rem .65rem}
+.modal-cols{display:grid;grid-template-columns:1.1fr .9fr;border-top:3px solid}
+.modal-left{padding:2rem 1.8rem;border-right:1px solid var(--border)}
+.modal-right{padding:2rem 1.8rem}
+.modal-left h3,.modal-right h3{font-family:'Cormorant Garamond',serif;
+  font-size:1.4rem;font-weight:600;color:var(--dark);margin-bottom:1.3rem}
+.mweek{display:grid;grid-template-columns:46px 1fr;gap:.8rem;
+  margin-bottom:1.1rem;padding-bottom:1.1rem;border-bottom:1px solid var(--border)}
+.mweek:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.mwbadge{width:42px;height:42px;display:flex;align-items:center;justify-content:center;
+  font-size:.58rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+  color:#fff;flex-shrink:0}
+.mwbody h4{font-size:.88rem;font-weight:600;color:var(--dark);margin-bottom:.2rem}
+.mwbody p{font-size:.8rem;color:var(--slate);line-height:1.5}
+.micard{background:var(--card);padding:1rem 1.2rem;margin-bottom:.75rem;
+  box-shadow:0 1px 3px rgba(0,0,0,.06);border-left:3px solid}
+.micard h5{font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;
+  font-weight:700;margin-bottom:.4rem}
+.micard p{font-size:.8rem;color:var(--slate);line-height:1.55}
+.modal-map-wrap{background:var(--card);border-top:1px solid var(--border)}
+.modal-map-header{padding:.9rem 1.5rem;display:flex;align-items:center;
+  justify-content:space-between;border-bottom:1px solid var(--border)}
+.modal-map-header h4{font-family:'Cormorant Garamond',serif;
+  font-size:1.1rem;font-weight:600;color:var(--dark)}
+.mmap-legend{display:flex;gap:.8rem;flex-wrap:wrap}
+.leg{display:flex;align-items:center;gap:.3rem;font-size:.72rem;color:var(--slate)}
+.leg-dot{width:10px;height:10px;border-radius:50%}
+.mmap{height:380px;width:100%}
+.modal-gallery{display:grid;grid-template-columns:repeat(3,1fr);height:180px;overflow:hidden}
+.modal-gallery img{height:100%;filter:brightness(.88);
+  transition:filter .4s,transform .5s}
+.modal-gallery img:hover{filter:brightness(1);transform:scale(1.04)}
+
+/* TAHITI */
+.tahiti-section{background:linear-gradient(135deg,#0c2e3a 0%,#0a4a5c 40%,#0c3040 100%);
+  padding:6rem 3rem;position:relative;overflow:hidden}
+.tahiti-section::before{content:'';position:absolute;top:-100px;right:-100px;
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(200,148,58,.12),transparent 70%)}
+.tahiti-inner{max-width:1200px;margin:0 auto}
+.tahiti-header{text-align:center;margin-bottom:4rem}
+.tahiti-eyebrow{display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(200,148,58,.15);border:1px solid rgba(200,148,58,.4);
+  color:var(--gold);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;
+  padding:.4rem 1.1rem;margin-bottom:1.5rem;font-weight:600}
+.tahiti-header h2{font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.5rem,5vw,4.5rem);font-weight:300;color:#fff;line-height:.95}
+.tahiti-header h2 em{font-style:italic;color:var(--gold)}
+.tahiti-header p{font-size:1rem;color:rgba(255,255,255,.55);
+  max-width:600px;margin:1.2rem auto 0;line-height:1.75}
+.tahiti-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:2.5rem;align-items:start}
+.tahiti-left h3,.tahiti-right h3{font-family:'Cormorant Garamond',serif;
+  font-size:1.5rem;font-weight:500;color:#fff;margin-bottom:1.3rem}
+.tphoto-hero{height:280px;overflow:hidden;margin-bottom:.7rem;position:relative}
+.tphoto-hero img{height:100%;transition:transform .7s}
+.tphoto-hero:hover img{transform:scale(1.04)}
+.tgallery{display:grid;grid-template-columns:1fr 1fr;gap:.55rem}
+.tgallery div{height:140px;overflow:hidden}
+.tgallery img{height:100%;filter:brightness(.85);transition:transform .5s,filter .4s}
+.tgallery div:hover img{transform:scale(1.04);filter:brightness(1)}
+.tahiti-map-wrap{margin-top:2rem}
+.tmap{height:360px;width:100%;margin-top:.6rem}
+.tahiti-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin:1.2rem 0}
+.ttag{border:1px solid rgba(200,148,58,.4);color:rgba(200,148,58,.9);
+  font-size:.72rem;padding:.25rem .7rem;letter-spacing:.04em}
+.tahiti-budget{display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(200,148,58,.2);border:1px solid rgba(200,148,58,.5);
+  color:var(--gold);font-size:.9rem;font-weight:600;padding:.5rem 1.2rem;margin-bottom:1.3rem}
+.tweek{display:grid;grid-template-columns:44px 1fr;gap:.75rem;
+  margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px solid rgba(255,255,255,.08)}
+.tweek:last-child{border-bottom:none}
+.twbadge{width:40px;height:40px;background:rgba(200,148,58,.2);
+  border:1px solid rgba(200,148,58,.4);display:flex;align-items:center;justify-content:center;
+  font-size:.58rem;font-weight:700;color:var(--gold);text-transform:uppercase;flex-shrink:0}
+.twbody h4{font-size:.88rem;font-weight:600;color:rgba(255,255,255,.9);margin-bottom:.18rem}
+.twbody p{font-size:.8rem;color:rgba(255,255,255,.5);line-height:1.5}
+.tcards{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-top:1.3rem}
+.tcard{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);padding:.9rem 1rem}
+.tcard h5{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(200,148,58,.8);margin-bottom:.35rem}
+.tcard p{font-size:.8rem;color:rgba(255,255,255,.55);line-height:1.5}
+.tahiti-note{background:rgba(200,148,58,.08);border:1px solid rgba(200,148,58,.2);
+  padding:1.2rem 1.5rem;margin-top:1.5rem;font-size:.85rem;
+  color:rgba(255,255,255,.55);line-height:1.65}
+.tahiti-note strong{color:rgba(200,148,58,.9)}
+
+/* FOOTER */
+footer{background:var(--dark);padding:2rem 3rem;display:flex;align-items:center;
+  justify-content:space-between;flex-wrap:wrap;gap:1rem;border-top:3px solid var(--teal)}
+footer .fl{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--teal2)}
+footer .fm{font-size:.78rem;color:rgba(255,255,255,.35);text-align:center}
+footer .fr{font-size:.72rem;color:rgba(255,255,255,.2)}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.rv.on{opacity:1;transform:none}
+.rv.d1{transition-delay:.15s}.rv.d2{transition-delay:.3s}.rv.d3{transition-delay:.45s}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav ul{display:none}
+  .profiles-inner,.cards-grid,.tahiti-grid,.modal-cols,.tcards{grid-template-columns:1fr}
+  .cards-grid,.filter-section,.hero-body,.profiles-section,.tahiti-section{padding-left:1.2rem;padding-right:1.2rem}
+  .tgallery{grid-template-columns:1fr 1fr}
+  .modal-gallery{grid-template-columns:1fr 1fr}
+  .modal-gallery img:last-child{display:none}
+}
+@media(max-width:600px){
+  .hero h1{font-size:3rem}
+  .cards-grid{grid-template-columns:1fr}
+}
+
+/* GOLD CARD — Tahiti special */
+.dest-card.gold-card{
+  box-shadow:0 0 0 3px #c8943a, 0 8px 32px rgba(200,148,58,.25);
+  position:relative;
+}
+.dest-card.gold-card::before{
+  content:'✨ Voyage d\'Exception';
+  position:absolute;top:-1px;left:50%;transform:translateX(-50%);
+  background:linear-gradient(90deg,#b8860b,#ffd700,#b8860b);
+  color:#1a1a2e;font-size:.62rem;font-weight:700;letter-spacing:.1em;
+  padding:.25rem 1rem;white-space:nowrap;z-index:10;text-transform:uppercase;
+}
+.dest-card.gold-card:hover{
+  box-shadow:0 0 0 3px #ffd700, 0 16px 48px rgba(200,148,58,.4);
+}
+.dest-card.gold-card .card-cta{
+  background:linear-gradient(90deg,#b8860b,#c8943a);color:#fff;
+}
+.dest-card.gold-card .card-cta:hover{background:linear-gradient(90deg,#c8943a,#ffd700);color:#1a1a2e;}
+
+/* COMMENTS SECTION */
+.comments-section{background:#fff;padding:4rem 3rem;border-top:1px solid var(--border)}
+.comments-inner{max-width:860px;margin:0 auto}
+.comments-inner h2{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:500;
+  color:var(--dark);margin-bottom:.5rem}
+.comments-inner p{font-size:.88rem;color:var(--slate);line-height:1.6;margin-bottom:2rem}
+
+
+/* COMMENT FORM */
+.comments-section{background:#f7f5f0;padding:4rem 3rem;border-top:3px solid var(--teal)}
+.comments-inner{max-width:720px;margin:0 auto}
+.comments-inner h2{font-family:'Cormorant Garamond',serif;font-size:2rem;
+  font-weight:500;color:var(--dark);margin-bottom:.5rem}
+.comments-inner>p{font-size:.88rem;color:var(--slate);line-height:1.6;margin-bottom:2rem}
+.comment-form{display:flex;flex-direction:column;gap:1.2rem}
+.cf-row{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.cf-field{display:flex;flex-direction:column;gap:.4rem}
+.cf-field label{font-size:.75rem;font-weight:600;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--slate)}
+.cf-field input,.cf-field select,.cf-field textarea{
+  background:#fff;border:1.5px solid var(--border);padding:.7rem .9rem;
+  font-family:'Outfit',sans-serif;font-size:.9rem;color:var(--dark);
+  outline:none;transition:border-color .2s;resize:vertical}
+.cf-field input:focus,.cf-field select:focus,.cf-field textarea:focus{
+  border-color:var(--teal)}
+.cf-btn{background:var(--dark);color:#fff;border:none;padding:.85rem 2rem;
+  font-family:'Outfit',sans-serif;font-size:.85rem;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;cursor:pointer;
+  align-self:flex-start;transition:background .2s}
+.cf-btn:hover{background:var(--teal)}
+.cf-success{display:none;background:#f0fdf4;border:1px solid #bbf7d0;
+  color:#166534;padding:.8rem 1.1rem;font-size:.85rem}
+@media(max-width:600px){.cf-row{grid-template-columns:1fr}}
+
+/* ── QUIZ WIDGET ── */
+.quiz-wrap{position:relative;z-index:3;margin-top:2rem;background:rgba(10,15,30,.75);
+  backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.15);border-radius:16px;
+  padding:1.5rem;max-width:440px;color:#fff}
+.quiz-wrap h3{font-family:'Cormorant Garamond',serif;font-size:1.35rem;margin:0 0 .3rem;color:#fff}
+.quiz-wrap p.qz-intro{font-size:.8rem;color:rgba(255,255,255,.55);margin:0 0 1.2rem}
+.qz-step{display:none}.qz-step.active{display:block}
+.qz-q{font-size:.9rem;font-weight:600;margin-bottom:.8rem;color:rgba(255,255,255,.9)}
+.qz-options{display:flex;flex-direction:column;gap:.5rem}
+.qz-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);
+  border-radius:8px;padding:.6rem 1rem;color:#fff;font-size:.85rem;cursor:pointer;
+  text-align:left;transition:all .2s}
+.qz-btn:hover,.qz-btn.selected{background:var(--teal);border-color:var(--teal);color:#fff}
+.qz-progress{display:flex;gap:.4rem;margin-bottom:1.2rem}
+.qz-dot{height:4px;flex:1;border-radius:2px;background:rgba(255,255,255,.2);transition:background .3s}
+.qz-dot.done{background:var(--teal)}
+.qz-results{display:none}
+.qz-results h4{font-family:'Cormorant Garamond',serif;font-size:1.1rem;margin:0 0 .8rem;color:var(--teal2)}
+.qz-top3{display:flex;flex-direction:column;gap:.5rem}
+.qz-dest{display:flex;align-items:center;gap:.7rem;padding:.6rem .8rem;
+  background:rgba(255,255,255,.07);border-radius:8px;cursor:pointer;transition:background .2s}
+.qz-dest:hover{background:rgba(255,255,255,.15)}
+.qz-rank{font-size:1.2rem;width:28px;text-align:center}
+.qz-info{flex:1}.qz-info strong{display:block;font-size:.9rem}
+.qz-info span{font-size:.75rem;color:rgba(255,255,255,.55)}
+.qz-pct{font-size:.8rem;font-weight:700;color:var(--teal2)}
+.qz-retry{margin-top:.8rem;background:transparent;border:1px solid rgba(255,255,255,.25);
+  border-radius:8px;padding:.5rem 1rem;color:rgba(255,255,255,.6);font-size:.8rem;cursor:pointer;width:100%}
+.qz-retry:hover{border-color:var(--teal);color:#fff}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">✦ <span>Mar et Ben</span> · Été 2026</div>
+  <ul>
+    <li><a href="#destinations">Destinations</a></li>
+    <li><a href="#destinations">✨ Tahiti</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg" style="background-image:url('hero.jpg')"></div>
+  <div class="hero-ov"></div>
+  <div class="hero-body">
+    <div class="hero-left"><div class="hero-chip">Sélection personnalisée · 8 août — 7 septembre</div>
+    <h1>Les vacances de<br><em>Mar et Ben</em></h1>
+    <p class="hero-sub">10 destinations soigneusement choisies pour nos deux profils, des Fjords norvégiens aux plages cachées de Polynésie.</p>
+    <div class="hero-pills">
+      <span class="hpill">📅 1 mois en duo</span>
+      <span class="hpill">🗺️ 10 destinations</span>
+      <span class="hpill">🏔️ Nature · 🌊 Mer · ✈️ Grand voyage · ✨ Exception</span>
+    </div>
+    </div>
+
+    <!-- QUIZ -->
+    <div class="quiz-wrap" id="quizWrap">
+      <h3>🧭 Trouvez votre destination</h3>
+      <p class="qz-intro">3 questions pour cibler votre top 3 parmi nos 10 destinations</p>
+      <div class="qz-progress">
+        <div class="qz-dot" id="dot0"></div>
+        <div class="qz-dot" id="dot1"></div>
+        <div class="qz-dot" id="dot2"></div>
+      </div>
+
+      <!-- Q1 -->
+      <div class="qz-step active" id="step0">
+        <div class="qz-q">1 · Quel paysage vous fait le plus rêver ?</div>
+        <div class="qz-options">
+          <button class="qz-btn" data-step="0" data-val="nature">🏔️ Montagnes, forêts, randonnées</button>
+          <button class="qz-btn" data-step="0" data-val="mer">🌊 Mer, plages, surf</button>
+          <button class="qz-btn" data-step="0" data-val="safari">🦁 Savane, faune sauvage</button>
+          <button class="qz-btn" data-step="0" data-val="culture">🏛️ Villes, culture, histoire</button>
+        </div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="qz-step" id="step1">
+        <div class="qz-q">2 · Quel est votre budget pour ce voyage ?</div>
+        <div class="qz-options">
+          <button class="qz-btn" data-step="1" data-val="small">💚 Moins de 3 000 €</button>
+          <button class="qz-btn" data-step="1" data-val="medium">💛 3 000 – 4 500 €</button>
+          <button class="qz-btn" data-step="1" data-val="large">🧡 Plus de 4 500 €</button>
+        </div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="qz-step" id="step2">
+        <div class="qz-q">3 · Qu'est-ce qui compte le plus ?</div>
+        <div class="qz-options">
+          <button class="qz-btn" data-step="2" data-val="adventure">⚡ Sensations fortes & aventure</button>
+          <button class="qz-btn" data-step="2" data-val="decouverte">🌍 Découverte & dépaysement total</button>
+          <button class="qz-btn" data-step="2" data-val="nature2">🌿 Nature & biodiversité</button>
+          <button class="qz-btn" data-step="2" data-val="detente">🌅 Farniente & détente</button>
+        </div>
+      </div>
+
+      <!-- Results -->
+      <div class="qz-results" id="qzResults">
+        <h4>🎯 Votre top 3 personnalisé</h4>
+        <div class="qz-top3" id="qzTop3"></div>
+        <button class="qz-retry" onclick="quizReset()">↩ Recommencer</button>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint">Explorer</div>
+</section>
+
+<!-- PROFILES -->
+<div class="profiles-section">
+  <div class="profiles-inner">
+    <div class="rv">
+      <h2>Nos profils,<br><strong>nos convergences</strong></h2>
+      <p>Une sélection construite pour satisfaire simultanément l'aventurier et la curieuse de découvertes.</p>
+    </div>
+    <div class="rv d1">
+      <div class="profile-cards">
+        <div class="pcard"><h4>👤 Lui</h4><p>Aventure & nature · Road trip · Hébergement immersif · Nage + Rando · Budget 3–6K€</p></div>
+        <div class="pcard"><h4>👤 Marion</h4><p>Mix détente / découverte · 2–3 étapes · Festivals · Nage + Rando · Budget &lt;3K€</p></div>
+        <div class="conv-bar">✅ Commun : hébergement immersif · aucune contrainte · nage & rando</div>
+        <div class="excl-bar">🚫 Déjà visités tous les deux : Portugal · Espagne · Côte Basque · Indonésie<br>⚠️ Déjà vu par Marion seule : Islande · Géorgie</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FILTER + GRID -->
+<div id="destinations">
+  <div class="filter-section">
+    <h2>Toutes nos propositions</h2>
+    <div class="filter-tabs">
+      <button class="ftab active" data-cat="all">Toutes <span class="cnt">10</span></button>
+      <button class="ftab" data-cat="nature">🏔️ Nature & Aventure <span class="cnt">2</span></button>
+      <button class="ftab" data-cat="mer">🌊 Mer & Îles <span class="cnt">3</span></button>
+      <button class="ftab" data-cat="grand">✈️ Grand Voyage <span class="cnt">4</span></button>
+      <button class="ftab" data-cat="exception">✨ Exception <span class="cnt">1</span></button>
+    </div>
+  </div>
+  <div class="cards-grid" id="cardsGrid"></div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-bg" id="modalBg">
+  <div class="modal" id="modal">
+    <button class="modal-close" id="modalClose">✕</button>
+    <div class="modal-hero">
+      <img id="mHeroImg" src="" alt="">
+      <div class="modal-hero-ov"></div>
+      <div class="modal-hero-body">
+        <div id="mFlag" style="font-size:2rem;margin-bottom:.5rem"></div>
+        <h2 id="mName"></h2>
+        <div class="mhsub" id="mSub"></div>
+      </div>
+    </div>
+    <div class="modal-tags" id="mTags"></div>
+    <div class="modal-cols" id="mCols">
+      <div class="modal-left"><h3>🗓️ Itinéraire — 4 semaines</h3><div id="mWeeks"></div></div>
+      <div class="modal-right"><h3>Informations pratiques</h3><div id="mInfo"></div></div>
+    </div>
+    <div class="modal-map-wrap">
+      <div class="modal-map-header">
+        <h4 id="mMapTitle">🗺️ Road Trip</h4>
+        <div class="mmap-legend" id="mLegend"></div>
+      </div>
+      <div class="mmap" id="mMap"></div>
+    </div>
+    <div class="modal-gallery" id="mGallery"></div>
+  </div>
+</div>
+
+<!-- TAHITI section moved to card grid -->
+
+
+<!-- COMMENTS -->
+<section class="comments-section" id="commentaires">
+  <div class="comments-inner">
+    <h2>💬 Vos avis & idées</h2>
+    <p>Dites-nous ce que vous en pensez — quelle destination vous fait envie, ce que vous changeriez, vos questions. Aucune connexion requise, juste votre prénom et votre message !</p>
+    <form class="comment-form" id="commentForm" action="https://formspree.io/f/VOTRE_ID" method="POST">
+      <div class="cf-row">
+        <div class="cf-field">
+          <label for="cf-name">Votre prénom</label>
+          <input type="text" id="cf-name" name="name" placeholder="Ex : Sophie" required>
+        </div>
+        <div class="cf-field">
+          <label for="cf-dest">Destination préférée</label>
+          <select id="cf-dest" name="destination">
+            <option value="">— Choisir —</option>
+            <option>🏔️ Norvège — Fjords & Lofoten</option>
+            <option>🦁 Kenya & Tanzanie — Safari & Zanzibar</option>
+            <option>🌊 Balkans — Croatie & Monténégro</option>
+            <option>⛪ Arménie — Monastères & Caucase</option>
+            <option>🌴 Costa Rica — Surf & Jungle</option>
+            <option>🍵 Sri Lanka — Surf & Temples</option>
+            <option>🌸 Japon</option>
+            <option>☕ Colombie — Caraïbes & Café</option>
+            <option>🌍 Afrique du Sud — Safari & Garden Route</option>
+            <option>🌺 Tahiti & Îles Authentiques</option>
+            <option>🤷 Pas de préférence</option>
+          </select>
+        </div>
+      </div>
+      <div class="cf-field">
+        <label for="cf-msg">Votre message</label>
+        <textarea id="cf-msg" name="message" rows="4" placeholder="Ce qui vous attire, ce que vous changeriez, vos questions..." required></textarea>
+      </div>
+      <button type="submit" class="cf-btn">Envoyer mon avis →</button>
+      <div class="cf-success" id="cfSuccess">✅ Merci ! Votre message a bien été envoyé.</div>
+    </form>
+  </div>
+</section>
+
+
+<footer>
+  <div class="fl">✦ Les Vacances de Mar et Ben</div>
+  <div class="fm">8 août — 7 septembre · Sélection personnalisée</div>
+  <div class="fr">Made with ❤️</div>
+</footer>
+
+<script>
+// ═══════════════════════════════════════════
+// IMAGE HELPER — builds a reliable Unsplash URL
+// Falls back gracefully if photo unavailable
+// ═══════════════════════════════════════════
+function img(id, w, q) {
+  return `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w||800}&q=${q||80}`;
+}
+
+// ═══════════════════════════════════════════
+// DATA — only well-known, long-standing IDs
+// ═══════════════════════════════════════════
+const DESTS = [
+  {
+    id:'norvege', num:'01', flag:'🇳🇴', name:'Norvège', sub:'Fjords & Lofoten',
+    cats:['nature'], color:'#0ea5e9', visited:false, marionVisited:false,
+    budget:'3 200 – 4 200 €', climate:'12–20°C · Tempéré',
+    heroImg: 'https://loremflickr.com/1200/700/norway,fjord',
+    gallery:['https://loremflickr.com/400/300/lofoten,norway','https://loremflickr.com/400/300/norway,waterfall','https://loremflickr.com/400/300/aurora,borealis'],
+    tagline:'Road trip légendaire entre fjords mythiques, îles sauvages et aurores boréales',
+    tags:['🏔️ Rando','🏊 Baignade fjord','🚐 Van','🌿 Éco+','☀️ Soleil minuit'],
+    weeks:[
+      {n:'1',place:'Oslo → Bergen',desc:'Arrivée Oslo, city break, train panoramique Bergen-Flåm, Nærøyfjord UNESCO'},
+      {n:'2',place:'Route des Fjords',desc:'Flåm, Gudvangen, Geirangerfjord en van — paysages classés UNESCO'},
+      {n:'3',place:'Ålesund → Lofoten',desc:'Archipel des Lofoten, rando Reinebringen, village de Reine, baignade'},
+      {n:'4',place:'Tromsø & retour',desc:'Marché Sami, fjord arctique, musée polaire, vol retour'}
+    ],
+    info:[
+      {icon:'💰',title:'Budget détaillé',c:'Vol A/R ~600€ pp · Van + ferry ~700€ · Camping/gîtes ~900€ · Activités ~1 000€',col:'#0ea5e9'},
+      {icon:'✈️',title:'Transport',c:'Vol direct Oslo (Air France / Norwegian) · CDG · 2h30 · Location van',col:'#0ea5e9'},
+      {icon:'🌿',title:'Impact carbone',c:'1 vol + van · Compensation ~45€ · Camping = hébergement éco',col:'#059669'},
+      {icon:'🎯',title:'Points forts duo',c:'Rando + baignade · Festivals d\'août · Paysages hors norme',col:'#0ea5e9'}
+    ],
+    map:{center:[65,13],zoom:5,
+      routes:[{coords:[[59.91,10.75],[60.39,5.32],[62.47,6.15],[62.10,7.07],[68.15,13.60],[69.65,18.96]],color:'#0ea5e9',w:3}],
+      markers:[{p:[59.91,10.75],l:'Oslo',c:'#0ea5e9'},{p:[60.39,5.32],l:'Bergen',c:'#0ea5e9'},{p:[62.10,7.07],l:'Geiranger',c:'#38bdf8'},{p:[68.15,13.60],l:'Lofoten',c:'#f59e0b'},{p:[69.65,18.96],l:'Tromsø',c:'#0ea5e9'}],
+      legend:[{c:'#0ea5e9',l:'Itinéraire van'},{c:'#f59e0b',l:'Incontournable'}]}
+  }
+  ,{
+    id:'kenya', num:'02', flag:'🦁', name:'Kenya & Tanzanie', sub:'Safari · Grande Migration · Zanzibar',
+    cats:['grand'], color:'#ea580c', visited:false, marionVisited:false,
+    budget:'4 800 – 7 000 €', climate:'22–30°C · Saison sèche en août',
+    heroImg: 'https://picsum.photos/seed/kenya/1200/700',
+    gallery:['https://picsum.photos/seed/safari/400/300','https://picsum.photos/seed/zanzibar/400/300','https://picsum.photos/seed/elephant/400/300'],
+    tagline:'La Grande Migration + plages de Zanzibar — août est exactement la meilleure période',
+    tags:['🦁 Big Five','🐘 Grande Migration','🏊 Zanzibar','🌅 Masai Mara','☀️ Août = parfait'],
+    weeks:[
+      {n:'1',place:'Nairobi & Masai Mara',desc:'Nairobi, réserve Masai Mara — pic de la Grande Migration en août, millions de gnous, montgolfière au lever du soleil'},
+      {n:'2',place:'Amboseli & Tsavo',desc:'Amboseli (éléphants avec Kilimandjaro en fond), Tsavo (lions à crinière noire), lodges tented camp dans la savane'},
+      {n:'3',place:'Serengeti & Ngorongoro',desc:'Serengeti (UNESCO), cratère du Ngorongoro — densité animale la plus haute du monde, lac Manyara (flamants roses)'},
+      {n:'4',place:'Zanzibar',desc:'Stone Town (UNESCO), plages de Nungwi et Kendwa, snorkeling Mnemba Atoll, épices et culture swahilie'}
+    ],
+    info:[
+      {icon:'💰',title:'Budget détaillé',c:'Vols ~950€ pp · Safaris & parcs ~1 500€ · Lodges & Zanzibar ~1 500€ · Transferts ~900€',col:'#ea580c'},
+      {icon:'✈️',title:'Transport',c:'Paris → Nairobi (~9h, escale) · Vols internes Kenya/Tanzanie · Retour depuis Zanzibar',col:'#ea580c'},
+      {icon:'🌿',title:'Impact carbone',c:'Long-courrier compensable ~130€ · Tented camps très éco · Économie communautaire Maasaï',col:'#059669'},
+      {icon:'🏆',title:'Pourquoi août est parfait',c:'Pic Grande Migration au Masai Mara · Saison sèche = animaux aux points eau · Zanzibar hors pluies',col:'#ea580c'}
+    ],
+    map:{center:[-3,36],zoom:5,
+      routes:[{coords:[[-1.29,36.82],[-1.50,35.14],[-2.65,37.26],[-3.07,37.35],[-2.33,34.83],[-3.20,35.73],[-6.15,39.19]],color:'#ea580c',w:3}],
+      markers:[{p:[-1.29,36.82],l:'Nairobi',c:'#ea580c'},{p:[-1.50,35.14],l:'Masai Mara',c:'#fbbf24'},{p:[-2.65,37.26],l:'Amboseli',c:'#fbbf24'},{p:[-2.33,34.83],l:'Serengeti',c:'#fbbf24'},{p:[-3.20,35.73],l:'Ngorongoro',c:'#fbbf24'},{p:[-6.15,39.19],l:'Zanzibar',c:'#0891b2'}],
+      legend:[{c:'#ea580c',l:'Route Safari'},{c:'#fbbf24',l:'Incontournable'},{c:'#0891b2',l:'Ile & mer'}]}
+  }
+  ,{
+    id:'balkans', num:'03', flag:'🌊', name:'Balkans', sub:'Croatie · Monténégro · Albanie',
+    cats:['mer'], color:'#7c3aed', visited:false, marionVisited:false,
+    budget:'2 800 – 3 800 €', climate:'28–34°C · Chaud',
+    heroImg: 'https://loremflickr.com/1200/700/dubrovnik,croatia',
+    gallery:['https://loremflickr.com/400/300/kotor,montenegro','https://loremflickr.com/400/300/albania,europe','https://loremflickr.com/400/300/plitvice,croatia'],
+    tagline:'Grand tour de l\'Adriatique : vieilles villes médiévales, mer cristalline et Albanie méconnue',
+    tags:['🏊 Adriatique','🏛️ Kotor UNESCO','🎉 Split','🚗 Road trip','💰 Accessible'],
+    weeks:[
+      {n:'1',place:'Split & Dubrovnik',desc:'Vieille ville de Split, Parc Krka, vieux Dubrovnik inscrit UNESCO'},
+      {n:'2',place:'Monténégro',desc:'Bouches de Kotor, Budva, Parc Durmitor, lac Skadar'},
+      {n:'3',place:'Albanie',desc:'Riviera albanaise (Himara, Dhermi), Gjirokastër, Berat (UNESCO)'},
+      {n:'4',place:'Plitvice & Zagreb',desc:'Lacs de Plitvice (UNESCO), Zagreb, vol retour'}
+    ],
+    info:[
+      {icon:'💰',title:'Budget détaillé',c:'Vols ~350€ pp · Voiture ~600€ · Hébergement ~650€ · Nourriture ~850€',col:'#7c3aed'},
+      {icon:'✈️',title:'Transport',c:'Vol Split (EasyJet/Ryanair) ~2h · Retour Zagreb · Voiture indispensable',col:'#7c3aed'},
+      {icon:'🌿',title:'Impact carbone',c:'Vol court-courrier · Albanie = tourisme à très faible pression',col:'#059669'},
+      {icon:'🎯',title:'Points forts duo',c:'Nage + rando · Vie nocturne Split & Kotor · Albanie = découverte totale',col:'#7c3aed'}
+    ],
+    map:{center:[42,18],zoom:6,
+      routes:[{coords:[[43.51,16.44],[42.65,18.09],[42.43,18.77],[42.28,18.84],[41.33,19.82],[40.71,20.95],[44.88,15.61],[45.81,15.98]],color:'#7c3aed',w:3}],
+      markers:[{p:[43.51,16.44],l:'Split',c:'#7c3aed'},{p:[42.65,18.09],l:'Dubrovnik',c:'#7c3aed'},{p:[42.43,18.77],l:'Kotor',c:'#a855f7'},{p:[41.33,19.82],l:'Tirana',c:'#a855f7'},{p:[44.88,15.61],l:'Plitvice',c:'#fbbf24'},{p:[45.81,15.98],l:'Zagreb',c:'#7c3aed'}],
+      legend:[{c:'#7c3aed',l:'Road trip Balkans'},{c:'#fbbf24',l:'Incontournable'}]}
+  }
+  ,{
+    id:'armenie', num:'04', flag:'🇦🇲', name:'Arménie', sub:'Monastères · Gorges · Caucase',
+    cats:['nature'], color:'#9333ea', visited:false, marionVisited:false,
+    budget:'2 000 – 2 800 €', climate:'25–32°C · Chaud et sec',
+    heroImg: 'https://picsum.photos/seed/armenia/1200/700',
+    gallery:['https://picsum.photos/seed/monastery/400/300','https://picsum.photos/seed/caucasus/400/300','https://picsum.photos/seed/ararat/400/300'],
+    tagline:'Le Caucase méconnu : monastères millénaires dans des gorges vertigineuses, vue sur le mont Ararat',
+    tags:['⛪ Monastères UNESCO','🏔️ Mont Ararat','🍷 Vin naturel','🌿 Éco++','💰 Budget imbattable'],
+    weeks:[
+      {n:'1',place:'Erevan & Ararat',desc:'Erevan (place République, musée du Génocide), Khor Virap (vue sur le mont Ararat 5 137m), Noravank (gorges rouges)'},
+      {n:'2',place:'Geghard & Garni',desc:'Temple de Garni (seul temple gréco-romain du Caucase), monastère de Geghard (UNESCO, taillé dans la roche), gorges de Azat'},
+      {n:'3',place:'Dilijan & Lac Sevan',desc:'Dilijan (la Suisse arménienne), monastères Haghartsin et Goshavank, lac Sevan (2 000m altitude), truites séchées'},
+      {n:'4',place:'Tatev & Sud Arménie',desc:'Monastère de Tatev, téléphérique Wings of Tatev (le plus long du monde), gorges de Vorotan, Goris troglodyte'}
+    ],
+    info:[
+      {icon:'💰',title:'Budget détaillé',c:'Vols ~400€ pp · Voiture ~300€ · Guesthouses ~400€ · Nourriture & activités ~500€',col:'#9333ea'},
+      {icon:'✈️',title:'Transport',c:'Paris → Erevan via Turkish Airlines ou Pegasus · Escale Istanbul · ~5h de vol',col:'#9333ea'},
+      {icon:'🌿',title:'Impact carbone',c:'Vol court-courrier · Cuisine artisanale locale · Destination très peu fréquentée',col:'#059669'},
+      {icon:'🎯',title:'Points forts duo',c:'Budget le plus bas · Randos dans les gorges pour Benoît · Monastères et gastronomie pour Marion · Hospitalité légendaire',col:'#9333ea'}
+    ],
+    map:{center:[40,45],zoom:7,
+      routes:[{coords:[[40.18,44.51],[39.68,44.76],[40.15,44.89],[40.88,44.72],[40.61,45.39],[39.38,46.28]],color:'#9333ea',w:3}],
+      markers:[{p:[40.18,44.51],l:'Erevan',c:'#9333ea'},{p:[39.68,44.76],l:'Khor Virap',c:'#fbbf24'},{p:[40.15,44.89],l:'Geghard',c:'#fbbf24'},{p:[40.88,44.72],l:'Sevan',c:'#9333ea'},{p:[39.38,46.28],l:'Tatev',c:'#fbbf24'}],
+      legend:[{c:'#9333ea',l:'Route Arménie'},{c:'#fbbf24',l:'Incontournable'}]}
+  }
+  ,{
+    id:'costarica', num:'05', flag:'🇨🇷', name:'Costa Rica', sub:'Surf · Jungle · Volcans',
+    cats:['mer'], color:'#0d9488', visited:false, marionVisited:false,
+    budget:'3 000 – 4 200 €', climate:'28–34°C · Côte Pacifique sèche en août',
+    heroImg: 'https://picsum.photos/seed/costarica/1200/700',
+    gallery:['https://picsum.photos/seed/surfwave/400/300','https://picsum.photos/seed/jungle/400/300','https://picsum.photos/seed/arenal/400/300'],
+    tagline:'Surf de classe mondiale, volcans actifs et biodiversité parmi les plus riches de la planète',
+    tags:['🏄 Surf Nosara','🌋 Volcans actifs','🐊 Biodiversité','🌴 Jungle','🐢 Tortues marines'],
+    weeks:[
+      {n:'1',place:'San José & Arenal',desc:'San José, Volcan Arenal (actif), sources thermales de La Fortuna, pont suspendu forêt tropicale, Monteverde'},
+      {n:'2',place:'Nicoya — Surf',desc:'Nosara et Santa Teresa : spots de surf de classe mondiale, cours de surf, yoga sur la plage, couchers de soleil Pacifique'},
+      {n:'3',place:'Manuel Antonio & Osa',desc:'Parc Manuel Antonio (singes, paresseux, plages), péninsule Osa — forêt primaire la plus dense d\'Amérique Centrale'},
+      {n:'4',place:'Côte Caraïbe',desc:'Puerto Viejo (culture afro-caribéenne), ponte des tortues marines en août, Parc Cahuita, snorkeling récif corallien'}
+    ],
+    info:[
+      {icon:'💰',title:'Budget détaillé',c:'Vols ~750€ pp · Voiture ~450€ · Éco-lodges ~850€ · Nourriture & activités ~900€',col:'#0d9488'},
+      {icon:'✈️',title:'Transport',c:'Paris → San José (~13h, escale Miami ou Panama) · Voiture indispensable hors San José',col:'#0d9488'},
+      {icon:'🌿',title:'Impact carbone',c:'Long-courrier compensable ~110€ · Costa Rica = 99% énergie renouvelable · Éco-lodges certifiés',col:'#059669'},
+      {icon:'🎯',title:'Points forts duo',c:'Surf à Nosara pour Benoît · Tortues marines et paresseux pour Marion · Le pays le plus écolo du monde',col:'#0d9488'}
+    ],
+    map:{center:[9.9,-84.2],zoom:7,
+      routes:[{coords:[[9.93,-84.08],[10.46,-84.64],[9.97,-85.09],[9.60,-85.65],[9.39,-83.44],[9.16,-82.77]],color:'#0d9488',w:3}],
+      markers:[{p:[9.93,-84.08],l:'San José',c:'#0d9488'},{p:[10.46,-84.64],l:'Arenal',c:'#fbbf24'},{p:[9.97,-85.09],l:'Nosara',c:'#fbbf24'},{p:[9.60,-85.65],l:'Santa Teresa',c:'#fbbf24'},{p:[9.39,-83.44],l:'Manuel Antonio',c:'#0d9488'},{p:[9.16,-82.77],l:'Puerto Viejo',c:'#0d9488'}],
+      legend:[{c:'#0d9488',l:'Route Costa Rica'},{c:'#fbbf24',l:'Surf & Incontournable'}]}
+  }
+  ,{
+    id:'srilanka', num:'06', flag:'🇱🇰', name:'Sri Lanka', sub:'Surf · Temples · Éléphants',
+    cats:['mer'], color:'#b45309', visited:false, marionVisited:false,
+    budget:'2 800 – 3 800 €', climate:'28–34°C · Côte est sèche en août',
+    heroImg: 'https://picsum.photos/seed/srilanka/1200/700',
+    gallery:['https://picsum.photos/seed/arugam/400/300','https://picsum.photos/seed/sigiriya/400/300','https://picsum.photos/seed/teaplantation/400/300'],
+    tagline:'Arugam Bay top 10 mondial du surf, temples millénaires et éléphants sauvages en liberté',
+    tags:['🏄 Arugam Bay top mondial','🐘 Éléphants sauvages','🏛️ Temples UNESCO','🍵 Collines de thé','☀️ Côte est = août parfait'],
+    weeks:[
+      {n:'1',place:'Triangle Culturel',desc:'Colombo, Sigiriya (forteresse-rocher UNESCO), Dambulla (temples rupestres), Polonnaruwa (cité ancienne UNESCO)'},
+      {n:'2',place:'Kandy & Collines de Thé',desc:'Kandy (Temple de la Dent UNESCO), train Kandy-Ella à travers les plantations de thé, rando Ella Rock'},
+      {n:'3',place:'Yala & Côte Sud',desc:'Parc Yala (léopards, éléphants, singes), Galle (fort colonial UNESCO), Mirissa (observation baleines bleues)'},
+      {n:'4',place:'Arugam Bay — Surf',desc:'Côte est, Arugam Bay classée top 10 mondial, houle parfaite en août, lagon de Pottuvil, parc Kumana (flamants roses)'}
+    ],
+    info:[
+      {icon:'💰',title:'Budget détaillé',c:'Vols ~650€ pp · Voiture + chauffeur ~500€ · Guesthouses ~550€ · Nourriture & activités ~700€',col:'#b45309'},
+      {icon:'✈️',title:'Transport',c:'Paris → Colombo (~11h, escale Dubaï ou Doha) · Voiture avec chauffeur conseillé (~30€/j)',col:'#b45309'},
+      {icon:'🌿',title:'Impact carbone',c:'Long-courrier compensable ~100€ · Hébergement local · Cuisine végétarienne naturelle',col:'#059669'},
+      {icon:'🎯',title:'Points forts duo',c:'Arugam Bay pour le surf · Train Kandy-Ella parmi les plus beaux du monde · Éléphants sauvages pour Marion',col:'#b45309'}
+    ],
+    map:{center:[8,80.8],zoom:7,
+      routes:[{coords:[[6.93,79.85],[7.95,80.76],[7.29,80.64],[6.03,80.22],[6.84,81.33]],color:'#b45309',w:3}],
+      markers:[{p:[6.93,79.85],l:'Colombo',c:'#b45309'},{p:[7.95,80.76],l:'Sigiriya',c:'#fbbf24'},{p:[7.29,80.64],l:'Kandy',c:'#b45309'},{p:[6.03,80.22],l:'Galle',c:'#b45309'},{p:[6.84,81.33],l:'Arugam Bay',c:'#fbbf24'}],
+      legend:[{c:'#b45309',l:'Route Sri Lanka'},{c:'#fbbf24',l:'Incontournable'}]}
+  }
+  ,{
+    id:'japon', num:'07', flag:'🇯🇵', name:'Japon', sub:'Hokkaido & Kyushu',
+    cats:['grand'], color:'#c2410c', visited:false, marionVisited:false,
+    budget:'4 200 – 5 800 €', climate:'20–26°C Hokkaido',
+    heroImg: 'https://loremflickr.com/1200/700/japan,fuji',
+    gallery:['https://loremflickr.com/400/300/japan,temple','https://loremflickr.com/400/300/japan,onsen','https://loremflickr.com/400/300/tokyo,japan'],
+    tagline:'Double road trip dans les deux joyaux méconnus du Japon — volcans, onsens et festivals d\'été',
+    tags:['♨️ Onsens en plein air','🌋 Volcans actifs','🚗 Double road trip','🎆 Festival Obon','🐻 Faune Hokkaido'],
+    weeks:[
+      {n:'1',place:'Hokkaido Ouest — Sapporo & Niseko',desc:'Marché Nijo, Otaru (canal), Niseko (randos volcaniques, onsens sulfureux), Furano (lavande)'},
+      {n:'2',place:'Hokkaido Est — Shiretoko & Kushiro',desc:'Shiretoko UNESCO (ours bruns, cascades), lac Mashu, marais de Kushiro, sources chaudes'},
+      {n:'3',place:'Kyushu — Beppu & Mont Aso',desc:'7 enfers géothermaux de Beppu, cratère du Mont Aso (actif), festival Obon en août'},
+      {n:'4',place:'Kyushu Sud — Kagoshima & Yakushima',desc:'Volcan Sakurajima, île Yakushima (forêt millénaire UNESCO), baignade en rivière'}
+    ],
+    info:[
+      {icon:'💰',title:'Budget détaillé',c:'Vols ~900€ pp · JR Pass 21j ~650€ · Voiture Hokkaido ~400€ · Ryokan/camping ~1 100€ · Activités ~900€',col:'#c2410c'},
+      {icon:'✈️',title:'Transport',c:'Vol Paris→Sapporo (escale Tokyo, ~13h) · Retour Fukuoka→Paris · JR Pass',col:'#c2410c'},
+      {icon:'🌿',title:'Impact carbone',c:'Long-courrier compensable ~120€ · Shinkansen très bas carbone · Ryokan = économie locale',col:'#059669'},
+      {icon:'🎯',title:'Points forts duo',c:'Onsens extérieurs uniques · Randos volcaniques · Festival Obon en août · Fraîcheur Hokkaido (20°C)',col:'#c2410c'}
+    ],
+    map:{center:[40,139],zoom:5,
+      routes:[
+        {coords:[[43.06,141.35],[42.80,140.69],[43.34,142.38],[44.08,145.11],[41.77,140.73]],color:'#c2410c',w:3},
+        {coords:[[33.59,130.40],[33.28,131.50],[32.88,131.10],[31.60,130.56],[30.38,130.56]],color:'#9a3412',w:3},
+        {coords:[[41.77,140.73],[35.68,139.69],[33.59,130.40]],color:'#fbbf24',w:2,dash:'8 4'}
+      ],
+      markers:[{p:[43.06,141.35],l:'Sapporo',c:'#c2410c'},{p:[44.08,145.11],l:'Shiretoko',c:'#fbbf24'},{p:[35.68,139.69],l:'Tokyo',c:'#fbbf24'},{p:[33.59,130.40],l:'Fukuoka',c:'#9a3412'},{p:[33.28,131.50],l:'Beppu',c:'#9a3412'},{p:[32.88,131.10],l:'Aso',c:'#fbbf24'},{p:[30.38,130.56],l:'Yakushima',c:'#fbbf24'}],
+      legend:[{c:'#c2410c',l:'Hokkaido'},{c:'#9a3412',l:'Kyushu'},{c:'#fbbf24',l:'Escale / Star'}]}
+  }
+  ,{
+    id:'colombie', num:'08', flag:'🇨🇴', name:'Colombie', sub:'Caraïbes · Café · Caño Cristales',
+    cats:['grand'], color:'#16a34a', visited:false, marionVisited:false,
+    budget:'3 000 – 4 000 €', climate:'28–34°C · Humide',
+    heroImg: 'https://loremflickr.com/1200/700/cartagena,colombia',
+    gallery:['https://loremflickr.com/400/300/medellin,colombia','https://loremflickr.com/400/300/colombia,nature','https://loremflickr.com/400/300/colombia,jungle'],
+    tagline:'De la mer des Caraïbes aux rivières arc-en-ciel — le secret le mieux gardé d\'Amérique du Sud',
+    tags:['🏊 Mer Caraïbes','🌈 Caño Cristales','☕ Route du café','🎉 Medellín','🦜 Biodiversité extrême'],
+    weeks:[
+      {n:'1',place:'Cartagena & Côte Caraïbe',desc:'Vieille ville coloniale (UNESCO), îles du Rosario, Palomino, Parc Tayrona'},
+      {n:'2',place:'Medellín & Guatapé',desc:'Quartier El Poblado, El Peñol (200m de granit), vie culturelle intense'},
+      {n:'3',place:'Eje Cafetero — Route du café',desc:'Salento, palmiers de cire de Cocora (60m), Jardín — plus beau village de Colombie'},
+      {n:'4',place:'Caño Cristales',desc:'La Macarena : rivière aux algues rouges/jaunes/vertes, phénomène unique au monde'}
+    ],
+    info:[
+      {icon:'💰',title:'Budget détaillé',c:'Vols ~700€ pp · Vols internes ~200€ · Hostels/éco-lodges ~600€ · Nourriture ~750€',col:'#16a34a'},
+      {icon:'✈️',title:'Transport',c:'Paris → Cartagena (~12h, escale) · Vols internes Avianca < 80€',col:'#16a34a'},
+      {icon:'🌿',title:'Impact carbone',c:'Long-courrier compensable ~100€ · Éco-lodges · Caño Cristales : accès réglementé',col:'#059669'},
+      {icon:'🎯',title:'Points forts duo',c:'Caño Cristales = phénomène unique · Medellín festif pour Marion · Rando Cocora pour Benoît',col:'#16a34a'}
+    ],
+    map:{center:[6,-74],zoom:6,
+      routes:[{coords:[[10.39,-75.48],[11.25,-74.22],[6.24,-75.57],[4.64,-75.70],[4.71,-74.07],[2.27,-73.79]],color:'#16a34a',w:3}],
+      markers:[{p:[10.39,-75.48],l:'Cartagena',c:'#16a34a'},{p:[11.25,-74.22],l:'Tayrona',c:'#22c55e'},{p:[6.24,-75.57],l:'Medellín',c:'#16a34a'},{p:[4.64,-75.70],l:'Salento',c:'#22c55e'},{p:[4.71,-74.07],l:'Bogotá',c:'#16a34a'},{p:[2.27,-73.79],l:'Caño Cristales ★',c:'#fbbf24'}],
+      legend:[{c:'#16a34a',l:'Road trip Colombie'},{c:'#fbbf24',l:'Phénomène unique'}]}
+  }
+  ,{
+    id:'afrique', num:'09', flag:'🇿🇦', name:'Afrique du Sud', sub:'Garden Route & Drakensberg',
+    cats:['grand'], color:'#b45309', visited:false, marionVisited:false,
+    budget:'3 500 – 4 800 €', climate:'16–24°C · Hiver sec ✓',
+    heroImg: 'https://loremflickr.com/1200/700/capetown,africa',
+    gallery:['https://loremflickr.com/400/300/southafrica,coast','https://loremflickr.com/400/300/drakensberg,africa','https://loremflickr.com/400/300/lion,safari'],
+    tagline:'Road trip en 3 actes : Cape Town, Garden Route sauvage et Drakensberg (les Alpes africaines)',
+    tags:['🏊 Côte Atlantique','🦁 Big Five','🚗 Garden Route','🏔️ Drakensberg','🐋 Baleines franches'],
+    weeks:[
+      {n:'1',place:'Cape Town & Péninsule',desc:'Table Mountain, Cap de Bonne Espérance, Stellenbosch (vins), Hermanus (baleines franches)'},
+      {n:'2',place:'Garden Route',desc:'Wilderness, Knysna (lagon & forêt), Tsitsikamma (kayak mer, pont suspendu)'},
+      {n:'3',place:'Eastern Cape & Addo',desc:'Jeffreys Bay (surf), Réserve Addo (éléphants, lions, buffles), Valley of Desolation'},
+      {n:'4',place:'Drakensberg — Alpes Africaines',desc:'Amphithéâtre Royal Natal, chutes Tugela (2e plus hautes du monde), Cathedral Peak'}
+    ],
+    info:[
+      {icon:'💰',title:'Budget détaillé',c:'Vols ~850€ pp · Voiture ~700€ · Lodges/B&B ~900€ · Nourriture ~900€',col:'#b45309'},
+      {icon:'✈️',title:'Transport',c:'Paris → Cape Town (~13h, escale) · Retour Johannesburg · Conduite à gauche',col:'#b45309'},
+      {icon:'🌿',title:'Impact carbone',c:'Long-courrier compensable ~110€ · Lodges eco-certifiés · Août = saison sèche idéale',col:'#059669'},
+      {icon:'🏆',title:'Coup de cœur 🏆',c:'Road trip le + varié : mer + safari + montagne · Rand faible = budget favorable · Aucun visa requis',col:'#b45309'}
+    ],
+    map:{center:[-31,24],zoom:6,
+      routes:[{coords:[[-33.92,18.42],[-34.40,19.25],[-34.04,23.05],[-33.96,25.60],[-32.25,24.54],[-28.68,29.43],[-26.20,28.04]],color:'#b45309',w:3}],
+      markers:[{p:[-33.92,18.42],l:'Cape Town',c:'#b45309'},{p:[-34.40,19.25],l:'Hermanus',c:'#d97706'},{p:[-34.04,23.05],l:'Knysna',c:'#d97706'},{p:[-33.96,25.60],l:'Gqeberha',c:'#b45309'},{p:[-28.68,29.43],l:'Drakensberg',c:'#fbbf24'},{p:[-26.20,28.04],l:'Johannesburg',c:'#b45309'}],
+      legend:[{c:'#b45309',l:'Garden Route'},{c:'#fbbf24',l:'Incontournable'}]}
+  }
+  ,{
+    id:'tahiti', num:'10', flag:'🌺', name:'Tahiti & Îles Authentiques', sub:'Polynésie hors des sentiers',
+    cats:['exception'], color:'#c8943a', visited:false, marionVisited:false,
+    special:true,
+    budget:'5 500 – 7 500 €', climate:'26–30°C · Tropical',
+    heroImg: 'https://loremflickr.com/1200/700/polynesia,lagoon',
+    gallery:['https://loremflickr.com/400/300/polynesia,ocean','https://loremflickr.com/400/300/tropical,island','https://loremflickr.com/400/300/pacific,beach'],
+    tagline:'Polynésie hors des sentiers touristiques — pensions locales, archipels secrets, baleines à bosse en août',
+    tags:['🏊 Lagons immaculés','🌿 Pensions locales','🏄 Surf à Teahupo\'o','🗿 Marae ancestraux','🐋 Baleines à bosse'],
+    weeks:[
+      {n:'1',place:'Tahiti Iti — La Péninsule Oubliée',desc:'Arrivée Papeete, presqu\'île Tahiti Iti, Teahupo\'o (village surfeurs), cascade Vaimahutu, pension locale chez l\'habitant'},
+      {n:'2',place:'Moorea — L\'Intérieur Sauvage',desc:'Ferry 30 min. Vélos vallée d\'Opunohu (marae archéologiques), snorkeling raies & requins citron, pension familiale dans les collines'},
+      {n:'3',place:'Huahine — La Bora Bora d\'Avant',desc:'"L\'île sauvage" : perliculture familiale, fermes de vanille, marae de Maeva (plus grand site archéo polynésien), criques désertes'},
+      {n:'4',place:'Maupiti — Le Joyau Interdit',desc:'1 200 habitants, aucun resort, pensions chez l\'habitant uniquement. Kayak, rando Teurafaatiu (380m), observation baleines à bosse. Réserver 3-4 mois à l\'avance'}
+    ],
+    info:[
+      {icon:'💰',title:'Budget détaillé',c:'Vols A/R ~1 600€ pp · Air Tahiti inter-îles ~400€ · Pensions locales ~1 100€ · Activités & repas ~800€',col:'#c8943a'},
+      {icon:'✈️',title:'Comment y aller',c:'Air Tahiti Nui depuis Paris CDG · ~22h avec escale · Inter-îles : Air Tahiti ou ferry goélette local',col:'#c8943a'},
+      {icon:'🌿',title:'Éco-impact',c:'Long-courrier compensable ~150€ · Pensions = économie directe locale · Maupiti = accès réglementé et préservé',col:'#059669'},
+      {icon:'💡',title:'Conseil authenticité',c:'Évitez Bora Bora (resorts ~800€/nuit) et le centre de Papeete. Concentrez-vous sur Huahine + Maupiti — la Polynésie d\'avant l\'industrie touristique.',col:'#c8943a'}
+    ],
+    map:{center:[-16.8,-151.2],zoom:8,
+      routes:[{coords:[[-17.54,-149.56],[-17.53,-149.83],[-16.72,-151.02],[-16.83,-151.43],[-16.45,-152.24]],color:'#0891b2',w:3}],
+      markers:[
+        {p:[-17.54,-149.56],l:'Papeete',c:'#0891b2'},
+        {p:[-17.53,-149.83],l:'Moorea',c:'#0e7490'},
+        {p:[-16.72,-151.02],l:'Huahine',c:'#c8943a'},
+        {p:[-16.83,-151.43],l:'Raiatea',c:'#0891b2'},
+        {p:[-16.45,-152.24],l:'Maupiti★',c:'#c8943a'}
+      ],
+      legend:[{c:'#0891b2',l:'Route inter-îles'},{c:'#c8943a',l:'Île authentique'}]}
+  }
+];
+
+// ═══════════════════════════════════
+// RENDER CARDS
+// ═══════════════════════════════════
+const FALLBACK = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='500'%3E%3Crect width='100%25' height='100%25' fill='%23e8e4de'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='16' fill='%23999'%3E🌍 Photo%3C/text%3E%3C/svg%3E";
+
+const grid = document.getElementById('cardsGrid');
+DESTS.forEach(d => {
+  const card = document.createElement('div');
+  card.className = 'dest-card' + (d.special ? ' gold-card' : '');
+  card.dataset.cats = d.cats.join(' ');
+  card.innerHTML = `
+    <div class="card-photo">
+      <img src="${d.heroImg}" alt="${d.name}" onerror="this.src='${FALLBACK}'">
+      <div class="card-photo-ov"></div>
+      <div class="card-num" style="background:${d.color}">${d.num}</div>
+      <div class="card-badges">
+        ${d.visited?'<div class="badge-visited">Déjà visités</div>':''}
+        ${d.marionVisited?'<div class="badge-marion">Déjà vu par Marion</div>':''}
+      </div>
+      <div class="card-flag">${d.flag}</div>
+    </div>
+    <div class="card-body">
+      <h3>${d.name}</h3>
+      <div class="card-sub">${d.sub}</div>
+      <div class="card-budget" style="background:${d.color}18;color:${d.color};border:1px solid ${d.color}40">
+        💰 ${d.budget}
+      </div>
+      <div class="card-tagline">${d.tagline}</div>
+      <div class="card-tags">
+        ${d.tags.map(t=>`<span class="ctag" style="border-color:${d.color}40;color:${d.color}">${t}</span>`).join('')}
+      </div>
+      <button class="card-cta" onclick="openModal('${d.id}')">Voir le détail →</button>
+    </div>`;
+  grid.appendChild(card);
+});
+
+// ═══════════════════════════════════
+// FILTER
+// ═══════════════════════════════════
+document.querySelectorAll('.ftab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.ftab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    const cat = tab.dataset.cat;
+    document.querySelectorAll('.dest-card').forEach(c => {
+      c.classList.toggle('hidden', cat!=='all' && !c.dataset.cats.includes(cat));
+    });
+  });
+});
+
+// ═══════════════════════════════════
+// MODAL
+// ═══════════════════════════════════
+const mapCache = {};
+
+function openModal(id) {
+  const d = DESTS.find(x=>x.id===id);
+  if(!d) return;
+  document.getElementById('mHeroImg').src = d.heroImg;
+  document.getElementById('mHeroImg').onerror = function(){this.src=FALLBACK};
+  document.getElementById('mFlag').textContent = d.flag;
+  document.getElementById('mName').textContent = d.name + ' — ' + d.sub;
+  document.getElementById('mSub').textContent = d.tagline;
+  document.getElementById('mCols').style.borderColor = d.color;
+  document.getElementById('mTags').innerHTML =
+    d.tags.map(t=>`<span class="mtag">${t}</span>`).join('') +
+    `<span class="mtag">🌡️ ${d.climate}</span>` +
+    (d.visited?`<span class="mtag" style="border-color:rgba(239,68,68,.5);color:rgba(239,68,68,.9)">🚫 Déjà visités tous les deux</span>`:'') +
+    (d.marionVisited?`<span class="mtag" style="border-color:rgba(239,68,68,.5);color:rgba(239,68,68,.9)">⚠️ Déjà vu par Marion</span>`:'');
+  document.getElementById('mWeeks').innerHTML = d.weeks.map(w=>`
+    <div class="mweek">
+      <div class="mwbadge" style="background:${d.color}">S${w.n}</div>
+      <div class="mwbody"><h4>${w.place}</h4><p>${w.desc}</p></div>
+    </div>`).join('');
+  document.getElementById('mInfo').innerHTML = d.info.map(i=>`
+    <div class="micard" style="border-color:${i.col}">
+      <h5 style="color:${i.col}">${i.icon} ${i.title}</h5>
+      <p>${i.c}</p>
+    </div>`).join('');
+  document.getElementById('mMapTitle').textContent = `🗺️ Road Trip — ${d.name}`;
+  document.getElementById('mLegend').innerHTML = d.map.legend.map(l=>
+    `<div class="leg"><div class="leg-dot" style="background:${l.c}"></div>${l.l}</div>`).join('');
+  document.getElementById('mGallery').innerHTML = d.gallery.map(g=>
+    `<img src="${g}" alt="${d.name}" onerror="this.src='${FALLBACK}'">`).join('');
+  document.getElementById('modalBg').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  setTimeout(()=>initMap(d), 200);
+}
+
+function initMap(d) {
+  const el = document.getElementById('mMap');
+  if(mapCache[d.id]) { mapCache[d.id].remove(); delete mapCache[d.id]; }
+  el.innerHTML = '';
+  const m = L.map('mMap',{scrollWheelZoom:false}).setView(d.map.center,d.map.zoom);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{
+    attribution:'© <a href="https://openstreetmap.org/copyright">OSM</a> © <a href="https://carto.com/">CARTO</a>',
+    subdomains:'abcd',maxZoom:19
+  }).addTo(m);
+  d.map.routes.forEach(r=>{
+    const o={color:r.color,weight:r.w||3,opacity:.9};
+    if(r.dash) o.dashArray=r.dash;
+    L.polyline(r.coords,o).addTo(m);
+  });
+  d.map.markers.forEach(mk=>{
+    const txt = mk.l.length > 6 ? mk.l.substring(0,6)+'…' : mk.l;
+    L.marker(mk.p,{icon:L.divIcon({
+      html:`<div style="background:${mk.c};color:#fff;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:7.5px;font-weight:700;font-family:Outfit,sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.3);border:2.5px solid rgba(255,255,255,.9);text-align:center;line-height:1.1;padding:2px">${txt}</div>`,
+      className:'',iconSize:[32,32],iconAnchor:[16,16]
+    })}).addTo(m).bindPopup(`<b style="font-family:Outfit">${mk.l}</b>`);
+  });
+  mapCache[d.id]=m;
+  setTimeout(()=>m.invalidateSize(),250);
+}
+
+document.getElementById('modalClose').onclick = closeModal;
+document.getElementById('modalBg').addEventListener('click',e=>{if(e.target===document.getElementById('modalBg'))closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+function closeModal(){document.getElementById('modalBg').classList.remove('open');document.body.style.overflow='';}
+
+// Tahiti map now handled via modal initMap()
+
+// ═══════════════════════════════════
+// REVEAL ON SCROLL
+// ═══════════════════════════════════
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target);}});
+},{threshold:.1});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+
+// COMMENT FORM
+document.getElementById('commentForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = this.querySelector('.cf-btn');
+  btn.textContent = 'Envoi en cours...';
+  btn.disabled = true;
+  try {
+    const res = await fetch(this.action, {
+      method:'POST',
+      body: new FormData(this),
+      headers:{Accept:'application/json'}
+    });
+    if(res.ok){
+      document.getElementById('cfSuccess').style.display='block';
+      this.reset();
+      btn.style.display='none';
+    } else {
+      btn.textContent = 'Erreur — réessayez';
+      btn.disabled = false;
+    }
+  } catch(err){
+    btn.textContent = 'Erreur réseau — réessayez';
+    btn.disabled = false;
+  }
+});
+
+// ── QUIZ ENGINE ──
+const QUIZ_ANSWERS = {};
+const SCORES = {
+  // [paysage, budget, motif]
+  norvege:   {nature:4, mer:1, safari:0, culture:1,  small:1, medium:3, large:2,  adventure:4, decouverte:3, nature2:4, detente:1},
+  kenya:     {nature:2, mer:2, safari:5, culture:1,  small:0, medium:1, large:4,  adventure:3, decouverte:5, nature2:4, detente:1},
+  balkans:   {nature:2, mer:4, safari:0, culture:4,  small:3, medium:4, large:2,  adventure:2, decouverte:4, nature2:2, detente:3},
+  armenie:   {nature:3, mer:0, safari:0, culture:5,  small:5, medium:2, large:0,  adventure:2, decouverte:5, nature2:2, detente:1},
+  costarica: {nature:3, mer:4, safari:2, culture:1,  small:1, medium:4, large:3,  adventure:5, decouverte:3, nature2:5, detente:2},
+  srilanka:  {nature:2, mer:4, safari:2, culture:3,  small:3, medium:5, large:2,  adventure:3, decouverte:4, nature2:3, detente:3},
+  japon:     {nature:2, mer:1, safari:0, culture:5,  small:1, medium:3, large:4,  adventure:2, decouverte:5, nature2:2, detente:2},
+  colombie:  {nature:3, mer:2, safari:1, culture:4,  small:2, medium:4, large:2,  adventure:4, decouverte:4, nature2:3, detente:2},
+  afrique:   {nature:2, mer:3, safari:4, culture:2,  small:0, medium:2, large:5,  adventure:3, decouverte:4, nature2:4, detente:3},
+  tahiti:    {nature:1, mer:5, safari:0, culture:1,  small:0, medium:1, large:5,  adventure:2, decouverte:3, nature2:2, detente:5}
+};
+const MEDALS = ['🥇','🥈','🥉'];
+
+document.querySelectorAll('.qz-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const step = +this.dataset.step;
+    const val = this.dataset.val;
+    QUIZ_ANSWERS[step] = val;
+    // Highlight selected
+    document.querySelectorAll(`[data-step="${step}"]`).forEach(b => b.classList.remove('selected'));
+    this.classList.add('selected');
+    // Mark dot
+    document.getElementById('dot' + step).classList.add('done');
+    // Next step
+    setTimeout(() => {
+      document.getElementById('step' + step).classList.remove('active');
+      if(step < 2) {
+        document.getElementById('step' + (step+1)).classList.add('active');
+      } else {
+        quizShowResults();
+      }
+    }, 300);
+  });
+});
+
+function quizShowResults() {
+  const [q1, q2, q3] = [QUIZ_ANSWERS[0], QUIZ_ANSWERS[1], QUIZ_ANSWERS[2]];
+  const scored = DESTS.map(d => {
+    const s = SCORES[d.id] || {};
+    const total = (s[q1]||0)*3 + (s[q2]||0)*2 + (s[q3]||0)*2;
+    const max = 5*3 + 5*2 + 5*2;
+    return {d, pct: Math.round(total/max*100)};
+  }).sort((a,b) => b.pct - a.pct).slice(0,3);
+
+  const top3 = document.getElementById('qzTop3');
+  top3.innerHTML = scored.map((item, i) => `
+    <div class="qz-dest" onclick="openModal('${item.d.id}')">
+      <div class="qz-rank">${MEDALS[i]}</div>
+      <div class="qz-info">
+        <strong>${item.d.flag} ${item.d.name}</strong>
+        <span>${item.d.sub}</span>
+      </div>
+      <div class="qz-pct">${item.pct}%</div>
+    </div>
+  `).join('');
+
+  document.querySelectorAll('.qz-step').forEach(s => s.classList.remove('active'));
+  document.getElementById('qzResults').style.display = 'block';
+  document.getElementById('quizWrap').querySelector('.qz-progress').style.opacity = '0';
+}
+
+function quizReset() {
+  Object.keys(QUIZ_ANSWERS).forEach(k => delete QUIZ_ANSWERS[k]);
+  document.getElementById('qzResults').style.display = 'none';
+  document.getElementById('quizWrap').querySelector('.qz-progress').style.opacity = '1';
+  document.querySelectorAll('.qz-dot').forEach(d => d.classList.remove('done'));
+  document.querySelectorAll('.qz-btn').forEach(b => b.classList.remove('selected'));
+  document.querySelectorAll('.qz-step').forEach(s => s.classList.remove('active'));
+  document.getElementById('step0').classList.add('active');
+}
+
+</script>
+</body>
+</html>
