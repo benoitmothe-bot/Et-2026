@@ -316,9 +316,7 @@ footer .fr{font-size:.72rem;color:rgba(255,255,255,.2)}
 @media(max-width:600px){.cf-row{grid-template-columns:1fr}}
 
 /* ── QUIZ WIDGET ── */
-.quiz-wrap{position:relative;z-index:3;margin-top:2rem;background:rgba(10,15,30,.75);
-  backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.15);border-radius:16px;
-  padding:1.5rem;max-width:440px;color:#fff}
+.quiz-wrap{position:absolute;bottom:2.5rem;right:2.5rem;z-index:3;background:rgba(10,15,30,.82);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.15);border-radius:16px;padding:1.5rem;width:380px;color:#fff;box-sizing:border-box}
 .quiz-wrap h3{font-family:'Cormorant Garamond',serif;font-size:1.35rem;margin:0 0 .3rem;color:#fff}
 .quiz-wrap p.qz-intro{font-size:.8rem;color:rgba(255,255,255,.55);margin:0 0 1.2rem}
 .qz-step{display:none}.qz-step.active{display:block}
@@ -344,7 +342,76 @@ footer .fr{font-size:.72rem;color:rgba(255,255,255,.2)}
 .qz-retry{margin-top:.8rem;background:transparent;border:1px solid rgba(255,255,255,.25);
   border-radius:8px;padding:.5rem 1rem;color:rgba(255,255,255,.6);font-size:.8rem;cursor:pointer;width:100%}
 .qz-retry:hover{border-color:var(--teal);color:#fff}
+
+/* ── BUDGET CHART ── */
+.mbudget-wrap{margin:1.5rem 0;padding:1.2rem 1.5rem;background:#f8f7f4;border-radius:12px}
+.mbudget-title{font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#888;margin-bottom:.7rem}
+.mbudget-total{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:600;margin-bottom:.9rem;color:var(--dark)}
+.mbudget-total span{font-size:.9rem;color:#888;font-family:'Outfit',sans-serif;font-weight:400}
+.mbudget-row{display:grid;grid-template-columns:150px 1fr 58px;align-items:center;gap:.5rem;margin-bottom:.45rem}
+.mbudget-label{font-size:.8rem;color:#555}
+.mbudget-bar-bg{background:#e8e8e8;border-radius:4px;height:7px;overflow:hidden}
+.mbudget-bar-fill{height:100%;border-radius:4px}
+.mbudget-val{font-size:.8rem;font-weight:600;color:var(--dark);text-align:right}
+.mbudget-note{font-size:.72rem;color:#bbb;margin-top:.7rem}
+/* ── VIDEOS ── */
+.mvid-section{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border)}
+.mvid-section h4{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:500;color:var(--dark);margin-bottom:.8rem}
+.mvid-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+.mvid-thumb{position:relative;border-radius:10px;overflow:hidden;cursor:pointer;background:#111;aspect-ratio:16/9}
+.mvid-thumb img{width:100%;height:100%;object-fit:cover;transition:opacity .3s;display:block}
+.mvid-thumb:hover img{opacity:.65}
+.mvid-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;background:rgba(255,0,0,.92);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.9rem;pointer-events:none;transition:transform .2s;box-shadow:0 2px 12px rgba(0,0,0,.4)}
+.mvid-thumb:hover .mvid-play{transform:translate(-50%,-50%) scale(1.15)}
+.mvid-caption{position:absolute;bottom:0;left:0;right:0;padding:.5rem .6rem;background:linear-gradient(to top,rgba(0,0,0,.78),transparent);color:#fff;font-size:.72rem;font-weight:600;line-height:1.3}
+/* ── VIDEO LIGHTBOX ── */
+.vbox{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.93);align-items:center;justify-content:center}
+.vbox.open{display:flex}
+.vbox-inner{position:relative;width:min(90vw,960px)}
+.vbox-inner iframe{width:100%;aspect-ratio:16/9;border:none;border-radius:10px}
+.vbox-close{position:absolute;top:-2.8rem;right:0;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;line-height:1;padding:0}
+/* ── WORLD MAP ── */
+.worldmap-section{padding:4rem 3rem;background:#f8f7f4}
+.worldmap-section h2{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:400;color:var(--dark);margin-bottom:.4rem}
+.worldmap-section p{color:#666;font-size:.95rem;margin-bottom:1.5rem}
+#worldMap{height:480px;border-radius:16px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.12)}
+.wmap-legend{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1rem}
+.wmap-pill{background:#fff;border:1px solid #e0e0e0;border-radius:20px;padding:.3rem .9rem;font-size:.78rem;cursor:pointer;transition:all .2s;color:var(--dark)}
+.wmap-pill:hover{background:var(--teal);color:#fff;border-color:var(--teal)}
+
+
+/* ── MUST SEE ── */
+.mustsee-block{margin-top:1.5rem;padding-top:1.2rem;border-top:1px solid var(--border)}
+.mustsee-title{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--dark);margin-bottom:.8rem}
+.mustsee-item{display:flex;flex-direction:column;padding:.6rem .8rem;margin-bottom:.4rem;border-radius:8px;border:1px solid var(--border);text-decoration:none;background:#fafaf9;transition:all .2s;cursor:pointer}
+.mustsee-item:hover{border-color:var(--teal);background:#f0fdfa;transform:translateX(3px)}
+.mustsee-name{font-weight:600;font-size:.85rem;color:var(--teal);margin-bottom:.15rem}
+.mustsee-desc{font-size:.78rem;color:var(--slate);line-height:1.4}
+
+/* ── VOTES ── */
+.vote-btn{display:flex;align-items:center;justify-content:center;gap:.5rem;width:100%;margin-top:.6rem;padding:.55rem;border-radius:8px;border:2px solid var(--border);background:#fff;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .2s;color:var(--slate)}
+.vote-btn:hover{border-color:#f43f5e;color:#f43f5e;background:#fff5f7}
+.vote-btn.voted{border-color:#f43f5e;background:#f43f5e;color:#fff}
+.vote-btn .vcnt{background:rgba(0,0,0,.1);border-radius:20px;padding:.05rem .45rem;font-size:.78rem;min-width:1.4rem;text-align:center}
+.vote-btn.voted .vcnt{background:rgba(255,255,255,.3)}
+/* ── LEADERBOARD ── */
+.leaderboard-section{padding:3.5rem 3rem;background:var(--dark)}
+.leaderboard-section h2{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:400;color:#fff;margin-bottom:.3rem;text-align:center}
+.leaderboard-section p{color:rgba(255,255,255,.5);font-size:.9rem;text-align:center;margin-bottom:2rem}
+.lb-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;max-width:1100px;margin:0 auto}
+.lb-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:1.1rem 1rem;display:flex;align-items:center;gap:.9rem;transition:all .3s}
+.lb-card.lb-first{background:linear-gradient(135deg,rgba(255,215,0,.12),rgba(255,165,0,.08));border-color:rgba(255,215,0,.4)}
+.lb-card.lb-second{background:linear-gradient(135deg,rgba(192,192,192,.12),rgba(160,160,160,.08));border-color:rgba(192,192,192,.3)}
+.lb-card.lb-third{background:linear-gradient(135deg,rgba(205,127,50,.12),rgba(180,100,30,.08));border-color:rgba(205,127,50,.3)}
+.lb-rank{font-size:1.6rem;min-width:2rem;text-align:center}
+.lb-info{flex:1;min-width:0}
+.lb-name{color:#fff;font-weight:600;font-size:.88rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lb-count{color:rgba(255,255,255,.5);font-size:.78rem;margin-top:.15rem}
+.lb-bar-wrap{height:4px;background:rgba(255,255,255,.1);border-radius:2px;margin-top:.4rem}
+.lb-bar{height:4px;border-radius:2px;transition:width .6s ease}
+.lb-empty{color:rgba(255,255,255,.4);text-align:center;padding:2rem;font-size:.9rem;grid-column:1/-1}
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
@@ -371,7 +438,6 @@ footer .fr{font-size:.72rem;color:rgba(255,255,255,.2)}
       <span class="hpill">🏔️ Nature · 🌊 Mer · ✈️ Grand voyage · ✨ Exception</span>
     </div>
     </div>
-
     <!-- QUIZ -->
     <div class="quiz-wrap" id="quizWrap">
       <h3>🧭 Trouvez votre destination</h3>
@@ -444,6 +510,15 @@ footer .fr{font-size:.72rem;color:rgba(255,255,255,.2)}
 </div>
 
 <!-- FILTER + GRID -->
+
+<!-- WORLD MAP -->
+<div class="worldmap-section">
+  <h2>🗺️ Nos destinations dans le monde</h2>
+  <p>Cliquez sur un marqueur pour voir le détail de la destination</p>
+  <div id="worldMap"></div>
+  <div class="wmap-legend" id="wmapLegend"></div>
+</div>
+
 <div id="destinations">
   <div class="filter-section">
     <h2>Toutes nos propositions</h2>
@@ -473,8 +548,8 @@ footer .fr{font-size:.72rem;color:rgba(255,255,255,.2)}
     </div>
     <div class="modal-tags" id="mTags"></div>
     <div class="modal-cols" id="mCols">
-      <div class="modal-left"><h3>🗓️ Itinéraire — 4 semaines</h3><div id="mWeeks"></div></div>
-      <div class="modal-right"><h3>Informations pratiques</h3><div id="mInfo"></div></div>
+      <div class="modal-left"><h3>🗓️ Itinéraire — 4 semaines</h3><div id="mWeeks"></div><div id="mVideos"></div></div>
+      <div class="modal-right"><h3>Informations pratiques</h3><div id="mInfo"></div><div id="mBudget"></div></div>
     </div>
     <div class="modal-map-wrap">
       <div class="modal-map-header">
@@ -489,6 +564,14 @@ footer .fr{font-size:.72rem;color:rgba(255,255,255,.2)}
 
 <!-- TAHITI section moved to card grid -->
 
+
+
+<!-- LEADERBOARD -->
+<section class="leaderboard-section" id="leaderboard">
+  <h2>🏆 Classement des votes</h2>
+  <p>Votes de tous les amis — mis à jour en temps réel</p>
+  <div class="lb-grid" id="lbGrid"><div class="lb-empty">Chargement des votes…</div></div>
+</section>
 
 <!-- COMMENTS -->
 <section class="comments-section" id="commentaires">
@@ -557,18 +640,17 @@ const DESTS = [
     gallery:['https://loremflickr.com/400/300/lofoten,norway','https://loremflickr.com/400/300/norway,waterfall','https://loremflickr.com/400/300/aurora,borealis'],
     tagline:'Road trip légendaire entre fjords mythiques, îles sauvages et aurores boréales',
     tags:['🏔️ Rando','🏊 Baignade fjord','🚐 Van','🌿 Éco+','☀️ Soleil minuit'],
-    weeks:[
-      {n:'1',place:'Oslo → Bergen',desc:'Arrivée Oslo, city break, train panoramique Bergen-Flåm, Nærøyfjord UNESCO'},
-      {n:'2',place:'Route des Fjords',desc:'Flåm, Gudvangen, Geirangerfjord en van — paysages classés UNESCO'},
-      {n:'3',place:'Ålesund → Lofoten',desc:'Archipel des Lofoten, rando Reinebringen, village de Reine, baignade'},
-      {n:'4',place:'Tromsø & retour',desc:'Marché Sami, fjord arctique, musée polaire, vol retour'}
-    ],
+    weeks:[{'n':'1','place':'Oslo','desc':'Arrivée Oslo · Musée des Vikings (Vikingskipshuset) · Opéra flottant · Quartier Grünerløkka · Train panoramique Bergen-Flåm (Flåmsbana)'},{'n':'2','place':'Bergen & Nærøyfjord (UNESCO)','desc':'Bergen & ses maisons colorées du Bryggen · Croisière Nærøyfjord · Gudvangen · Kayak en fjord · Marché aux poissons'},{'n':'3','place':'Geiranger & Trollstigen','desc':'Geirangerfjord (UNESCO) · Cascade des Sept Sœurs · Route de l\'Aigle (Ørnesvingen) · Ålesund Art Nouveau · Trollstigen — route vertigineuse'},{'n':'4','place':'Archipel des Lofoten','desc':'Svolvær · Village de Reine · Rando Reinebringen (448m) · Plage de Haukland · Baignade dans les fjords · Village de pêcheurs de Henningsvær'},{'n':'5','place':'Tromsø & Grand Nord','desc':'Musée polaire · Fjord arctique · Île de Senja · Marché Sami · Dîner de renne · Soleil de minuit'}],
+    budgetDetail:{total:3700,items:[{label:'✈️ Vols A/R',val:1200},{label:'🏨 Hébergement',val:900},{label:'🚗 Transport local',val:700},{label:'🎯 Activités',val:500},{label:'🍽️ Restauration',val:400}]},
+    mustSee:[{name:'Nærøyfjord (UNESCO)',url:'https://www.visitnorway.com/places-to-go/fjord-norway/the-sognefjord/naeroyfjord/',desc:'Le fjord le plus étroit et spectaculaire de Norvège'},{name:'Village de Reine, Lofoten',url:'https://www.visitnorway.com/places-to-go/northern-norway/lofoten/reine/',desc:'Village de pêcheurs classé parmi les plus beaux du monde'},{name:'Geirangerfjord (UNESCO)',url:'https://www.visitnorway.com/places-to-go/fjord-norway/geiranger-trollstigen/geirangerfjord/',desc:'Fjord UNESCO + cascades des Sept Soeurs'},{name:'Trollstigen',url:'https://www.nasjonaleturistveger.no/en/routes/trollstigen/',desc:'Route en lacets vertigineuse, une des plus belles d Europe'},{name:'Musée des Vikings Oslo',url:'https://www.khm.uio.no/english/visit-us/viking-ship-museum/',desc:'Les drakkars vikings les mieux conservés au monde'}],
+    videos:[{id:'OIjonSaI3JY',title:'Norvège — Road trip estival'},{id:'hpe0M__Mg4w',title:'Fjords & Lofoten — drone 4K'}],
     info:[
       {icon:'💰',title:'Budget détaillé',c:'Vol A/R ~600€ pp · Van + ferry ~700€ · Camping/gîtes ~900€ · Activités ~1 000€',col:'#0ea5e9'},
-      {icon:'✈️',title:'Transport',c:'Vol direct Oslo (Air France / Norwegian) · CDG · 2h30 · Location van',col:'#0ea5e9'},
+      {icon:'✈️',title:'Transport',c:'Vol direct Oslo (Air France / Norwegian) · CDG · 2h30 · Location van',col:'#0ea5e9',sky:'https://www.skyscanner.fr/transport/vols/PAR/OSL/20260808/20260907/?adults=2'},
       {icon:'🌿',title:'Impact carbone',c:'1 vol + van · Compensation ~45€ · Camping = hébergement éco',col:'#059669'},
       {icon:'🎯',title:'Points forts duo',c:'Rando + baignade · Festivals d\'août · Paysages hors norme',col:'#0ea5e9'}
-    ],
+    ,
+      {icon:'🌡️',title:'Météo en août',c:'☀️ 15–22°C · Peu de pluie · Mer 12°C · 20h de jour · Meilleure saison',col:'#0891b2'}],
     map:{center:[65,13],zoom:5,
       routes:[{coords:[[59.91,10.75],[60.39,5.32],[62.47,6.15],[62.10,7.07],[68.15,13.60],[69.65,18.96]],color:'#0ea5e9',w:3}],
       markers:[{p:[59.91,10.75],l:'Oslo',c:'#0ea5e9'},{p:[60.39,5.32],l:'Bergen',c:'#0ea5e9'},{p:[62.10,7.07],l:'Geiranger',c:'#38bdf8'},{p:[68.15,13.60],l:'Lofoten',c:'#f59e0b'},{p:[69.65,18.96],l:'Tromsø',c:'#0ea5e9'}],
@@ -582,18 +664,17 @@ const DESTS = [
     gallery:['https://picsum.photos/seed/safari/400/300','https://picsum.photos/seed/zanzibar/400/300','https://picsum.photos/seed/elephant/400/300'],
     tagline:'La Grande Migration + plages de Zanzibar — août est exactement la meilleure période',
     tags:['🦁 Big Five','🐘 Grande Migration','🏊 Zanzibar','🌅 Masai Mara','☀️ Août = parfait'],
-    weeks:[
-      {n:'1',place:'Nairobi & Masai Mara',desc:'Nairobi, réserve Masai Mara — pic de la Grande Migration en août, millions de gnous, montgolfière au lever du soleil'},
-      {n:'2',place:'Amboseli & Tsavo',desc:'Amboseli (éléphants avec Kilimandjaro en fond), Tsavo (lions à crinière noire), lodges tented camp dans la savane'},
-      {n:'3',place:'Serengeti & Ngorongoro',desc:'Serengeti (UNESCO), cratère du Ngorongoro — densité animale la plus haute du monde, lac Manyara (flamants roses)'},
-      {n:'4',place:'Zanzibar',desc:'Stone Town (UNESCO), plages de Nungwi et Kendwa, snorkeling Mnemba Atoll, épices et culture swahilie'}
-    ],
+    weeks:[{'n':'1','place':'Nairobi','desc':'Nairobi National Park (seul parc en pleine capitale) · Orphelinat des éléphants Sheldrick · Giraffe Centre · Cuisine kényane · Karen Blixen Museum'},{'n':'2','place':'Masai Mara — Grande Migration','desc':'Août = pic de la Grande Migration · Millions de gnous traversant le fleuve Mara · Big Five garantis · Safari montgolfière au lever du soleil · Nuit en tented camp'},{'n':'3','place':'Amboseli & Tsavo','desc':'Amboseli — éléphants avec le Kilimandjaro en fond · Tsavo — lions à crinière noire · Paysage volcanique rouge · Chutes Mzima Springs'},{'n':'4','place':'Serengeti & Ngorongoro (Tanzanie)','desc':'Serengeti (UNESCO) · Cratère du Ngorongoro — densité animale record mondiale · Lac Manyara et ses flamants roses · Olduvai Gorge (berceau de l\'humanité)'},{'n':'5','place':'Zanzibar','desc':'Stone Town (UNESCO) · Plages de Nungwi et Kendwa · Snorkeling à Mnemba Atoll · Forêt Jozani · Tour des plantations d\'épices · Dhow cruise au coucher de soleil'}],
+    budgetDetail:{total:5900,items:[{label:'✈️ Vols A/R',val:1900},{label:'🏨 Hébergement',val:1500},{label:'🚗 Transport local',val:900},{label:'🎯 Activités',val:1100},{label:'🍽️ Restauration',val:500}]},
+    mustSee:[{name:'Grande Migration Masai Mara',url:'https://www.masaimara.com/the-great-migration.html',desc:'Le plus grand spectacle animalier de la planète, pic en août'},{name:'Cratère du Ngorongoro',url:'https://www.tanzaniaparks.go.tz/parks/ngorongoro',desc:'Caldeira avec la plus haute densité animale d Afrique'},{name:'Zanzibar Stone Town (UNESCO)',url:'https://www.zanzibartourism.go.tz/stone-town',desc:'Ville historique swahilie mêlant Afrique, Arabie et Inde'},{name:'Orphelinat éléphants Sheldrick',url:'https://www.sheldrickwildlifetrust.org/',desc:'Sanctuaire éléphanteaux orphelins, moment inoubliable'},{name:'Serengeti National Park',url:'https://www.tanzaniaparks.go.tz/parks/serengeti',desc:'Parc UNESCO, savane infinie et biodiversité exceptionnelle'}],
+    videos:[{id:'gTEXJsw62iU',title:'Kenya — Road trip & safari'},{id:'rUWwsEoVIwc',title:'Kenya — drone 4K'}],
     info:[
       {icon:'💰',title:'Budget détaillé',c:'Vols ~950€ pp · Safaris & parcs ~1 500€ · Lodges & Zanzibar ~1 500€ · Transferts ~900€',col:'#ea580c'},
-      {icon:'✈️',title:'Transport',c:'Paris → Nairobi (~9h, escale) · Vols internes Kenya/Tanzanie · Retour depuis Zanzibar',col:'#ea580c'},
+      {icon:'✈️',title:'Transport',c:'Paris → Nairobi (~9h, escale) · Vols internes Kenya/Tanzanie · Retour depuis Zanzibar',col:'#ea580c',sky:'https://www.skyscanner.fr/transport/vols/PAR/NBO/20260808/20260907/?adults=2'},
       {icon:'🌿',title:'Impact carbone',c:'Long-courrier compensable ~130€ · Tented camps très éco · Économie communautaire Maasaï',col:'#059669'},
       {icon:'🏆',title:'Pourquoi août est parfait',c:'Pic Grande Migration au Masai Mara · Saison sèche = animaux aux points eau · Zanzibar hors pluies',col:'#ea580c'}
-    ],
+    ,
+      {icon:'🌡️',title:'Météo en août',c:'🌤️ 22–28°C · Saison sèche · Mer 26°C (Zanzibar) · Pic Grande Migration',col:'#0891b2'}],
     map:{center:[-3,36],zoom:5,
       routes:[{coords:[[-1.29,36.82],[-1.50,35.14],[-2.65,37.26],[-3.07,37.35],[-2.33,34.83],[-3.20,35.73],[-6.15,39.19]],color:'#ea580c',w:3}],
       markers:[{p:[-1.29,36.82],l:'Nairobi',c:'#ea580c'},{p:[-1.50,35.14],l:'Masai Mara',c:'#fbbf24'},{p:[-2.65,37.26],l:'Amboseli',c:'#fbbf24'},{p:[-2.33,34.83],l:'Serengeti',c:'#fbbf24'},{p:[-3.20,35.73],l:'Ngorongoro',c:'#fbbf24'},{p:[-6.15,39.19],l:'Zanzibar',c:'#0891b2'}],
@@ -607,18 +688,17 @@ const DESTS = [
     gallery:['https://loremflickr.com/400/300/kotor,montenegro','https://loremflickr.com/400/300/albania,europe','https://loremflickr.com/400/300/plitvice,croatia'],
     tagline:'Grand tour de l\'Adriatique : vieilles villes médiévales, mer cristalline et Albanie méconnue',
     tags:['🏊 Adriatique','🏛️ Kotor UNESCO','🎉 Split','🚗 Road trip','💰 Accessible'],
-    weeks:[
-      {n:'1',place:'Split & Dubrovnik',desc:'Vieille ville de Split, Parc Krka, vieux Dubrovnik inscrit UNESCO'},
-      {n:'2',place:'Monténégro',desc:'Bouches de Kotor, Budva, Parc Durmitor, lac Skadar'},
-      {n:'3',place:'Albanie',desc:'Riviera albanaise (Himara, Dhermi), Gjirokastër, Berat (UNESCO)'},
-      {n:'4',place:'Plitvice & Zagreb',desc:'Lacs de Plitvice (UNESCO), Zagreb, vol retour'}
-    ],
+    weeks:[{'n':'1','place':'Split & Côte Dalmate','desc':'Palais de Dioclétien (UNESCO, 3e s.) · Vieille ville de Split · Parc national de Krka — cascades et baignade · Île de Brač (plage Zlatni Rat)'},{'n':'2','place':'Dubrovnik & Monténégro','desc':'Vieux Dubrovnik (UNESCO, Game of Thrones) · Bouches de Kotor (UNESCO) · Vieille ville de Kotor · Budva Riviera · Île de Sveti Stefan'},{'n':'3','place':'Albanie — la surprise des Balkans','desc':'Riviera albanaise : Himara, Dhermi (eaux turquoise) · Gjirokastër (UNESCO) · Berat (UNESCO, ville aux mille fenêtres) · Lac d\'Ohrid'},{'n':'4','place':'Bosnie & Lacs de Plitvice','desc':'Mostar — Vieux Pont (UNESCO) · Sarajevo — carrefour des civilisations · Lacs de Plitvice (UNESCO) · Zagreb · Marché Dolac'},{'n':'5','place':'Îles croates — Hvar & Korčula','desc':'Hvar — lavande et plages · Korčula — ville médiévale de Marco Polo · Vis — île authentique · Kayak entre les îles'}],
+    budgetDetail:{total:3300,items:[{label:'✈️ Vols A/R',val:700},{label:'🏨 Hébergement',val:650},{label:'🚗 Transport local',val:600},{label:'🎯 Activités',val:500},{label:'🍽️ Restauration',val:850}]},
+    mustSee:[{name:'Vieux Dubrovnik (UNESCO)',url:'https://www.tzdubrovnik.hr/en',desc:'La perle de l Adriatique, remparts médiévaux à couper le souffle'},{name:'Bouches de Kotor (UNESCO)',url:'https://www.montenegrotravel.com/boka-kotorska',desc:'Fjord méditerranéen entouré de montagnes, joyau du Monténégro'},{name:'Lacs de Plitvice (UNESCO)',url:'https://np-plitvicka-jezera.hr/en/',desc:'16 lacs en cascade aux couleurs turquoise magiques'},{name:'Vieux Pont de Mostar (UNESCO)',url:'https://www.tourism.ba/en',desc:'Pont ottoman, symbole de réconciliation'},{name:'Riviera albanaise',url:'https://albania.al/explore/riviera/',desc:'Côte sauvage aux eaux cristallines encore préservée'}],
+    videos:[{id:'-4rYBhJMANA',title:'Balkans — Road trip estival'},{id:'F4ABHwXy-Mg',title:'Balkans — drone 4K'}],
     info:[
       {icon:'💰',title:'Budget détaillé',c:'Vols ~350€ pp · Voiture ~600€ · Hébergement ~650€ · Nourriture ~850€',col:'#7c3aed'},
-      {icon:'✈️',title:'Transport',c:'Vol Split (EasyJet/Ryanair) ~2h · Retour Zagreb · Voiture indispensable',col:'#7c3aed'},
+      {icon:'✈️',title:'Transport',c:'Vol Split (EasyJet/Ryanair) ~2h · Retour Zagreb · Voiture indispensable',col:'#7c3aed',sky:'https://www.skyscanner.fr/transport/vols/PAR/SPU/20260808/20260907/?adults=2'},
       {icon:'🌿',title:'Impact carbone',c:'Vol court-courrier · Albanie = tourisme à très faible pression',col:'#059669'},
       {icon:'🎯',title:'Points forts duo',c:'Nage + rando · Vie nocturne Split & Kotor · Albanie = découverte totale',col:'#7c3aed'}
-    ],
+    ,
+      {icon:'🌡️',title:'Météo en août',c:'☀️ 28–35°C · Quasi pas de pluie · Mer 26°C · Pleine saison estivale',col:'#0891b2'}],
     map:{center:[42,18],zoom:6,
       routes:[{coords:[[43.51,16.44],[42.65,18.09],[42.43,18.77],[42.28,18.84],[41.33,19.82],[40.71,20.95],[44.88,15.61],[45.81,15.98]],color:'#7c3aed',w:3}],
       markers:[{p:[43.51,16.44],l:'Split',c:'#7c3aed'},{p:[42.65,18.09],l:'Dubrovnik',c:'#7c3aed'},{p:[42.43,18.77],l:'Kotor',c:'#a855f7'},{p:[41.33,19.82],l:'Tirana',c:'#a855f7'},{p:[44.88,15.61],l:'Plitvice',c:'#fbbf24'},{p:[45.81,15.98],l:'Zagreb',c:'#7c3aed'}],
@@ -632,18 +712,17 @@ const DESTS = [
     gallery:['https://picsum.photos/seed/monastery/400/300','https://picsum.photos/seed/caucasus/400/300','https://picsum.photos/seed/ararat/400/300'],
     tagline:'Le Caucase méconnu : monastères millénaires dans des gorges vertigineuses, vue sur le mont Ararat',
     tags:['⛪ Monastères UNESCO','🏔️ Mont Ararat','🍷 Vin naturel','🌿 Éco++','💰 Budget imbattable'],
-    weeks:[
-      {n:'1',place:'Erevan & Ararat',desc:'Erevan (place République, musée du Génocide), Khor Virap (vue sur le mont Ararat 5 137m), Noravank (gorges rouges)'},
-      {n:'2',place:'Geghard & Garni',desc:'Temple de Garni (seul temple gréco-romain du Caucase), monastère de Geghard (UNESCO, taillé dans la roche), gorges de Azat'},
-      {n:'3',place:'Dilijan & Lac Sevan',desc:'Dilijan (la Suisse arménienne), monastères Haghartsin et Goshavank, lac Sevan (2 000m altitude), truites séchées'},
-      {n:'4',place:'Tatev & Sud Arménie',desc:'Monastère de Tatev, téléphérique Wings of Tatev (le plus long du monde), gorges de Vorotan, Goris troglodyte'}
-    ],
+    weeks:[{'n':'1','place':'Erevan & Ararat','desc':'Place de la République · Cascade (musée d\'art moderne) · Musée du Génocide · Marché Vernissage · Khor Virap — vue sur le mont Ararat · Noravank dans les gorges rouges'},{'n':'2','place':'Garni & Geghard','desc':'Temple de Garni (1er s., seul temple gréco-romain du Caucase) · Monastère de Geghard (UNESCO, taillé dans la roche) · Gorges de la rivière Azat'},{'n':'3','place':'Dilijan & Lac Sevan','desc':'Dilijan — la Suisse arménienne · Monastères Haghartsin & Goshavank · Lac Sevan à 2 000m · Monastère de Sevanavank · Village de potiers d\'Ijevan'},{'n':'4','place':'Tatev & Sud Arménie','desc':'Téléphérique Wings of Tatev (record mondial 5,7km) · Monastère de Tatev (9e s.) · Gorges de Vorotan · Grotte de l\'Oiseau · Goris et ses maisons troglodytes'},{'n':'5','place':'Vins & Gastronomie','desc':'Vignobles d\'Arménie et dégustation de vins naturels · Lavash (pain traditionnel, UNESCO) · Cognac Ararat · Dolma · Marché aux herbes et épices de Yeghegnadzor'}],
+    budgetDetail:{total:2400,items:[{label:'✈️ Vols A/R',val:800},{label:'🏨 Hébergement',val:400},{label:'🚗 Transport local',val:300},{label:'🎯 Activités',val:400},{label:'🍽️ Restauration',val:500}]},
+    mustSee:[{name:'Monastère de Geghard (UNESCO)',url:'https://whc.unesco.org/en/list/777',desc:'Monastère creusé dans la roche volcanique, ambiance mystique'},{name:'Temple de Garni',url:'https://www.garni.am/',desc:'Seul temple gréco-romain du Caucase, vue sur les gorges'},{name:'Wings of Tatev (record Guinness)',url:'https://tatev.am/',desc:'Plus long téléphérique réversible au monde'},{name:'Lac Sevan',url:'https://visitarmenia.am/destination/sevan-lake/',desc:'Grand lac à 2 000m, air pur et truites fraîches'},{name:'Khor Virap & mont Ararat',url:'https://visitorarmenia.com/khor-virap-monastery/',desc:'Vue iconique sur le symbole de l Arménie au coucher de soleil'}],
+    videos:[{id:'_AosxL_OVFA',title:'Arménie — Road trip estival'},{id:'zsj3PVOcXqw',title:'Arménie — drone 4K'}],
     info:[
       {icon:'💰',title:'Budget détaillé',c:'Vols ~400€ pp · Voiture ~300€ · Guesthouses ~400€ · Nourriture & activités ~500€',col:'#9333ea'},
-      {icon:'✈️',title:'Transport',c:'Paris → Erevan via Turkish Airlines ou Pegasus · Escale Istanbul · ~5h de vol',col:'#9333ea'},
+      {icon:'✈️',title:'Transport',c:'Paris → Erevan via Turkish Airlines ou Pegasus · Escale Istanbul · ~5h de vol',col:'#9333ea',sky:'https://www.skyscanner.fr/transport/vols/PAR/EVN/20260808/20260907/?adults=2'},
       {icon:'🌿',title:'Impact carbone',c:'Vol court-courrier · Cuisine artisanale locale · Destination très peu fréquentée',col:'#059669'},
       {icon:'🎯',title:'Points forts duo',c:'Budget le plus bas · Randos dans les gorges pour Benoît · Monastères et gastronomie pour Marion · Hospitalité légendaire',col:'#9333ea'}
-    ],
+    ,
+      {icon:'🌡️',title:'Météo en août',c:'🌞 28–35°C · Très sec · Idéal pour randonner · Nuits fraîches en altitude',col:'#0891b2'}],
     map:{center:[40,45],zoom:7,
       routes:[{coords:[[40.18,44.51],[39.68,44.76],[40.15,44.89],[40.88,44.72],[40.61,45.39],[39.38,46.28]],color:'#9333ea',w:3}],
       markers:[{p:[40.18,44.51],l:'Erevan',c:'#9333ea'},{p:[39.68,44.76],l:'Khor Virap',c:'#fbbf24'},{p:[40.15,44.89],l:'Geghard',c:'#fbbf24'},{p:[40.88,44.72],l:'Sevan',c:'#9333ea'},{p:[39.38,46.28],l:'Tatev',c:'#fbbf24'}],
@@ -657,18 +736,17 @@ const DESTS = [
     gallery:['https://picsum.photos/seed/surfwave/400/300','https://picsum.photos/seed/jungle/400/300','https://picsum.photos/seed/arenal/400/300'],
     tagline:'Surf de classe mondiale, volcans actifs et biodiversité parmi les plus riches de la planète',
     tags:['🏄 Surf Nosara','🌋 Volcans actifs','🐊 Biodiversité','🌴 Jungle','🐢 Tortues marines'],
-    weeks:[
-      {n:'1',place:'San José & Arenal',desc:'San José, Volcan Arenal (actif), sources thermales de La Fortuna, pont suspendu forêt tropicale, Monteverde'},
-      {n:'2',place:'Nicoya — Surf',desc:'Nosara et Santa Teresa : spots de surf de classe mondiale, cours de surf, yoga sur la plage, couchers de soleil Pacifique'},
-      {n:'3',place:'Manuel Antonio & Osa',desc:'Parc Manuel Antonio (singes, paresseux, plages), péninsule Osa — forêt primaire la plus dense d\'Amérique Centrale'},
-      {n:'4',place:'Côte Caraïbe',desc:'Puerto Viejo (culture afro-caribéenne), ponte des tortues marines en août, Parc Cahuita, snorkeling récif corallien'}
-    ],
+    weeks:[{'n':'1','place':'San José & Volcan Arenal','desc':'San José · Volcan Arenal (1 633m, l\'un des plus actifs) · Sources chaudes de La Fortuna · Forêt tropicale · Pont suspendu dans la canopée'},{'n':'2','place':'Monteverde — forêt nuageuse','desc':'Réserve nuageuse de Monteverde · Ponts suspendus Sky Walk · Observation des quetzals · Zip-line · Paresseux et toucans · Chocolat et café locaux'},{'n':'3','place':'Nosara & Samara — Pacifique','desc':'Nosara — capitale mondiale du surf · École de surf à Playa Guiones · Samara — baie protégée · Tortues marines (nidification en août) · Kayak de mer'},{'n':'4','place':'Parc Manuel Antonio','desc':'Le parc le plus visité du Costa Rica · Singes capucins et paresseux en liberté · Plages de rêve dans la jungle · Snorkeling · Randonnée côtière'},{'n':'5','place':'Péninsule d\'Osa & Corcovado','desc':'Corcovado — biodiversité la plus intense du continent (National Geographic) · Dauphins et baleines (pic en août) · Jungle primaire · Isla del Caño snorkeling'}],
+    budgetDetail:{total:3700,items:[{label:'✈️ Vols A/R',val:1500},{label:'🏨 Hébergement',val:850},{label:'🚗 Transport local',val:450},{label:'🎯 Activités',val:550},{label:'🍽️ Restauration',val:350}]},
+    mustSee:[{name:'Volcan Arenal',url:'https://www.sinac.go.cr/EN-US/ac/acahn/pnva/Pages/default.aspx',desc:'Volcan actif, sources chaudes en pleine forêt tropicale'},{name:'Forêt nuageuse de Monteverde',url:'https://www.monteverdeinfo.com/',desc:'Écosystème unique suspendu dans les nuages'},{name:'Parc national Manuel Antonio',url:'https://www.costarica.com/national-parks/manuel-antonio/',desc:'Plages + faune tropicale en totale liberté'},{name:'Corcovado',url:'https://www.costarica.com/national-parks/corcovado/',desc:'Biodiversité la plus intense du continent selon National Geographic'},{name:'Baleines en août',url:'https://www.visitcostarica.com/en/costa-rica/things-to-do/nature/marine-wildlife',desc:'Pic de la saison des baleines à bosse sur le Pacifique'}],
+    videos:[{id:'CZXon6FoRY0',title:'Costa Rica — Road trip estival'},{id:'Id7z5Mkqypc',title:'Costa Rica — drone 4K'}],
     info:[
       {icon:'💰',title:'Budget détaillé',c:'Vols ~750€ pp · Voiture ~450€ · Éco-lodges ~850€ · Nourriture & activités ~900€',col:'#0d9488'},
-      {icon:'✈️',title:'Transport',c:'Paris → San José (~13h, escale Miami ou Panama) · Voiture indispensable hors San José',col:'#0d9488'},
+      {icon:'✈️',title:'Transport',c:'Paris → San José (~13h, escale Miami ou Panama) · Voiture indispensable hors San José',col:'#0d9488',sky:'https://www.skyscanner.fr/transport/vols/PAR/SJO/20260808/20260907/?adults=2'},
       {icon:'🌿',title:'Impact carbone',c:'Long-courrier compensable ~110€ · Costa Rica = 99% énergie renouvelable · Éco-lodges certifiés',col:'#059669'},
       {icon:'🎯',title:'Points forts duo',c:'Surf à Nosara pour Benoît · Tortues marines et paresseux pour Marion · Le pays le plus écolo du monde',col:'#0d9488'}
-    ],
+    ,
+      {icon:'🌡️',title:'Météo en août',c:'🌤️ 26–32°C · Côte Pacifique sèche · Mer 28°C · Saison surf Pacifique',col:'#0891b2'}],
     map:{center:[9.9,-84.2],zoom:7,
       routes:[{coords:[[9.93,-84.08],[10.46,-84.64],[9.97,-85.09],[9.60,-85.65],[9.39,-83.44],[9.16,-82.77]],color:'#0d9488',w:3}],
       markers:[{p:[9.93,-84.08],l:'San José',c:'#0d9488'},{p:[10.46,-84.64],l:'Arenal',c:'#fbbf24'},{p:[9.97,-85.09],l:'Nosara',c:'#fbbf24'},{p:[9.60,-85.65],l:'Santa Teresa',c:'#fbbf24'},{p:[9.39,-83.44],l:'Manuel Antonio',c:'#0d9488'},{p:[9.16,-82.77],l:'Puerto Viejo',c:'#0d9488'}],
@@ -682,18 +760,17 @@ const DESTS = [
     gallery:['https://picsum.photos/seed/arugam/400/300','https://picsum.photos/seed/sigiriya/400/300','https://picsum.photos/seed/teaplantation/400/300'],
     tagline:'Arugam Bay top 10 mondial du surf, temples millénaires et éléphants sauvages en liberté',
     tags:['🏄 Arugam Bay top mondial','🐘 Éléphants sauvages','🏛️ Temples UNESCO','🍵 Collines de thé','☀️ Côte est = août parfait'],
-    weeks:[
-      {n:'1',place:'Triangle Culturel',desc:'Colombo, Sigiriya (forteresse-rocher UNESCO), Dambulla (temples rupestres), Polonnaruwa (cité ancienne UNESCO)'},
-      {n:'2',place:'Kandy & Collines de Thé',desc:'Kandy (Temple de la Dent UNESCO), train Kandy-Ella à travers les plantations de thé, rando Ella Rock'},
-      {n:'3',place:'Yala & Côte Sud',desc:'Parc Yala (léopards, éléphants, singes), Galle (fort colonial UNESCO), Mirissa (observation baleines bleues)'},
-      {n:'4',place:'Arugam Bay — Surf',desc:'Côte est, Arugam Bay classée top 10 mondial, houle parfaite en août, lagon de Pottuvil, parc Kumana (flamants roses)'}
-    ],
+    weeks:[{'n':'1','place':'Triangle culturel','desc':'Kandy — Temple de la Dent (UNESCO) · Sigiriya — rocher forteresse (UNESCO) · Dambulla — grottes bouddhistes (UNESCO) · Polonnaruwa (UNESCO) · Anuradhapura (UNESCO)'},{'n':'2','place':'Hauts Plateaux & Ella','desc':'Train de Kandy à Ella (un des plus beaux au monde) · Pont des 9 arches d\'Ella · Plantations de thé de Nuwara Eliya · Chutes de Diyaluma · Horton Plains'},{'n':'3','place':'Côte sud — Galle & Mirissa','desc':'Fort de Galle (UNESCO, colonial hollandais) · Mirissa · Baleines bleues · Unawatuna · Weligama — surf initiation · Marché aux épices'},{'n':'4','place':'Arugam Bay — côte est','desc':'Arugam Bay — top 10 mondial des spots de surf · Parc national de Yala (léopards) · Lagune de Kumana · Village de pêcheurs de Pottuvil · École de surf'},{'n':'5','place':'Jaffna & Nord','desc':'Jaffna — culture tamoule authentique · Forteresse hollandaise · Île de Nainativu · Pêche sur échasses (stilt fishing) · Cuisine épicée du nord · Temples hindous colorés'}],
+    budgetDetail:{total:3300,items:[{label:'✈️ Vols A/R',val:1300},{label:'🏨 Hébergement',val:550},{label:'🚗 Transport local',val:500},{label:'🎯 Activités',val:550},{label:'🍽️ Restauration',val:400}]},
+    mustSee:[{name:'Sigiriya (UNESCO)',url:'https://whc.unesco.org/en/list/509',desc:'Citadelle du 5e s. sur un rocher de 200m, fresques et jardins'},{name:'Train Kandy-Ella',url:'https://www.srilanka.travel/train-journey',desc:'Un des plus beaux trajets en train au monde'},{name:'Temple de la Dent Kandy (UNESCO)',url:'https://www.sridaladamaligawa.lk/',desc:'Le temple le plus sacré du bouddhisme sri-lankais'},{name:'Arugam Bay',url:'https://www.surfing-sri-lanka.com/arugam-bay',desc:'Top 10 mondial des spots de surf'},{name:'Baleines bleues de Mirissa',url:'https://www.mirissawhalewatch.com/',desc:'Meilleur spot mondial pour observer les baleines bleues'}],
+    videos:[{id:'f-Sdk3Jjp3I',title:'Sri Lanka — Road trip estival'},{id:'r6HTCiPwJr8',title:'Sri Lanka — drone 4K'}],
     info:[
       {icon:'💰',title:'Budget détaillé',c:'Vols ~650€ pp · Voiture + chauffeur ~500€ · Guesthouses ~550€ · Nourriture & activités ~700€',col:'#b45309'},
-      {icon:'✈️',title:'Transport',c:'Paris → Colombo (~11h, escale Dubaï ou Doha) · Voiture avec chauffeur conseillé (~30€/j)',col:'#b45309'},
+      {icon:'✈️',title:'Transport',c:'Paris → Colombo (~11h, escale Dubaï ou Doha) · Voiture avec chauffeur conseillé (~30€/j)',col:'#b45309',sky:'https://www.skyscanner.fr/transport/vols/PAR/CMB/20260808/20260907/?adults=2'},
       {icon:'🌿',title:'Impact carbone',c:'Long-courrier compensable ~100€ · Hébergement local · Cuisine végétarienne naturelle',col:'#059669'},
       {icon:'🎯',title:'Points forts duo',c:'Arugam Bay pour le surf · Train Kandy-Ella parmi les plus beaux du monde · Éléphants sauvages pour Marion',col:'#b45309'}
-    ],
+    ,
+      {icon:'🌡️',title:'Météo en août',c:'☀️ 28–33°C · Côte est sèche · Mer 27°C · Arugam Bay au meilleur',col:'#0891b2'}],
     map:{center:[8,80.8],zoom:7,
       routes:[{coords:[[6.93,79.85],[7.95,80.76],[7.29,80.64],[6.03,80.22],[6.84,81.33]],color:'#b45309',w:3}],
       markers:[{p:[6.93,79.85],l:'Colombo',c:'#b45309'},{p:[7.95,80.76],l:'Sigiriya',c:'#fbbf24'},{p:[7.29,80.64],l:'Kandy',c:'#b45309'},{p:[6.03,80.22],l:'Galle',c:'#b45309'},{p:[6.84,81.33],l:'Arugam Bay',c:'#fbbf24'}],
@@ -707,18 +784,17 @@ const DESTS = [
     gallery:['https://loremflickr.com/400/300/japan,temple','https://loremflickr.com/400/300/japan,onsen','https://loremflickr.com/400/300/tokyo,japan'],
     tagline:'Double road trip dans les deux joyaux méconnus du Japon — volcans, onsens et festivals d\'été',
     tags:['♨️ Onsens en plein air','🌋 Volcans actifs','🚗 Double road trip','🎆 Festival Obon','🐻 Faune Hokkaido'],
-    weeks:[
-      {n:'1',place:'Hokkaido Ouest — Sapporo & Niseko',desc:'Marché Nijo, Otaru (canal), Niseko (randos volcaniques, onsens sulfureux), Furano (lavande)'},
-      {n:'2',place:'Hokkaido Est — Shiretoko & Kushiro',desc:'Shiretoko UNESCO (ours bruns, cascades), lac Mashu, marais de Kushiro, sources chaudes'},
-      {n:'3',place:'Kyushu — Beppu & Mont Aso',desc:'7 enfers géothermaux de Beppu, cratère du Mont Aso (actif), festival Obon en août'},
-      {n:'4',place:'Kyushu Sud — Kagoshima & Yakushima',desc:'Volcan Sakurajima, île Yakushima (forêt millénaire UNESCO), baignade en rivière'}
-    ],
+    weeks:[{'n':'1','place':'Tokyo','desc':'Shinjuku · Shibuya Crossing · Harajuku · Akihabara · Senso-ji (Asakusa) · Tokyo Skytree · Tsukiji · Ramen, sushi, yakitori · Onsen en ville'},{'n':'2','place':'Nikko & Hakone','desc':'Nikko (UNESCO) — sanctuaires et forêts de cèdres millénaires · Hakone · Mont Fuji vu du lac Ashi · Onsen face au Fuji · Ryokan traditionnel · Shinrin-yoku (bain de forêt)'},{'n':'3','place':'Kyoto & Nara','desc':'Fushimi Inari (5 000 torii) · Arashiyama (bambous) · Geishas à Gion · 17 sites UNESCO · Nara — cerfs en liberté · Grand Bouddha Tōdai-ji · Kinkaku-ji (pavillon d\'or)'},{'n':'4','place':'Osaka & Hiroshima','desc':'Osaka Dotonbori (street food) · Château d\'Osaka · Hiroshima — Mémorial de la Paix (UNESCO) · Île de Miyajima · Torii flottant (UNESCO) · Sake local'},{'n':'5','place':'Hokkaido — grand nord','desc':'Sapporo · Lavandes de Furano (pic juillet–août) · Biei et ses collines colorées · Parc national de Daisetsuzan · Onsen de Noboribetsu · Fruits de mer d\'Hokkaido'}],
+    budgetDetail:{total:5200,items:[{label:'✈️ Vols A/R',val:1800},{label:'🏨 Hébergement',val:1100},{label:'🚗 Transport local',val:1050},{label:'🎯 Activités',val:650},{label:'🍽️ Restauration',val:600}]},
+    mustSee:[{name:'Fushimi Inari Taisha Kyoto',url:'https://inari.jp/en/',desc:'5 000 torii orangés gravissant la montagne — icône du Japon'},{name:'Mont Fuji & Hakone',url:'https://www.japan-guide.com/e/e6015.html',desc:'Le symbole du Japon, mirroir dans le lac Ashi'},{name:'Lavandes de Furano Hokkaido',url:'https://www.farm-tomita.co.jp/en/',desc:'Pic juillet-août : champs de lavande à perte de vue'},{name:'Hiroshima & Miyajima (UNESCO)',url:'https://visithiroshima.net/',desc:'Mémorial de la Paix + torii flottant, expérience émouvante'},{name:'Quartier Gion Kyoto',url:'https://www.kyoto.travel/en/sightseeing/area/gion',desc:'Quartier des geishas depuis l Ère Edo, magique au crépuscule'}],
+    videos:[{id:'csgiI_TquGA',title:'Japon — Road trip estival'},{id:'G5RpJwCJDqc',title:'Japon — drone 4K'}],
     info:[
       {icon:'💰',title:'Budget détaillé',c:'Vols ~900€ pp · JR Pass 21j ~650€ · Voiture Hokkaido ~400€ · Ryokan/camping ~1 100€ · Activités ~900€',col:'#c2410c'},
-      {icon:'✈️',title:'Transport',c:'Vol Paris→Sapporo (escale Tokyo, ~13h) · Retour Fukuoka→Paris · JR Pass',col:'#c2410c'},
+      {icon:'✈️',title:'Transport',c:'Vol Paris→Sapporo (escale Tokyo, ~13h) · Retour Fukuoka→Paris · JR Pass',col:'#c2410c',sky:'https://www.skyscanner.fr/transport/vols/PAR/TYO/20260808/20260907/?adults=2'},
       {icon:'🌿',title:'Impact carbone',c:'Long-courrier compensable ~120€ · Shinkansen très bas carbone · Ryokan = économie locale',col:'#059669'},
       {icon:'🎯',title:'Points forts duo',c:'Onsens extérieurs uniques · Randos volcaniques · Festival Obon en août · Fraîcheur Hokkaido (20°C)',col:'#c2410c'}
-    ],
+    ,
+      {icon:'🌡️',title:'Météo en août',c:'🌡️ 26–34°C · Chaud et humide · Mer 25°C · Festivals estivaux',col:'#0891b2'}],
     map:{center:[40,139],zoom:5,
       routes:[
         {coords:[[43.06,141.35],[42.80,140.69],[43.34,142.38],[44.08,145.11],[41.77,140.73]],color:'#c2410c',w:3},
@@ -736,18 +812,17 @@ const DESTS = [
     gallery:['https://loremflickr.com/400/300/medellin,colombia','https://loremflickr.com/400/300/colombia,nature','https://loremflickr.com/400/300/colombia,jungle'],
     tagline:'De la mer des Caraïbes aux rivières arc-en-ciel — le secret le mieux gardé d\'Amérique du Sud',
     tags:['🏊 Mer Caraïbes','🌈 Caño Cristales','☕ Route du café','🎉 Medellín','🦜 Biodiversité extrême'],
-    weeks:[
-      {n:'1',place:'Cartagena & Côte Caraïbe',desc:'Vieille ville coloniale (UNESCO), îles du Rosario, Palomino, Parc Tayrona'},
-      {n:'2',place:'Medellín & Guatapé',desc:'Quartier El Poblado, El Peñol (200m de granit), vie culturelle intense'},
-      {n:'3',place:'Eje Cafetero — Route du café',desc:'Salento, palmiers de cire de Cocora (60m), Jardín — plus beau village de Colombie'},
-      {n:'4',place:'Caño Cristales',desc:'La Macarena : rivière aux algues rouges/jaunes/vertes, phénomène unique au monde'}
-    ],
+    weeks:[{'n':'1','place':'Bogotá','desc':'La Candelaria (colonial) · Musée de l\'Or (50 000 pièces, le plus grand au monde) · Monserrate (3 152m, vue panoramique) · Street art · Marché Paloquemao'},{'n':'2','place':'Medellín — la ville la plus innovante','desc':'Commune 13 (street art & escalators) · Métrocâble · Musée Botero · Parapente depuis El Penol · La ville du printemps éternel · Parc Arvi'},{'n':'3','place':'Café & Andes — Salento','desc':'Vallée de Cocora (palmiers de cire géants) · Salento colonial · Fermes de café (fincas) · Processus complet du café · Randonnées dans les Andes'},{'n':'4','place':'Carthagène des Indes','desc':'Vieille ville fortifiée (UNESCO) · Murailles coloniales espagnoles · Getsemaní · Îles Rosario (snorkeling) · Playa Blanca · Fruits exotiques'},{'n':'5','place':'Parc Tayrona & Santa Marta','desc':'Parc Tayrona — plages sauvages dans la jungle · Cabo San Juan · Taganga · Trek Ciudad Perdida (4 jours, en option) · Hammacs au-dessus de la mer'}],
+    budgetDetail:{total:3400,items:[{label:'✈️ Vols A/R',val:1100},{label:'🏨 Hébergement',val:750},{label:'🚗 Transport local',val:550},{label:'🎯 Activités',val:600},{label:'🍽️ Restauration',val:400}]},
+    mustSee:[{name:'Carthagène des Indes (UNESCO)',url:'https://www.cartagena.gov.co/turismo',desc:'Joyau colonial espagnol aux couleurs vives'},{name:'Vallée de Cocora Salento',url:'https://colombia.travel/es/salento',desc:'Palmiers de cire géants dans un décor de conte'},{name:'Commune 13 Medellín',url:'https://www.medellin.travel/en/comuna-13/',desc:'Transformation urbaine fascinante, street art monumental'},{name:'Parc Tayrona',url:'https://www.parquesnacionales.gov.co/portal/es/ecoturismo/region-caribe/',desc:'Jungle tropicale plongeant dans la mer des Caraïbes'},{name:'Musée de l Or Bogotá',url:'https://www.banrepcultural.org/bogota/museo-del-oro',desc:'Plus grande collection d orfèvrerie précolombienne au monde'}],
+    videos:[{id:'tJ-WBdrR_ak',title:'Colombie — Road trip estival'},{id:'OpRiGjb4y38',title:'Colombie — drone 4K'}],
     info:[
       {icon:'💰',title:'Budget détaillé',c:'Vols ~700€ pp · Vols internes ~200€ · Hostels/éco-lodges ~600€ · Nourriture ~750€',col:'#16a34a'},
-      {icon:'✈️',title:'Transport',c:'Paris → Cartagena (~12h, escale) · Vols internes Avianca < 80€',col:'#16a34a'},
+      {icon:'✈️',title:'Transport',c:'Paris → Cartagena (~12h, escale) · Vols internes Avianca < 80€',col:'#16a34a',sky:'https://www.skyscanner.fr/transport/vols/PAR/CTG/20260808/20260907/?adults=2'},
       {icon:'🌿',title:'Impact carbone',c:'Long-courrier compensable ~100€ · Éco-lodges · Caño Cristales : accès réglementé',col:'#059669'},
       {icon:'🎯',title:'Points forts duo',c:'Caño Cristales = phénomène unique · Medellín festif pour Marion · Rando Cocora pour Benoît',col:'#16a34a'}
-    ],
+    ,
+      {icon:'🌡️',title:'Météo en août',c:'🌦️ 18–28°C · Caraïbes ensoleillées · Mer 29°C · Intérieur variable',col:'#0891b2'}],
     map:{center:[6,-74],zoom:6,
       routes:[{coords:[[10.39,-75.48],[11.25,-74.22],[6.24,-75.57],[4.64,-75.70],[4.71,-74.07],[2.27,-73.79]],color:'#16a34a',w:3}],
       markers:[{p:[10.39,-75.48],l:'Cartagena',c:'#16a34a'},{p:[11.25,-74.22],l:'Tayrona',c:'#22c55e'},{p:[6.24,-75.57],l:'Medellín',c:'#16a34a'},{p:[4.64,-75.70],l:'Salento',c:'#22c55e'},{p:[4.71,-74.07],l:'Bogotá',c:'#16a34a'},{p:[2.27,-73.79],l:'Caño Cristales ★',c:'#fbbf24'}],
@@ -761,18 +836,17 @@ const DESTS = [
     gallery:['https://loremflickr.com/400/300/southafrica,coast','https://loremflickr.com/400/300/drakensberg,africa','https://loremflickr.com/400/300/lion,safari'],
     tagline:'Road trip en 3 actes : Cape Town, Garden Route sauvage et Drakensberg (les Alpes africaines)',
     tags:['🏊 Côte Atlantique','🦁 Big Five','🚗 Garden Route','🏔️ Drakensberg','🐋 Baleines franches'],
-    weeks:[
-      {n:'1',place:'Cape Town & Péninsule',desc:'Table Mountain, Cap de Bonne Espérance, Stellenbosch (vins), Hermanus (baleines franches)'},
-      {n:'2',place:'Garden Route',desc:'Wilderness, Knysna (lagon & forêt), Tsitsikamma (kayak mer, pont suspendu)'},
-      {n:'3',place:'Eastern Cape & Addo',desc:'Jeffreys Bay (surf), Réserve Addo (éléphants, lions, buffles), Valley of Desolation'},
-      {n:'4',place:'Drakensberg — Alpes Africaines',desc:'Amphithéâtre Royal Natal, chutes Tugela (2e plus hautes du monde), Cathedral Peak'}
-    ],
+    weeks:[{'n':'1','place':'Le Cap','desc':'Table Mountain · Cap de Bonne-Espérance · Robben Island (UNESCO) · Bo-Kaap · Boulders Beach (manchots africains) · Cape Winelands (Franschhoek, Stellenbosch)'},{'n':'2','place':'Garden Route','desc':'Knysna Lagoon · Tsitsikamma (suspension bridge) · Parc de Storms River · Surf à Jeffreys Bay (J-Bay) · Baleines depuis Hermanus · Grottes de Cango · Ostrich farms d\'Oudtshoorn'},{'n':'3','place':'Parc Kruger — Big Five','desc':'Kruger (l\'un des meilleurs parcs d\'Afrique) · Big Five quasi garantis · Safaris matin & soir · Réserves privées de Sabi Sand · Blyde River Canyon (3e plus grand du monde)'},{'n':'4','place':'Drakensberg & KwaZulu-Natal','desc':'Monts Drakensberg (UNESCO) · Peintures rupestres San · iSimangaliso (UNESCO) · Plongée avec requins-baleines · Durban · Cuisine zoulou'},{'n':'5','place':'Johannesburg & Soweto','desc':'Soweto · Maison de Mandela · Musée de l\'Apartheid · Const. Hill · Neighbourgoods Market · Cradle of Humankind (UNESCO)'}],
+    budgetDetail:{total:5000,items:[{label:'✈️ Vols A/R',val:1600},{label:'🏨 Hébergement',val:1400},{label:'🚗 Transport local',val:600},{label:'🎯 Activités',val:1000},{label:'🍽️ Restauration',val:400}]},
+    mustSee:[{name:'Table Mountain Le Cap',url:'https://www.tablemountain.net/',desc:'Vue à 360° sur l océan depuis le plateau sommital'},{name:'Parc national Kruger',url:'https://www.sanparks.org/parks/kruger/',desc:'Un des meilleurs parcs d Afrique pour les Big Five'},{name:'Cap de Bonne-Espérance',url:'https://www.capepoint.co.za/',desc:'Bout du continent africain, manchots et babouins'},{name:'Blyde River Canyon',url:'https://www.sa-venues.com/game-parks-mpumalanga/blyde-river-canyon.php',desc:'3e plus grand canyon du monde'},{name:'Robben Island (UNESCO)',url:'https://www.robben-island.org.za/',desc:'Île-prison de Mandela, visites par d anciens prisonniers'}],
+    videos:[{id:'Shw0HEMuq_k',title:'Afrique du Sud — Road trip estival'},{id:'hb4p6nstPK4',title:'Afrique du Sud — drone 4K'}],
     info:[
       {icon:'💰',title:'Budget détaillé',c:'Vols ~850€ pp · Voiture ~700€ · Lodges/B&B ~900€ · Nourriture ~900€',col:'#b45309'},
-      {icon:'✈️',title:'Transport',c:'Paris → Cape Town (~13h, escale) · Retour Johannesburg · Conduite à gauche',col:'#b45309'},
+      {icon:'✈️',title:'Transport',c:'Paris → Cape Town (~13h, escale) · Retour Johannesburg · Conduite à gauche',col:'#b45309',sky:'https://www.skyscanner.fr/transport/vols/PAR/CPT/20260808/20260907/?adults=2'},
       {icon:'🌿',title:'Impact carbone',c:'Long-courrier compensable ~110€ · Lodges eco-certifiés · Août = saison sèche idéale',col:'#059669'},
       {icon:'🏆',title:'Coup de cœur 🏆',c:'Road trip le + varié : mer + safari + montagne · Rand faible = budget favorable · Aucun visa requis',col:'#b45309'}
-    ],
+    ,
+      {icon:'🌡️',title:'Météo en août',c:'🌤️ 15–22°C · Hiver austral sec · Idéal safari · Garden Route douce',col:'#0891b2'}],
     map:{center:[-31,24],zoom:6,
       routes:[{coords:[[-33.92,18.42],[-34.40,19.25],[-34.04,23.05],[-33.96,25.60],[-32.25,24.54],[-28.68,29.43],[-26.20,28.04]],color:'#b45309',w:3}],
       markers:[{p:[-33.92,18.42],l:'Cape Town',c:'#b45309'},{p:[-34.40,19.25],l:'Hermanus',c:'#d97706'},{p:[-34.04,23.05],l:'Knysna',c:'#d97706'},{p:[-33.96,25.60],l:'Gqeberha',c:'#b45309'},{p:[-28.68,29.43],l:'Drakensberg',c:'#fbbf24'},{p:[-26.20,28.04],l:'Johannesburg',c:'#b45309'}],
@@ -787,18 +861,17 @@ const DESTS = [
     gallery:['https://loremflickr.com/400/300/polynesia,ocean','https://loremflickr.com/400/300/tropical,island','https://loremflickr.com/400/300/pacific,beach'],
     tagline:'Polynésie hors des sentiers touristiques — pensions locales, archipels secrets, baleines à bosse en août',
     tags:['🏊 Lagons immaculés','🌿 Pensions locales','🏄 Surf à Teahupo\'o','🗿 Marae ancestraux','🐋 Baleines à bosse'],
-    weeks:[
-      {n:'1',place:'Tahiti Iti — La Péninsule Oubliée',desc:'Arrivée Papeete, presqu\'île Tahiti Iti, Teahupo\'o (village surfeurs), cascade Vaimahutu, pension locale chez l\'habitant'},
-      {n:'2',place:'Moorea — L\'Intérieur Sauvage',desc:'Ferry 30 min. Vélos vallée d\'Opunohu (marae archéologiques), snorkeling raies & requins citron, pension familiale dans les collines'},
-      {n:'3',place:'Huahine — La Bora Bora d\'Avant',desc:'"L\'île sauvage" : perliculture familiale, fermes de vanille, marae de Maeva (plus grand site archéo polynésien), criques désertes'},
-      {n:'4',place:'Maupiti — Le Joyau Interdit',desc:'1 200 habitants, aucun resort, pensions chez l\'habitant uniquement. Kayak, rando Teurafaatiu (380m), observation baleines à bosse. Réserver 3-4 mois à l\'avance'}
-    ],
+    weeks:[{'n':'1','place':'Tahiti','desc':'Papeete · Marché central (vanille, monoï, perles noires) · Musée de Tahiti · Cascade de Faarumai · Point Venus · Lagons côte ouest · Poisson cru au lait de coco'},{'n':'2','place':'Moorea','desc':'Baie de Cook & baie d\'Opunohu (parmi les plus belles du monde) · Mont Rotui · Snorkeling avec raies et dauphins · ATV dans les montagnes · Stand-up paddle dans le lagon'},{'n':'3','place':'Huahine — l\'authentique','desc':'Huahine Nui & Iti · Sites maraes (temples polynésiens anciens) · Anguilles sacrées de Faie · Lagons peu fréquentés · Pêche traditionnelle · Plantation de vanille'},{'n':'4','place':'Raiatea & Taha\'a','desc':'Raiatea — île sacrée, marae Taputapuatea (UNESCO) · Taha\'a — 80% de la vanille de Polynésie · Motu Mahana · Croisière entre les îles · Cérémonie polynésienne'},{'n':'5','place':'Bora Bora','desc':'Le lagon le plus célèbre du monde · Mont Otemanu · Motu Tapu (île de plage privée) · Snorkeling avec requins et raies · Bungalow sur pilotis · Survol hélicoptère'}],
+    budgetDetail:{total:6000,items:[{label:'✈️ Vols A/R',val:3200},{label:'🏨 Hébergement',val:1100},{label:'🚗 Transport local',val:400},{label:'🎯 Activités',val:700},{label:'🍽️ Restauration',val:600}]},
+    mustSee:[{name:'Lagon de Bora Bora',url:'https://www.borabora.com/',desc:'Le lagon aux 50 nuances de bleu — le plus beau du monde'},{name:'Marae Taputapuatea (UNESCO)',url:'https://whc.unesco.org/en/list/1529',desc:'Temple polynésien UNESCO, centre spirituel de Polynésie'},{name:'Baies de Moorea',url:'https://www.tahiti-tourisme.com/islands/moorea/',desc:'Baie de Cook et d Opunohu, parmi les plus belles du monde'},{name:'Dauphins Moorea',url:'https://www.moorea-mahana-tours.com/',desc:'Nager avec les dauphins dans le lagon'},{name:'Huahine authentique',url:'https://www.tahiti-tourisme.com/islands/huahine/',desc:'La Polynésie avant le tourisme de masse'}],
+    videos:[{id:'UPbV_r9I_0A',title:'Tahiti — Road trip estival'},{id:'YbUkAJHCgd0',title:'Tahiti — drone 4K'}],
     info:[
       {icon:'💰',title:'Budget détaillé',c:'Vols A/R ~1 600€ pp · Air Tahiti inter-îles ~400€ · Pensions locales ~1 100€ · Activités & repas ~800€',col:'#c8943a'},
-      {icon:'✈️',title:'Comment y aller',c:'Air Tahiti Nui depuis Paris CDG · ~22h avec escale · Inter-îles : Air Tahiti ou ferry goélette local',col:'#c8943a'},
+      {icon:'✈️',title:'Comment y aller',c:'Air Tahiti Nui depuis Paris CDG · ~22h avec escale · Inter-îles : Air Tahiti ou ferry goélette local',col:'#c8943a',sky:'https://www.skyscanner.fr/transport/vols/PAR/PPT/20260808/20260907/?adults=2'},
       {icon:'🌿',title:'Éco-impact',c:'Long-courrier compensable ~150€ · Pensions = économie directe locale · Maupiti = accès réglementé et préservé',col:'#059669'},
       {icon:'💡',title:'Conseil authenticité',c:'Évitez Bora Bora (resorts ~800€/nuit) et le centre de Papeete. Concentrez-vous sur Huahine + Maupiti — la Polynésie d\'avant l\'industrie touristique.',col:'#c8943a'}
-    ],
+    ,
+      {icon:'🌡️',title:'Météo en août',c:'☀️ 24–29°C · Saison sèche · Mer 27°C · Meilleure période',col:'#0891b2'}],
     map:{center:[-16.8,-151.2],zoom:8,
       routes:[{coords:[[-17.54,-149.56],[-17.53,-149.83],[-16.72,-151.02],[-16.83,-151.43],[-16.45,-152.24]],color:'#0891b2',w:3}],
       markers:[
@@ -823,7 +896,7 @@ DESTS.forEach(d => {
   card.className = 'dest-card' + (d.special ? ' gold-card' : '');
   card.dataset.cats = d.cats.join(' ');
   card.innerHTML = `
-    <div class="card-photo">
+    <div class="card-photo" onclick="openModal('${d.id}')" style="cursor:pointer">
       <img src="${d.heroImg}" alt="${d.name}" onerror="this.src='${FALLBACK}'">
       <div class="card-photo-ov"></div>
       <div class="card-num" style="background:${d.color}">${d.num}</div>
@@ -844,6 +917,9 @@ DESTS.forEach(d => {
         ${d.tags.map(t=>`<span class="ctag" style="border-color:${d.color}40;color:${d.color}">${t}</span>`).join('')}
       </div>
       <button class="card-cta" onclick="openModal('${d.id}')">Voir le détail →</button>
+      <button class="vote-btn" id="vbtn-${d.id}" onclick="toggleVote(event,'${d.id}')">
+        ❤️ Je vote <span class="vcnt" id="vcnt-${d.id}">0</span>
+      </button>
     </div>`;
   grid.appendChild(card);
 });
@@ -881,16 +957,56 @@ function openModal(id) {
     `<span class="mtag">🌡️ ${d.climate}</span>` +
     (d.visited?`<span class="mtag" style="border-color:rgba(239,68,68,.5);color:rgba(239,68,68,.9)">🚫 Déjà visités tous les deux</span>`:'') +
     (d.marionVisited?`<span class="mtag" style="border-color:rgba(239,68,68,.5);color:rgba(239,68,68,.9)">⚠️ Déjà vu par Marion</span>`:'');
+  const stepLabel = (n) => {
+    const labels = ['1','2','3','4','5','6','7'];
+    return 'Étape ' + (labels[n-1] || n);
+  };
   document.getElementById('mWeeks').innerHTML = d.weeks.map(w=>`
     <div class="mweek">
-      <div class="mwbadge" style="background:${d.color}">S${w.n}</div>
+      <div class="mwbadge" style="background:${d.color}">${w.n}</div>
       <div class="mwbody"><h4>${w.place}</h4><p>${w.desc}</p></div>
-    </div>`).join('');
+    </div>`).join('')
+  + (d.mustSee && d.mustSee.length ? `
+    <div class="mustsee-block">
+      <h4 class="mustsee-title">📍 À voir absolument</h4>
+      ${d.mustSee.map(m=>`
+        <a class="mustsee-item" href="${m.url}" target="_blank" rel="noopener">
+          <span class="mustsee-name">${m.name}</span>
+          <span class="mustsee-desc">${m.desc}</span>
+        </a>`).join('')}
+    </div>` : '');
   document.getElementById('mInfo').innerHTML = d.info.map(i=>`
     <div class="micard" style="border-color:${i.col}">
       <h5 style="color:${i.col}">${i.icon} ${i.title}</h5>
       <p>${i.c}</p>
+      ${i.sky ? `<a href="${i.sky}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:.4rem;margin-top:.6rem;background:#0770e3;color:#fff;text-decoration:none;padding:.35rem .8rem;border-radius:6px;font-size:.78rem;font-weight:600">✈️ Rechercher sur Skyscanner</a>` : ''}
     </div>`).join('');
+  // Budget chart
+  const bd = d.budgetDetail;
+  if(bd){
+    const bc=['#0ea5e9','#10b981','#f59e0b','#8b5cf6','#f43f5e'];
+    document.getElementById('mBudget').innerHTML=`<div class="mbudget-wrap">
+      <div class="mbudget-title">Budget estimé · 2 personnes · 4 semaines</div>
+      <div class="mbudget-total">${bd.total.toLocaleString('fr-FR')} € <span>au total</span></div>
+      ${bd.items.map((item,i)=>`<div class="mbudget-row">
+        <div class="mbudget-label">${item.label}</div>
+        <div class="mbudget-bar-bg"><div class="mbudget-bar-fill" style="width:${Math.round(item.val/bd.total*100)}%;background:${bc[i]}"></div></div>
+        <div class="mbudget-val">${item.val.toLocaleString('fr-FR')} €</div>
+      </div>`).join('')}
+      <div class="mbudget-note">* Estimation moyenne — varie selon confort et date de réservation</div>
+    </div>`;}
+  // Videos in left column
+  if(d.videos&&d.videos.length){
+    document.getElementById('mVideos').innerHTML=`<div class="mvid-section">
+      <h4>🎬 Vidéos de voyage</h4>
+      <div class="mvid-grid">${d.videos.map(v=>`
+        <div class="mvid-thumb" onclick="window.open('https://www.youtube.com/watch?v=${v.id}','_blank')">
+          <img src="https://img.youtube.com/vi/${v.id}/mqdefault.jpg" alt="${v.title}">
+          <div class="mvid-play">▶</div>
+          <div class="mvid-caption">${v.title}</div>
+        </div>`).join('')}
+      </div></div>`;}
+  else{document.getElementById('mVideos').innerHTML='';}
   document.getElementById('mMapTitle').textContent = `🗺️ Road Trip — ${d.name}`;
   document.getElementById('mLegend').innerHTML = d.map.legend.map(l=>
     `<div class="leg"><div class="leg-dot" style="background:${l.c}"></div>${l.l}</div>`).join('');
@@ -1042,6 +1158,176 @@ function quizReset() {
   document.getElementById('step0').classList.add('active');
 }
 
+
+// ── VIDEO LIGHTBOX ──
+function vboxOpen(id){
+  document.getElementById('vboxFrame').src='https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0';
+  document.getElementById('vbox').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function vboxClose(){
+  document.getElementById('vboxFrame').src='';
+  document.getElementById('vbox').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')vboxClose();});
+
+// ── WORLD MAP ──
+const WORLD_COORDS={
+  norvege:[65.0,14.0],kenya:[-1.5,37.0],balkans:[43.5,16.5],armenie:[40.2,44.5],
+  costarica:[9.9,-84.2],srilanka:[7.9,80.7],japon:[36.5,138.0],
+  colombie:[4.5,-74.0],afrique:[-30.5,25.0],tahiti:[-17.5,-149.5]
+};
+window.addEventListener('load',function(){
+  const wm=L.map('worldMap',{center:[20,10],zoom:2,scrollWheelZoom:false});
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{
+    attribution:'© OpenStreetMap © CARTO',subdomains:'abcd',maxZoom:19
+  }).addTo(wm);
+  const leg=document.getElementById('wmapLegend');
+  DESTS.forEach(d=>{
+    const c=WORLD_COORDS[d.id];if(!c)return;
+    const ic=L.divIcon({className:'',iconSize:[36,36],iconAnchor:[18,18],popupAnchor:[0,-20],
+      html:`<div style="background:${d.color};width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;box-shadow:0 3px 10px rgba(0,0,0,.3);border:3px solid #fff;cursor:pointer">${d.flag}</div>`});
+    const mk=L.marker(c,{icon:ic}).addTo(wm);
+    mk.bindPopup(`<div style="font-family:'Outfit',sans-serif;min-width:180px">
+      <div style="font-size:1.2rem;margin-bottom:.3rem">${d.flag} <strong>${d.name}</strong></div>
+      <div style="color:#666;font-size:.8rem;margin-bottom:.5rem">${d.sub}</div>
+      <div style="color:${d.color};font-weight:600;font-size:.85rem;margin-bottom:.6rem">💰 ${d.budget}</div>
+      <button onclick="openModal('${d.id}')" style="background:${d.color};color:#fff;border:none;padding:.4rem .9rem;border-radius:6px;cursor:pointer;font-size:.8rem;width:100%">Voir le détail →</button>
+    </div>`,{maxWidth:220});
+    mk.on('mouseover',function(){this.openPopup();});
+    const p=document.createElement('span');
+    p.className='wmap-pill';p.textContent=d.flag+' '+d.name;
+    p.onclick=()=>{wm.setView(c,5,{animate:true,duration:1});mk.openPopup();};
+    leg.appendChild(p);
+  });
+  setTimeout(()=>wm.invalidateSize(),300);
+});
+// ══════════════════════════════════════
+// ── SYSTÈME DE VOTE SUPABASE ──
+// ══════════════════════════════════════
+const SUPA_URL = 'https://zvkxmrdzyddawyalyxnu.supabase.co';
+const SUPA_KEY = 'sb_publishable_ydZ9Q6eaGU0WAw2XViMvVw_mIldY0SG';
+const supa = window.supabase.createClient(SUPA_URL, SUPA_KEY);
+
+// Voter ID unique stocké localement
+function getVoterId() {
+  let id = localStorage.getItem('vote_uid');
+  if (!id) {
+    id = 'v_' + Math.random().toString(36).substr(2,12) + '_' + Date.now();
+    localStorage.setItem('vote_uid', id);
+  }
+  return id;
+}
+
+let myVotes = new Set(); // destinations votées par cet utilisateur
+let allCounts = {}; // { destId: count }
+
+async function initVotes() {
+  const voterId = getVoterId();
+  // Charger tous les votes
+  const { data, error } = await supa.from('votes').select('destination, voter_id');
+  if (error) { console.error('Vote fetch error:', error); return; }
+  
+  // Compter
+  allCounts = {};
+  myVotes = new Set();
+  data.forEach(row => {
+    allCounts[row.destination] = (allCounts[row.destination] || 0) + 1;
+    if (row.voter_id === voterId) myVotes.add(row.destination);
+  });
+  
+  updateAllButtons();
+  renderLeaderboard();
+}
+
+function updateAllButtons() {
+  DESTS.forEach(d => {
+    const btn = document.getElementById('vbtn-' + d.id);
+    const cnt = document.getElementById('vcnt-' + d.id);
+    if (!btn || !cnt) return;
+    const n = allCounts[d.id] || 0;
+    cnt.textContent = n;
+    if (myVotes.has(d.id)) {
+      btn.classList.add('voted');
+      btn.innerHTML = '❤️ Voté ! <span class="vcnt">' + n + '</span>';
+    } else {
+      btn.classList.remove('voted');
+      btn.innerHTML = '🤍 Je vote <span class="vcnt">' + n + '</span>';
+    }
+  });
+}
+
+async function toggleVote(e, destId) {
+  e.stopPropagation();
+  const voterId = getVoterId();
+  const btn = document.getElementById('vbtn-' + destId);
+  btn.disabled = true;
+
+  if (myVotes.has(destId)) {
+    // Supprimer le vote
+    await supa.from('votes').delete().eq('voter_id', voterId).eq('destination', destId);
+    myVotes.delete(destId);
+    allCounts[destId] = Math.max(0, (allCounts[destId] || 1) - 1);
+  } else {
+    // Ajouter le vote
+    await supa.from('votes').insert({ destination: destId, voter_id: voterId });
+    myVotes.add(destId);
+    allCounts[destId] = (allCounts[destId] || 0) + 1;
+  }
+
+  btn.disabled = false;
+  updateAllButtons();
+  renderLeaderboard();
+}
+
+function renderLeaderboard() {
+  const grid = document.getElementById('lbGrid');
+  if (!grid) return;
+  
+  const sorted = DESTS
+    .map(d => ({ id: d.id, name: d.name, flag: d.flag, color: d.color, count: allCounts[d.id] || 0 }))
+    .filter(d => d.count > 0)
+    .sort((a, b) => b.count - a.count);
+
+  if (sorted.length === 0) {
+    grid.innerHTML = '<div class="lb-empty">Aucun vote pour le moment — soyez le premier !</div>';
+    return;
+  }
+
+  const medals = ['🥇','🥈','🥉'];
+  const rankClass = ['lb-first','lb-second','lb-third'];
+  const maxCount = sorted[0].count;
+
+  grid.innerHTML = sorted.map((d, i) => {
+    const medal = medals[i] || (i + 1);
+    const cls = rankClass[i] || '';
+    const pct = Math.round(d.count / maxCount * 100);
+    const voteWord = d.count === 1 ? 'vote' : 'votes';
+    return '<div class="lb-card ' + cls + '">'
+      + '<div class="lb-rank">' + medal + '</div>'
+      + '<div class="lb-info">'
+      + '<div class="lb-name">' + d.flag + ' ' + d.name + '</div>'
+      + '<div class="lb-count">' + d.count + ' ' + voteWord + '</div>'
+      + '<div class="lb-bar-wrap"><div class="lb-bar" style="width:' + pct + '%;background:' + d.color + '"></div></div>'
+      + '</div></div>';
+  }).join('');
+}
+
+// Init au chargement
+window.addEventListener('load', () => { setTimeout(initVotes, 500); });
+
+// Rafraîchir toutes les 30 secondes
+setInterval(initVotes, 30000);
+
+
 </script>
+
+<div class="vbox" id="vbox" onclick="if(event.target===this)vboxClose()">
+  <div class="vbox-inner">
+    <button class="vbox-close" onclick="vboxClose()">✕</button>
+    <iframe id="vboxFrame" src="" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+  </div>
+</div>
 </body>
 </html>
