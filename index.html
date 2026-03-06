@@ -1276,16 +1276,14 @@ async function initVotes() {
 function updateAllButtons() {
   DESTS.forEach(d => {
     const btn = document.getElementById('vbtn-' + d.id);
-    const cnt = document.getElementById('vcnt-' + d.id);
-    if (!btn || !cnt) return;
+    if (!btn) return;
     const n = allCounts[d.id] || 0;
-    cnt.textContent = n;
     if (myVotes.has(d.id)) {
       btn.classList.add('voted');
-      btn.innerHTML = '❤️ Voté ! <span class="vcnt">' + n + '</span>';
+      btn.innerHTML = '❤️ Voté ! <span class="vcnt" id="vcnt-' + d.id + '">' + n + '</span>';
     } else {
       btn.classList.remove('voted');
-      btn.innerHTML = '🤍 Je vote <span class="vcnt">' + n + '</span>';
+      btn.innerHTML = '🤍 Je vote <span class="vcnt" id="vcnt-' + d.id + '">' + n + '</span>';
     }
   });
 }
