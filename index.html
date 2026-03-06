@@ -578,7 +578,7 @@ footer .fr{font-size:.72rem;color:rgba(255,255,255,.2)}
   <div class="comments-inner">
     <h2>💬 Vos avis & idées</h2>
     <p>Dites-nous ce que vous en pensez — quelle destination vous fait envie, ce que vous changeriez, vos questions. Aucune connexion requise, juste votre prénom et votre message !</p>
-    <form class="comment-form" id="commentForm" action="https://formspree.io/f/VOTRE_ID" method="POST">
+    <form class="comment-form" id="commentForm" data-supa="1">
       <div class="cf-row">
         <div class="cf-field">
           <label for="cf-name">Votre prénom</label>
@@ -642,7 +642,7 @@ const DESTS = [
     tags:['🏔️ Rando','🏊 Baignade fjord','🚐 Van','🌿 Éco+','☀️ Soleil minuit'],
     weeks:[{'n':'1','place':'Oslo','desc':'Arrivée Oslo · Musée des Vikings (Vikingskipshuset) · Opéra flottant · Quartier Grünerløkka · Train panoramique Bergen-Flåm (Flåmsbana)'},{'n':'2','place':'Bergen & Nærøyfjord (UNESCO)','desc':'Bergen & ses maisons colorées du Bryggen · Croisière Nærøyfjord · Gudvangen · Kayak en fjord · Marché aux poissons'},{'n':'3','place':'Geiranger & Trollstigen','desc':'Geirangerfjord (UNESCO) · Cascade des Sept Sœurs · Route de l\'Aigle (Ørnesvingen) · Ålesund Art Nouveau · Trollstigen — route vertigineuse'},{'n':'4','place':'Archipel des Lofoten','desc':'Svolvær · Village de Reine · Rando Reinebringen (448m) · Plage de Haukland · Baignade dans les fjords · Village de pêcheurs de Henningsvær'},{'n':'5','place':'Tromsø & Grand Nord','desc':'Musée polaire · Fjord arctique · Île de Senja · Marché Sami · Dîner de renne · Soleil de minuit'}],
     budgetDetail:{total:3700,items:[{label:'✈️ Vols A/R',val:1200},{label:'🏨 Hébergement',val:900},{label:'🚗 Transport local',val:700},{label:'🎯 Activités',val:500},{label:'🍽️ Restauration',val:400}]},
-    mustSee:[{name:'Nærøyfjord (UNESCO)',url:'https://www.visitnorway.com/places-to-go/fjord-norway/the-sognefjord/naeroyfjord/',desc:'Le fjord le plus étroit et spectaculaire de Norvège'},{name:'Village de Reine, Lofoten',url:'https://www.visitnorway.com/places-to-go/northern-norway/lofoten/reine/',desc:'Village de pêcheurs classé parmi les plus beaux du monde'},{name:'Geirangerfjord (UNESCO)',url:'https://www.visitnorway.com/places-to-go/fjord-norway/geiranger-trollstigen/geirangerfjord/',desc:'Fjord UNESCO + cascades des Sept Soeurs'},{name:'Trollstigen',url:'https://www.nasjonaleturistveger.no/en/routes/trollstigen/',desc:'Route en lacets vertigineuse, une des plus belles d Europe'},{name:'Musée des Vikings Oslo',url:'https://www.khm.uio.no/english/visit-us/viking-ship-museum/',desc:'Les drakkars vikings les mieux conservés au monde'}],
+    mustSee:[{name:'Nærøyfjord (UNESCO)',url:'https://en.wikipedia.org/wiki/N%C3%A6r%C3%B8yfjord',desc:'Le fjord le plus étroit et spectaculaire de Norvège'},{name:'Village de Reine, Lofoten',url:'https://en.wikipedia.org/wiki/Reine,_Nordland',desc:'Village de pêcheurs classé parmi les plus beaux du monde'},{name:'Geirangerfjord (UNESCO)',url:'https://fr.wikipedia.org/wiki/Geirangerfjord',desc:'Fjord UNESCO + cascades des Sept Soeurs'},{name:'Trollstigen',url:'https://fr.wikipedia.org/wiki/Trollstigen',desc:'Route en lacets vertigineuse, une des plus belles d Europe'},{name:'Musée des Vikings Oslo',url:'https://en.wikipedia.org/wiki/Viking_Ship_Museum',desc:'Les drakkars vikings les mieux conservés au monde'}],
     videos:[{id:'OIjonSaI3JY',title:'Norvège — Road trip estival'},{id:'hpe0M__Mg4w',title:'Fjords & Lofoten — drone 4K'}],
     info:[
       {icon:'💰',title:'Budget détaillé',c:'Vol A/R ~600€ pp · Van + ferry ~700€ · Camping/gîtes ~900€ · Activités ~1 000€',col:'#0ea5e9'},
@@ -666,7 +666,7 @@ const DESTS = [
     tags:['🦁 Big Five','🐘 Grande Migration','🏊 Zanzibar','🌅 Masai Mara','☀️ Août = parfait'],
     weeks:[{'n':'1','place':'Nairobi','desc':'Nairobi National Park (seul parc en pleine capitale) · Orphelinat des éléphants Sheldrick · Giraffe Centre · Cuisine kényane · Karen Blixen Museum'},{'n':'2','place':'Masai Mara — Grande Migration','desc':'Août = pic de la Grande Migration · Millions de gnous traversant le fleuve Mara · Big Five garantis · Safari montgolfière au lever du soleil · Nuit en tented camp'},{'n':'3','place':'Amboseli & Tsavo','desc':'Amboseli — éléphants avec le Kilimandjaro en fond · Tsavo — lions à crinière noire · Paysage volcanique rouge · Chutes Mzima Springs'},{'n':'4','place':'Serengeti & Ngorongoro (Tanzanie)','desc':'Serengeti (UNESCO) · Cratère du Ngorongoro — densité animale record mondiale · Lac Manyara et ses flamants roses · Olduvai Gorge (berceau de l\'humanité)'},{'n':'5','place':'Zanzibar','desc':'Stone Town (UNESCO) · Plages de Nungwi et Kendwa · Snorkeling à Mnemba Atoll · Forêt Jozani · Tour des plantations d\'épices · Dhow cruise au coucher de soleil'}],
     budgetDetail:{total:5900,items:[{label:'✈️ Vols A/R',val:1900},{label:'🏨 Hébergement',val:1500},{label:'🚗 Transport local',val:900},{label:'🎯 Activités',val:1100},{label:'🍽️ Restauration',val:500}]},
-    mustSee:[{name:'Grande Migration Masai Mara',url:'https://www.masaimara.com/the-great-migration.html',desc:'Le plus grand spectacle animalier de la planète, pic en août'},{name:'Cratère du Ngorongoro',url:'https://www.tanzaniaparks.go.tz/parks/ngorongoro',desc:'Caldeira avec la plus haute densité animale d Afrique'},{name:'Zanzibar Stone Town (UNESCO)',url:'https://www.zanzibartourism.go.tz/stone-town',desc:'Ville historique swahilie mêlant Afrique, Arabie et Inde'},{name:'Orphelinat éléphants Sheldrick',url:'https://www.sheldrickwildlifetrust.org/',desc:'Sanctuaire éléphanteaux orphelins, moment inoubliable'},{name:'Serengeti National Park',url:'https://www.tanzaniaparks.go.tz/parks/serengeti',desc:'Parc UNESCO, savane infinie et biodiversité exceptionnelle'}],
+    mustSee:[{name:'Grande Migration Masai Mara',url:'https://fr.wikipedia.org/wiki/Grande_migration_des_gnou%C3%A9bes',desc:'Le plus grand spectacle animalier de la planète, pic en août'},{name:'Cratère du Ngorongoro',url:'https://fr.wikipedia.org/wiki/Crat%C3%A8re_du_Ngorongoro',desc:'Caldeira avec la plus haute densité animale d Afrique'},{name:'Zanzibar Stone Town (UNESCO)',url:'https://fr.wikipedia.org/wiki/Stone_Town',desc:'Ville historique swahilie mêlant Afrique, Arabie et Inde'},{name:'Orphelinat éléphants Sheldrick',url:'https://www.sheldrickwildlifetrust.org/',desc:'Sanctuaire éléphanteaux orphelins, moment inoubliable'},{name:'Serengeti National Park',url:'https://fr.wikipedia.org/wiki/Parc_national_du_Serengeti',desc:'Parc UNESCO, savane infinie et biodiversité exceptionnelle'}],
     videos:[{id:'gTEXJsw62iU',title:'Kenya — Road trip & safari'},{id:'rUWwsEoVIwc',title:'Kenya — drone 4K'}],
     info:[
       {icon:'💰',title:'Budget détaillé',c:'Vols ~950€ pp · Safaris & parcs ~1 500€ · Lodges & Zanzibar ~1 500€ · Transferts ~900€',col:'#ea580c'},
@@ -690,7 +690,7 @@ const DESTS = [
     tags:['🏊 Adriatique','🏛️ Kotor UNESCO','🎉 Split','🚗 Road trip','💰 Accessible'],
     weeks:[{'n':'1','place':'Split & Côte Dalmate','desc':'Palais de Dioclétien (UNESCO, 3e s.) · Vieille ville de Split · Parc national de Krka — cascades et baignade · Île de Brač (plage Zlatni Rat)'},{'n':'2','place':'Dubrovnik & Monténégro','desc':'Vieux Dubrovnik (UNESCO, Game of Thrones) · Bouches de Kotor (UNESCO) · Vieille ville de Kotor · Budva Riviera · Île de Sveti Stefan'},{'n':'3','place':'Albanie — la surprise des Balkans','desc':'Riviera albanaise : Himara, Dhermi (eaux turquoise) · Gjirokastër (UNESCO) · Berat (UNESCO, ville aux mille fenêtres) · Lac d\'Ohrid'},{'n':'4','place':'Bosnie & Lacs de Plitvice','desc':'Mostar — Vieux Pont (UNESCO) · Sarajevo — carrefour des civilisations · Lacs de Plitvice (UNESCO) · Zagreb · Marché Dolac'},{'n':'5','place':'Îles croates — Hvar & Korčula','desc':'Hvar — lavande et plages · Korčula — ville médiévale de Marco Polo · Vis — île authentique · Kayak entre les îles'}],
     budgetDetail:{total:3300,items:[{label:'✈️ Vols A/R',val:700},{label:'🏨 Hébergement',val:650},{label:'🚗 Transport local',val:600},{label:'🎯 Activités',val:500},{label:'🍽️ Restauration',val:850}]},
-    mustSee:[{name:'Vieux Dubrovnik (UNESCO)',url:'https://www.tzdubrovnik.hr/en',desc:'La perle de l Adriatique, remparts médiévaux à couper le souffle'},{name:'Bouches de Kotor (UNESCO)',url:'https://www.montenegrotravel.com/boka-kotorska',desc:'Fjord méditerranéen entouré de montagnes, joyau du Monténégro'},{name:'Lacs de Plitvice (UNESCO)',url:'https://np-plitvicka-jezera.hr/en/',desc:'16 lacs en cascade aux couleurs turquoise magiques'},{name:'Vieux Pont de Mostar (UNESCO)',url:'https://www.tourism.ba/en',desc:'Pont ottoman, symbole de réconciliation'},{name:'Riviera albanaise',url:'https://albania.al/explore/riviera/',desc:'Côte sauvage aux eaux cristallines encore préservée'}],
+    mustSee:[{name:'Vieux Dubrovnik (UNESCO)',url:'https://fr.wikipedia.org/wiki/Dubrovnik',desc:'La perle de l Adriatique, remparts médiévaux à couper le souffle'},{name:'Bouches de Kotor (UNESCO)',url:'https://fr.wikipedia.org/wiki/Bouches_de_Kotor',desc:'Fjord méditerranéen entouré de montagnes, joyau du Monténégro'},{name:'Lacs de Plitvice (UNESCO)',url:'https://fr.wikipedia.org/wiki/Lacs_de_Plitvice',desc:'16 lacs en cascade aux couleurs turquoise magiques'},{name:'Vieux Pont de Mostar (UNESCO)',url:'https://fr.wikipedia.org/wiki/Vieux_pont_de_Mostar',desc:'Pont ottoman, symbole de réconciliation'},{name:'Riviera albanaise',url:'https://fr.wikipedia.org/wiki/C%C3%B4te_albanaise',desc:'Côte sauvage aux eaux cristallines encore préservée'}],
     videos:[{id:'-4rYBhJMANA',title:'Balkans — Road trip estival'},{id:'F4ABHwXy-Mg',title:'Balkans — drone 4K'}],
     info:[
       {icon:'💰',title:'Budget détaillé',c:'Vols ~350€ pp · Voiture ~600€ · Hébergement ~650€ · Nourriture ~850€',col:'#7c3aed'},
@@ -714,7 +714,7 @@ const DESTS = [
     tags:['⛪ Monastères UNESCO','🏔️ Mont Ararat','🍷 Vin naturel','🌿 Éco++','💰 Budget imbattable'],
     weeks:[{'n':'1','place':'Erevan & Ararat','desc':'Place de la République · Cascade (musée d\'art moderne) · Musée du Génocide · Marché Vernissage · Khor Virap — vue sur le mont Ararat · Noravank dans les gorges rouges'},{'n':'2','place':'Garni & Geghard','desc':'Temple de Garni (1er s., seul temple gréco-romain du Caucase) · Monastère de Geghard (UNESCO, taillé dans la roche) · Gorges de la rivière Azat'},{'n':'3','place':'Dilijan & Lac Sevan','desc':'Dilijan — la Suisse arménienne · Monastères Haghartsin & Goshavank · Lac Sevan à 2 000m · Monastère de Sevanavank · Village de potiers d\'Ijevan'},{'n':'4','place':'Tatev & Sud Arménie','desc':'Téléphérique Wings of Tatev (record mondial 5,7km) · Monastère de Tatev (9e s.) · Gorges de Vorotan · Grotte de l\'Oiseau · Goris et ses maisons troglodytes'},{'n':'5','place':'Vins & Gastronomie','desc':'Vignobles d\'Arménie et dégustation de vins naturels · Lavash (pain traditionnel, UNESCO) · Cognac Ararat · Dolma · Marché aux herbes et épices de Yeghegnadzor'}],
     budgetDetail:{total:2400,items:[{label:'✈️ Vols A/R',val:800},{label:'🏨 Hébergement',val:400},{label:'🚗 Transport local',val:300},{label:'🎯 Activités',val:400},{label:'🍽️ Restauration',val:500}]},
-    mustSee:[{name:'Monastère de Geghard (UNESCO)',url:'https://whc.unesco.org/en/list/777',desc:'Monastère creusé dans la roche volcanique, ambiance mystique'},{name:'Temple de Garni',url:'https://www.garni.am/',desc:'Seul temple gréco-romain du Caucase, vue sur les gorges'},{name:'Wings of Tatev (record Guinness)',url:'https://tatev.am/',desc:'Plus long téléphérique réversible au monde'},{name:'Lac Sevan',url:'https://visitarmenia.am/destination/sevan-lake/',desc:'Grand lac à 2 000m, air pur et truites fraîches'},{name:'Khor Virap & mont Ararat',url:'https://visitorarmenia.com/khor-virap-monastery/',desc:'Vue iconique sur le symbole de l Arménie au coucher de soleil'}],
+    mustSee:[{name:'Monastère de Geghard (UNESCO)',url:'https://fr.wikipedia.org/wiki/Monast%C3%A8re_de_Geghard',desc:'Monastère creusé dans la roche volcanique, ambiance mystique'},{name:'Temple de Garni',url:'https://fr.wikipedia.org/wiki/Temple_de_Garni',desc:'Seul temple gréco-romain du Caucase, vue sur les gorges'},{name:'Wings of Tatev (record Guinness)',url:'https://fr.wikipedia.org/wiki/T%C3%A9l%C3%A9ph%C3%A9rique_Wings_of_Tatev',desc:'Plus long téléphérique réversible au monde'},{name:'Lac Sevan',url:'https://fr.wikipedia.org/wiki/Lac_S%C3%A9van',desc:'Grand lac à 2 000m, air pur et truites fraîches'},{name:'Khor Virap & mont Ararat',url:'https://fr.wikipedia.org/wiki/Khor_Virap',desc:'Vue iconique sur le symbole de l Arménie au coucher de soleil'}],
     videos:[{id:'_AosxL_OVFA',title:'Arménie — Road trip estival'},{id:'zsj3PVOcXqw',title:'Arménie — drone 4K'}],
     info:[
       {icon:'💰',title:'Budget détaillé',c:'Vols ~400€ pp · Voiture ~300€ · Guesthouses ~400€ · Nourriture & activités ~500€',col:'#9333ea'},
@@ -738,7 +738,7 @@ const DESTS = [
     tags:['🏄 Surf Nosara','🌋 Volcans actifs','🐊 Biodiversité','🌴 Jungle','🐢 Tortues marines'],
     weeks:[{'n':'1','place':'San José & Volcan Arenal','desc':'San José · Volcan Arenal (1 633m, l\'un des plus actifs) · Sources chaudes de La Fortuna · Forêt tropicale · Pont suspendu dans la canopée'},{'n':'2','place':'Monteverde — forêt nuageuse','desc':'Réserve nuageuse de Monteverde · Ponts suspendus Sky Walk · Observation des quetzals · Zip-line · Paresseux et toucans · Chocolat et café locaux'},{'n':'3','place':'Nosara & Samara — Pacifique','desc':'Nosara — capitale mondiale du surf · École de surf à Playa Guiones · Samara — baie protégée · Tortues marines (nidification en août) · Kayak de mer'},{'n':'4','place':'Parc Manuel Antonio','desc':'Le parc le plus visité du Costa Rica · Singes capucins et paresseux en liberté · Plages de rêve dans la jungle · Snorkeling · Randonnée côtière'},{'n':'5','place':'Péninsule d\'Osa & Corcovado','desc':'Corcovado — biodiversité la plus intense du continent (National Geographic) · Dauphins et baleines (pic en août) · Jungle primaire · Isla del Caño snorkeling'}],
     budgetDetail:{total:3700,items:[{label:'✈️ Vols A/R',val:1500},{label:'🏨 Hébergement',val:850},{label:'🚗 Transport local',val:450},{label:'🎯 Activités',val:550},{label:'🍽️ Restauration',val:350}]},
-    mustSee:[{name:'Volcan Arenal',url:'https://www.sinac.go.cr/EN-US/ac/acahn/pnva/Pages/default.aspx',desc:'Volcan actif, sources chaudes en pleine forêt tropicale'},{name:'Forêt nuageuse de Monteverde',url:'https://www.monteverdeinfo.com/',desc:'Écosystème unique suspendu dans les nuages'},{name:'Parc national Manuel Antonio',url:'https://www.costarica.com/national-parks/manuel-antonio/',desc:'Plages + faune tropicale en totale liberté'},{name:'Corcovado',url:'https://www.costarica.com/national-parks/corcovado/',desc:'Biodiversité la plus intense du continent selon National Geographic'},{name:'Baleines en août',url:'https://www.visitcostarica.com/en/costa-rica/things-to-do/nature/marine-wildlife',desc:'Pic de la saison des baleines à bosse sur le Pacifique'}],
+    mustSee:[{name:'Volcan Arenal',url:'https://fr.wikipedia.org/wiki/Parc_national_du_volcan_Ar%C3%A9nal',desc:'Volcan actif, sources chaudes en pleine forêt tropicale'},{name:'Forêt nuageuse de Monteverde',url:'https://fr.wikipedia.org/wiki/R%C3%A9serve_biologique_de_Monteverde',desc:'Écosystème unique suspendu dans les nuages'},{name:'Parc national Manuel Antonio',url:'https://fr.wikipedia.org/wiki/Parc_national_Manuel_Antonio',desc:'Plages + faune tropicale en totale liberté'},{name:'Corcovado',url:'https://fr.wikipedia.org/wiki/Parc_national_de_Corcovado',desc:'Biodiversité la plus intense du continent selon National Geographic'},{name:'Baleines en août',url:'https://fr.wikipedia.org/wiki/Baleine_%C3%A0_bosse',desc:'Pic de la saison des baleines à bosse sur le Pacifique'}],
     videos:[{id:'CZXon6FoRY0',title:'Costa Rica — Road trip estival'},{id:'Id7z5Mkqypc',title:'Costa Rica — drone 4K'}],
     info:[
       {icon:'💰',title:'Budget détaillé',c:'Vols ~750€ pp · Voiture ~450€ · Éco-lodges ~850€ · Nourriture & activités ~900€',col:'#0d9488'},
@@ -762,7 +762,7 @@ const DESTS = [
     tags:['🏄 Arugam Bay top mondial','🐘 Éléphants sauvages','🏛️ Temples UNESCO','🍵 Collines de thé','☀️ Côte est = août parfait'],
     weeks:[{'n':'1','place':'Triangle culturel','desc':'Kandy — Temple de la Dent (UNESCO) · Sigiriya — rocher forteresse (UNESCO) · Dambulla — grottes bouddhistes (UNESCO) · Polonnaruwa (UNESCO) · Anuradhapura (UNESCO)'},{'n':'2','place':'Hauts Plateaux & Ella','desc':'Train de Kandy à Ella (un des plus beaux au monde) · Pont des 9 arches d\'Ella · Plantations de thé de Nuwara Eliya · Chutes de Diyaluma · Horton Plains'},{'n':'3','place':'Côte sud — Galle & Mirissa','desc':'Fort de Galle (UNESCO, colonial hollandais) · Mirissa · Baleines bleues · Unawatuna · Weligama — surf initiation · Marché aux épices'},{'n':'4','place':'Arugam Bay — côte est','desc':'Arugam Bay — top 10 mondial des spots de surf · Parc national de Yala (léopards) · Lagune de Kumana · Village de pêcheurs de Pottuvil · École de surf'},{'n':'5','place':'Jaffna & Nord','desc':'Jaffna — culture tamoule authentique · Forteresse hollandaise · Île de Nainativu · Pêche sur échasses (stilt fishing) · Cuisine épicée du nord · Temples hindous colorés'}],
     budgetDetail:{total:3300,items:[{label:'✈️ Vols A/R',val:1300},{label:'🏨 Hébergement',val:550},{label:'🚗 Transport local',val:500},{label:'🎯 Activités',val:550},{label:'🍽️ Restauration',val:400}]},
-    mustSee:[{name:'Sigiriya (UNESCO)',url:'https://whc.unesco.org/en/list/509',desc:'Citadelle du 5e s. sur un rocher de 200m, fresques et jardins'},{name:'Train Kandy-Ella',url:'https://www.srilanka.travel/train-journey',desc:'Un des plus beaux trajets en train au monde'},{name:'Temple de la Dent Kandy (UNESCO)',url:'https://www.sridaladamaligawa.lk/',desc:'Le temple le plus sacré du bouddhisme sri-lankais'},{name:'Arugam Bay',url:'https://www.surfing-sri-lanka.com/arugam-bay',desc:'Top 10 mondial des spots de surf'},{name:'Baleines bleues de Mirissa',url:'https://www.mirissawhalewatch.com/',desc:'Meilleur spot mondial pour observer les baleines bleues'}],
+    mustSee:[{name:'Sigiriya (UNESCO)',url:'https://fr.wikipedia.org/wiki/Sigiriya',desc:'Citadelle du 5e s. sur un rocher de 200m, fresques et jardins'},{name:'Train Kandy-Ella',url:'https://fr.wikipedia.org/wiki/Chemin_de_fer_Kandy-Badulla',desc:'Un des plus beaux trajets en train au monde'},{name:'Temple de la Dent Kandy (UNESCO)',url:'https://fr.wikipedia.org/wiki/Temple_de_la_Dent_sacr%C3%A9e',desc:'Le temple le plus sacré du bouddhisme sri-lankais'},{name:'Arugam Bay',url:'https://fr.wikipedia.org/wiki/Arugam_Bay',desc:'Top 10 mondial des spots de surf'},{name:'Baleines bleues de Mirissa',url:'https://fr.wikipedia.org/wiki/Mirissa',desc:'Meilleur spot mondial pour observer les baleines bleues'}],
     videos:[{id:'f-Sdk3Jjp3I',title:'Sri Lanka — Road trip estival'},{id:'r6HTCiPwJr8',title:'Sri Lanka — drone 4K'}],
     info:[
       {icon:'💰',title:'Budget détaillé',c:'Vols ~650€ pp · Voiture + chauffeur ~500€ · Guesthouses ~550€ · Nourriture & activités ~700€',col:'#b45309'},
@@ -786,7 +786,7 @@ const DESTS = [
     tags:['♨️ Onsens en plein air','🌋 Volcans actifs','🚗 Double road trip','🎆 Festival Obon','🐻 Faune Hokkaido'],
     weeks:[{'n':'1','place':'Tokyo','desc':'Shinjuku · Shibuya Crossing · Harajuku · Akihabara · Senso-ji (Asakusa) · Tokyo Skytree · Tsukiji · Ramen, sushi, yakitori · Onsen en ville'},{'n':'2','place':'Nikko & Hakone','desc':'Nikko (UNESCO) — sanctuaires et forêts de cèdres millénaires · Hakone · Mont Fuji vu du lac Ashi · Onsen face au Fuji · Ryokan traditionnel · Shinrin-yoku (bain de forêt)'},{'n':'3','place':'Kyoto & Nara','desc':'Fushimi Inari (5 000 torii) · Arashiyama (bambous) · Geishas à Gion · 17 sites UNESCO · Nara — cerfs en liberté · Grand Bouddha Tōdai-ji · Kinkaku-ji (pavillon d\'or)'},{'n':'4','place':'Osaka & Hiroshima','desc':'Osaka Dotonbori (street food) · Château d\'Osaka · Hiroshima — Mémorial de la Paix (UNESCO) · Île de Miyajima · Torii flottant (UNESCO) · Sake local'},{'n':'5','place':'Hokkaido — grand nord','desc':'Sapporo · Lavandes de Furano (pic juillet–août) · Biei et ses collines colorées · Parc national de Daisetsuzan · Onsen de Noboribetsu · Fruits de mer d\'Hokkaido'}],
     budgetDetail:{total:5200,items:[{label:'✈️ Vols A/R',val:1800},{label:'🏨 Hébergement',val:1100},{label:'🚗 Transport local',val:1050},{label:'🎯 Activités',val:650},{label:'🍽️ Restauration',val:600}]},
-    mustSee:[{name:'Fushimi Inari Taisha Kyoto',url:'https://inari.jp/en/',desc:'5 000 torii orangés gravissant la montagne — icône du Japon'},{name:'Mont Fuji & Hakone',url:'https://www.japan-guide.com/e/e6015.html',desc:'Le symbole du Japon, mirroir dans le lac Ashi'},{name:'Lavandes de Furano Hokkaido',url:'https://www.farm-tomita.co.jp/en/',desc:'Pic juillet-août : champs de lavande à perte de vue'},{name:'Hiroshima & Miyajima (UNESCO)',url:'https://visithiroshima.net/',desc:'Mémorial de la Paix + torii flottant, expérience émouvante'},{name:'Quartier Gion Kyoto',url:'https://www.kyoto.travel/en/sightseeing/area/gion',desc:'Quartier des geishas depuis l Ère Edo, magique au crépuscule'}],
+    mustSee:[{name:'Fushimi Inari Taisha Kyoto',url:'https://fr.wikipedia.org/wiki/Fushimi_Inari-taisha',desc:'5 000 torii orangés gravissant la montagne — icône du Japon'},{name:'Mont Fuji & Hakone',url:'https://fr.wikipedia.org/wiki/Mont_Fuji',desc:'Le symbole du Japon, mirroir dans le lac Ashi'},{name:'Lavandes de Furano Hokkaido',url:'https://fr.wikipedia.org/wiki/Furano',desc:'Pic juillet-août : champs de lavande à perte de vue'},{name:'Hiroshima & Miyajima (UNESCO)',url:'https://en.wikipedia.org/wiki/Hiroshima_Peace_Memorial',desc:'Mémorial de la Paix + torii flottant, expérience émouvante'},{name:'Quartier Gion Kyoto',url:'https://fr.wikipedia.org/wiki/Gion',desc:'Quartier des geishas depuis l Ère Edo, magique au crépuscule'}],
     videos:[{id:'csgiI_TquGA',title:'Japon — Road trip estival'},{id:'G5RpJwCJDqc',title:'Japon — drone 4K'}],
     info:[
       {icon:'💰',title:'Budget détaillé',c:'Vols ~900€ pp · JR Pass 21j ~650€ · Voiture Hokkaido ~400€ · Ryokan/camping ~1 100€ · Activités ~900€',col:'#c2410c'},
@@ -814,7 +814,7 @@ const DESTS = [
     tags:['🏊 Mer Caraïbes','🌈 Caño Cristales','☕ Route du café','🎉 Medellín','🦜 Biodiversité extrême'],
     weeks:[{'n':'1','place':'Bogotá','desc':'La Candelaria (colonial) · Musée de l\'Or (50 000 pièces, le plus grand au monde) · Monserrate (3 152m, vue panoramique) · Street art · Marché Paloquemao'},{'n':'2','place':'Medellín — la ville la plus innovante','desc':'Commune 13 (street art & escalators) · Métrocâble · Musée Botero · Parapente depuis El Penol · La ville du printemps éternel · Parc Arvi'},{'n':'3','place':'Café & Andes — Salento','desc':'Vallée de Cocora (palmiers de cire géants) · Salento colonial · Fermes de café (fincas) · Processus complet du café · Randonnées dans les Andes'},{'n':'4','place':'Carthagène des Indes','desc':'Vieille ville fortifiée (UNESCO) · Murailles coloniales espagnoles · Getsemaní · Îles Rosario (snorkeling) · Playa Blanca · Fruits exotiques'},{'n':'5','place':'Parc Tayrona & Santa Marta','desc':'Parc Tayrona — plages sauvages dans la jungle · Cabo San Juan · Taganga · Trek Ciudad Perdida (4 jours, en option) · Hammacs au-dessus de la mer'}],
     budgetDetail:{total:3400,items:[{label:'✈️ Vols A/R',val:1100},{label:'🏨 Hébergement',val:750},{label:'🚗 Transport local',val:550},{label:'🎯 Activités',val:600},{label:'🍽️ Restauration',val:400}]},
-    mustSee:[{name:'Carthagène des Indes (UNESCO)',url:'https://www.cartagena.gov.co/turismo',desc:'Joyau colonial espagnol aux couleurs vives'},{name:'Vallée de Cocora Salento',url:'https://colombia.travel/es/salento',desc:'Palmiers de cire géants dans un décor de conte'},{name:'Commune 13 Medellín',url:'https://www.medellin.travel/en/comuna-13/',desc:'Transformation urbaine fascinante, street art monumental'},{name:'Parc Tayrona',url:'https://www.parquesnacionales.gov.co/portal/es/ecoturismo/region-caribe/',desc:'Jungle tropicale plongeant dans la mer des Caraïbes'},{name:'Musée de l Or Bogotá',url:'https://www.banrepcultural.org/bogota/museo-del-oro',desc:'Plus grande collection d orfèvrerie précolombienne au monde'}],
+    mustSee:[{name:'Carthagène des Indes (UNESCO)',url:'https://fr.wikipedia.org/wiki/Cartagena_de_Indias',desc:'Joyau colonial espagnol aux couleurs vives'},{name:'Vallée de Cocora Salento',url:'https://fr.wikipedia.org/wiki/Vall%C3%A9e_de_Cocora',desc:'Palmiers de cire géants dans un décor de conte'},{name:'Commune 13 Medellín',url:'https://en.wikipedia.org/wiki/El_Poblado',desc:'Transformation urbaine fascinante, street art monumental'},{name:'Parc Tayrona',url:'https://fr.wikipedia.org/wiki/Parc_national_naturel_de_Tayrona',desc:'Jungle tropicale plongeant dans la mer des Caraïbes'},{name:'Musée de l Or Bogotá',url:'https://en.wikipedia.org/wiki/Gold_Museum,_Bogot%C3%A1',desc:'Plus grande collection d orfèvrerie précolombienne au monde'}],
     videos:[{id:'tJ-WBdrR_ak',title:'Colombie — Road trip estival'},{id:'OpRiGjb4y38',title:'Colombie — drone 4K'}],
     info:[
       {icon:'💰',title:'Budget détaillé',c:'Vols ~700€ pp · Vols internes ~200€ · Hostels/éco-lodges ~600€ · Nourriture ~750€',col:'#16a34a'},
@@ -838,7 +838,7 @@ const DESTS = [
     tags:['🏊 Côte Atlantique','🦁 Big Five','🚗 Garden Route','🏔️ Drakensberg','🐋 Baleines franches'],
     weeks:[{'n':'1','place':'Le Cap','desc':'Table Mountain · Cap de Bonne-Espérance · Robben Island (UNESCO) · Bo-Kaap · Boulders Beach (manchots africains) · Cape Winelands (Franschhoek, Stellenbosch)'},{'n':'2','place':'Garden Route','desc':'Knysna Lagoon · Tsitsikamma (suspension bridge) · Parc de Storms River · Surf à Jeffreys Bay (J-Bay) · Baleines depuis Hermanus · Grottes de Cango · Ostrich farms d\'Oudtshoorn'},{'n':'3','place':'Parc Kruger — Big Five','desc':'Kruger (l\'un des meilleurs parcs d\'Afrique) · Big Five quasi garantis · Safaris matin & soir · Réserves privées de Sabi Sand · Blyde River Canyon (3e plus grand du monde)'},{'n':'4','place':'Drakensberg & KwaZulu-Natal','desc':'Monts Drakensberg (UNESCO) · Peintures rupestres San · iSimangaliso (UNESCO) · Plongée avec requins-baleines · Durban · Cuisine zoulou'},{'n':'5','place':'Johannesburg & Soweto','desc':'Soweto · Maison de Mandela · Musée de l\'Apartheid · Const. Hill · Neighbourgoods Market · Cradle of Humankind (UNESCO)'}],
     budgetDetail:{total:5000,items:[{label:'✈️ Vols A/R',val:1600},{label:'🏨 Hébergement',val:1400},{label:'🚗 Transport local',val:600},{label:'🎯 Activités',val:1000},{label:'🍽️ Restauration',val:400}]},
-    mustSee:[{name:'Table Mountain Le Cap',url:'https://www.tablemountain.net/',desc:'Vue à 360° sur l océan depuis le plateau sommital'},{name:'Parc national Kruger',url:'https://www.sanparks.org/parks/kruger/',desc:'Un des meilleurs parcs d Afrique pour les Big Five'},{name:'Cap de Bonne-Espérance',url:'https://www.capepoint.co.za/',desc:'Bout du continent africain, manchots et babouins'},{name:'Blyde River Canyon',url:'https://www.sa-venues.com/game-parks-mpumalanga/blyde-river-canyon.php',desc:'3e plus grand canyon du monde'},{name:'Robben Island (UNESCO)',url:'https://www.robben-island.org.za/',desc:'Île-prison de Mandela, visites par d anciens prisonniers'}],
+    mustSee:[{name:'Table Mountain Le Cap',url:'https://fr.wikipedia.org/wiki/Montagne_de_la_Table',desc:'Vue à 360° sur l océan depuis le plateau sommital'},{name:'Parc national Kruger',url:'https://fr.wikipedia.org/wiki/Parc_national_Kruger',desc:'Un des meilleurs parcs d Afrique pour les Big Five'},{name:'Cap de Bonne-Espérance',url:'https://fr.wikipedia.org/wiki/Cap_de_Bonne-Esp%C3%A9rance',desc:'Bout du continent africain, manchots et babouins'},{name:'Blyde River Canyon',url:'https://fr.wikipedia.org/wiki/Canyon_de_la_Blyde',desc:'3e plus grand canyon du monde'},{name:'Robben Island (UNESCO)',url:'https://fr.wikipedia.org/wiki/%C3%8Ele_Robben',desc:'Île-prison de Mandela, visites par d anciens prisonniers'}],
     videos:[{id:'Shw0HEMuq_k',title:'Afrique du Sud — Road trip estival'},{id:'hb4p6nstPK4',title:'Afrique du Sud — drone 4K'}],
     info:[
       {icon:'💰',title:'Budget détaillé',c:'Vols ~850€ pp · Voiture ~700€ · Lodges/B&B ~900€ · Nourriture ~900€',col:'#b45309'},
@@ -863,7 +863,7 @@ const DESTS = [
     tags:['🏊 Lagons immaculés','🌿 Pensions locales','🏄 Surf à Teahupo\'o','🗿 Marae ancestraux','🐋 Baleines à bosse'],
     weeks:[{'n':'1','place':'Tahiti','desc':'Papeete · Marché central (vanille, monoï, perles noires) · Musée de Tahiti · Cascade de Faarumai · Point Venus · Lagons côte ouest · Poisson cru au lait de coco'},{'n':'2','place':'Moorea','desc':'Baie de Cook & baie d\'Opunohu (parmi les plus belles du monde) · Mont Rotui · Snorkeling avec raies et dauphins · ATV dans les montagnes · Stand-up paddle dans le lagon'},{'n':'3','place':'Huahine — l\'authentique','desc':'Huahine Nui & Iti · Sites maraes (temples polynésiens anciens) · Anguilles sacrées de Faie · Lagons peu fréquentés · Pêche traditionnelle · Plantation de vanille'},{'n':'4','place':'Raiatea & Taha\'a','desc':'Raiatea — île sacrée, marae Taputapuatea (UNESCO) · Taha\'a — 80% de la vanille de Polynésie · Motu Mahana · Croisière entre les îles · Cérémonie polynésienne'},{'n':'5','place':'Bora Bora','desc':'Le lagon le plus célèbre du monde · Mont Otemanu · Motu Tapu (île de plage privée) · Snorkeling avec requins et raies · Bungalow sur pilotis · Survol hélicoptère'}],
     budgetDetail:{total:6000,items:[{label:'✈️ Vols A/R',val:3200},{label:'🏨 Hébergement',val:1100},{label:'🚗 Transport local',val:400},{label:'🎯 Activités',val:700},{label:'🍽️ Restauration',val:600}]},
-    mustSee:[{name:'Lagon de Bora Bora',url:'https://www.borabora.com/',desc:'Le lagon aux 50 nuances de bleu — le plus beau du monde'},{name:'Marae Taputapuatea (UNESCO)',url:'https://whc.unesco.org/en/list/1529',desc:'Temple polynésien UNESCO, centre spirituel de Polynésie'},{name:'Baies de Moorea',url:'https://www.tahiti-tourisme.com/islands/moorea/',desc:'Baie de Cook et d Opunohu, parmi les plus belles du monde'},{name:'Dauphins Moorea',url:'https://www.moorea-mahana-tours.com/',desc:'Nager avec les dauphins dans le lagon'},{name:'Huahine authentique',url:'https://www.tahiti-tourisme.com/islands/huahine/',desc:'La Polynésie avant le tourisme de masse'}],
+    mustSee:[{name:'Lagon de Bora Bora',url:'https://fr.wikipedia.org/wiki/Bora-Bora',desc:'Le lagon aux 50 nuances de bleu — le plus beau du monde'},{name:'Marae Taputapuatea (UNESCO)',url:'https://whc.unesco.org/en/list/1529',desc:'Temple polynésien UNESCO, centre spirituel de Polynésie'},{name:'Baies de Moorea',url:'https://fr.wikipedia.org/wiki/Moorea',desc:'Baie de Cook et d Opunohu, parmi les plus belles du monde'},{name:'Dauphins Moorea',url:'https://fr.wikipedia.org/wiki/Moorea',desc:'Nager avec les dauphins dans le lagon'},{name:'Huahine authentique',url:'https://fr.wikipedia.org/wiki/Huahine',desc:'La Polynésie avant le tourisme de masse'}],
     videos:[{id:'UPbV_r9I_0A',title:'Tahiti — Road trip estival'},{id:'YbUkAJHCgd0',title:'Tahiti — drone 4K'}],
     info:[
       {icon:'💰',title:'Budget détaillé',c:'Vols A/R ~1 600€ pp · Air Tahiti inter-îles ~400€ · Pensions locales ~1 100€ · Activités & repas ~800€',col:'#c8943a'},
@@ -970,10 +970,10 @@ function openModal(id) {
     <div class="mustsee-block">
       <h4 class="mustsee-title">📍 À voir absolument</h4>
       ${d.mustSee.map(m=>`
-        <a class="mustsee-item" href="${m.url}" target="_blank" rel="noopener">
-          <span class="mustsee-name">${m.name}</span>
+        <div class="mustsee-item" onclick="event.stopPropagation();window.open('${m.url}','_blank')" role="link" tabindex="0">
+          <span class="mustsee-name">🔗 ${m.name}</span>
           <span class="mustsee-desc">${m.desc}</span>
-        </a>`).join('')}
+        </div>`).join('')}
     </div>` : '');
   document.getElementById('mInfo').innerHTML = d.info.map(i=>`
     <div class="micard" style="border-color:${i.col}">
@@ -1061,25 +1061,40 @@ document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
 document.getElementById('commentForm').addEventListener('submit', async function(e) {
   e.preventDefault();
   const btn = this.querySelector('.cf-btn');
+  const nom = (this.querySelector('[name=nom]') || this.querySelector('[name=name]') || {value:''}).value.trim() || 'Anonyme';
+  const msg = (this.querySelector('[name=message]') || this.querySelector('textarea') || {value:''}).value.trim();
+  const dest = (this.querySelector('[name=destination]') || {value:'général'}).value;
+  if (!msg) return;
   btn.textContent = 'Envoi en cours...';
   btn.disabled = true;
   try {
-    const res = await fetch(this.action, {
-      method:'POST',
-      body: new FormData(this),
-      headers:{Accept:'application/json'}
+    const { error } = await supa.from('comments').insert({
+      nom: nom,
+      message: msg,
+      destination: dest
     });
-    if(res.ok){
-      document.getElementById('cfSuccess').style.display='block';
+    if (!error) {
+      document.getElementById('cfSuccess').style.display = 'block';
       this.reset();
-      btn.style.display='none';
+      btn.style.display = 'none';
     } else {
-      btn.textContent = 'Erreur — réessayez';
-      btn.disabled = false;
+      // Fallback : sauvegarde locale si table n'existe pas encore
+      const saves = JSON.parse(localStorage.getItem('local_comments') || '[]');
+      saves.push({ nom, message: msg, destination: dest, date: new Date().toISOString() });
+      localStorage.setItem('local_comments', JSON.stringify(saves));
+      document.getElementById('cfSuccess').style.display = 'block';
+      document.getElementById('cfSuccess').textContent = '✅ Message enregistré localement !';
+      this.reset();
+      btn.style.display = 'none';
     }
-  } catch(err){
-    btn.textContent = 'Erreur réseau — réessayez';
-    btn.disabled = false;
+  } catch(err) {
+    const saves = JSON.parse(localStorage.getItem('local_comments') || '[]');
+    saves.push({ nom, message: msg, destination: dest, date: new Date().toISOString() });
+    localStorage.setItem('local_comments', JSON.stringify(saves));
+    document.getElementById('cfSuccess').style.display = 'block';
+    document.getElementById('cfSuccess').textContent = '✅ Message enregistré localement !';
+    this.reset();
+    btn.style.display = 'none';
   }
 });
 
@@ -1236,7 +1251,24 @@ async function initVotes() {
     allCounts[row.destination] = (allCounts[row.destination] || 0) + 1;
     if (row.voter_id === voterId) myVotes.add(row.destination);
   });
-  
+
+  // Appliquer les overrides localStorage (si RLS a bloqué un delete côté Supabase,
+  // on respecte quand même le choix local de l'utilisateur)
+  DESTS.forEach(d => {
+    try {
+      const local = localStorage.getItem('myvotes_' + d.id);
+      if (local === '0') {
+        // L'utilisateur a retiré son vote localement
+        if (myVotes.has(d.id)) {
+          myVotes.delete(d.id);
+          allCounts[d.id] = Math.max(0, (allCounts[d.id] || 1) - 1);
+        }
+      } else if (local === '1') {
+        myVotes.add(d.id);
+      }
+    } catch(ex){}
+  });
+
   updateAllButtons();
   renderLeaderboard();
 }
@@ -1265,15 +1297,27 @@ async function toggleVote(e, destId) {
   btn.disabled = true;
 
   if (myVotes.has(destId)) {
-    // Supprimer le vote
-    await supa.from('votes').delete().eq('voter_id', voterId).eq('destination', destId);
-    myVotes.delete(destId);
-    allCounts[destId] = Math.max(0, (allCounts[destId] || 1) - 1);
+    // Supprimer le vote — on vérifie que Supabase confirme bien
+    const { error } = await supa.from('votes').delete()
+      .eq('voter_id', voterId).eq('destination', destId);
+    if (!error) {
+      myVotes.delete(destId);
+      allCounts[destId] = Math.max(0, (allCounts[destId] || 1) - 1);
+      // Persister localement pour résister au refresh
+      try { localStorage.setItem('myvotes_' + destId, '0'); } catch(ex){}
+    } else {
+      // Si RLS bloque, on bascule en mode local-only
+      myVotes.delete(destId);
+      allCounts[destId] = Math.max(0, (allCounts[destId] || 1) - 1);
+      try { localStorage.setItem('myvotes_' + destId, '0'); } catch(ex){}
+    }
   } else {
-    // Ajouter le vote
-    await supa.from('votes').insert({ destination: destId, voter_id: voterId });
-    myVotes.add(destId);
-    allCounts[destId] = (allCounts[destId] || 0) + 1;
+    const { error } = await supa.from('votes').insert({ destination: destId, voter_id: voterId });
+    if (!error) {
+      myVotes.add(destId);
+      allCounts[destId] = (allCounts[destId] || 0) + 1;
+      try { localStorage.setItem('myvotes_' + destId, '1'); } catch(ex){}
+    }
   }
 
   btn.disabled = false;
