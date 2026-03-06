@@ -388,6 +388,68 @@ footer .fr{font-size:.72rem;color:rgba(255,255,255,.2)}
 .mustsee-name{font-weight:600;font-size:.85rem;color:var(--teal);margin-bottom:.15rem}
 .mustsee-desc{font-size:.78rem;color:var(--slate);line-height:1.4}
 
+
+/* ── COMPARATEUR ── */
+.compare-section{padding:4rem 3rem;background:#f7f5f0;border-top:3px solid var(--teal)}
+.compare-inner{max-width:960px;margin:0 auto}
+.compare-inner>h2{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:500;color:var(--dark);margin-bottom:.4rem}
+.compare-inner>p{font-size:.88rem;color:var(--slate);margin-bottom:2rem}
+.compare-selectors{display:grid;grid-template-columns:1fr 60px 1fr;align-items:center;gap:1rem;margin-bottom:2rem}
+.compare-vs{text-align:center;font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:var(--teal)}
+.compare-select{width:100%;padding:.7rem 1rem;border:2px solid var(--border);border-radius:10px;font-size:.95rem;font-family:inherit;background:#fff;color:var(--dark);cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23009999' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center}
+.compare-select:focus{outline:none;border-color:var(--teal)}
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.compare-card{background:#fff;border-radius:14px;border:2px solid var(--border);padding:1.5rem;transition:border-color .3s}
+.compare-card.active{border-color:var(--teal)}
+.compare-card-header{display:flex;align-items:center;gap:.8rem;margin-bottom:1.2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
+.compare-flag{font-size:2rem}
+.compare-card-title{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:var(--dark)}
+.compare-card-sub{font-size:.78rem;color:var(--slate)}
+.compare-row{display:flex;justify-content:space-between;align-items:center;padding:.5rem 0;border-bottom:1px solid #f0ede8;font-size:.85rem}
+.compare-row:last-child{border-bottom:none}
+.compare-label{color:var(--slate);font-size:.8rem}
+.compare-val{font-weight:600;color:var(--dark)}
+.compare-bar-wrap{margin:.3rem 0 .6rem}
+.compare-bar-bg{height:6px;background:#f0ede8;border-radius:3px;overflow:hidden}
+.compare-bar-fill{height:100%;border-radius:3px;transition:width .6s cubic-bezier(.4,0,.2,1)}
+.compare-winner{background:linear-gradient(135deg,var(--teal),#0d9488);color:#fff;text-align:center;padding:.35rem .8rem;border-radius:20px;font-size:.75rem;font-weight:700;margin-top:.8rem;display:inline-block}
+.compare-placeholder{display:flex;align-items:center;justify-content:center;min-height:180px;color:var(--slate);font-size:.9rem;opacity:.6}
+
+/* ── CALCULATEUR BUDGET ── */
+.budget-section{padding:4rem 3rem;background:#fff;border-top:1px solid var(--border)}
+.budget-inner{max-width:860px;margin:0 auto}
+.budget-inner>h2{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:500;color:var(--dark);margin-bottom:.4rem}
+.budget-inner>p{font-size:.88rem;color:var(--slate);margin-bottom:2rem}
+.budget-controls{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2rem}
+.budget-control-group{background:#f7f5f0;border-radius:12px;padding:1.2rem 1.4rem}
+.budget-control-group label{display:block;font-size:.8rem;font-weight:600;color:var(--teal);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.8rem}
+.budget-dest-select{width:100%;padding:.6rem .9rem;border:2px solid var(--border);border-radius:8px;font-size:.9rem;font-family:inherit;background:#fff;cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23009999' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .8rem center}
+.budget-dest-select:focus{outline:none;border-color:var(--teal)}
+.person-counter{display:flex;align-items:center;gap:1rem}
+.person-btn{width:36px;height:36px;border-radius:50%;border:2px solid var(--teal);background:transparent;color:var(--teal);font-size:1.2rem;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;line-height:1}
+.person-btn:hover{background:var(--teal);color:#fff}
+.person-count{font-size:1.4rem;font-weight:700;color:var(--dark);min-width:2rem;text-align:center}
+.cat-btns{display:flex;flex-wrap:wrap;gap:.5rem}
+.cat-btn{padding:.45rem .9rem;border-radius:20px;border:2px solid var(--border);background:#fff;font-size:.8rem;font-weight:600;cursor:pointer;color:var(--slate);transition:all .2s}
+.cat-btn.active{border-color:var(--teal);background:var(--teal);color:#fff}
+.budget-result{background:linear-gradient(135deg,var(--dark) 0%,#1e3a5f 100%);border-radius:16px;padding:2rem 2.5rem;color:#fff;display:grid;grid-template-columns:1fr auto;align-items:center;gap:2rem}
+.budget-result-left h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:400;color:rgba(255,255,255,.7);margin-bottom:.3rem}
+.budget-total{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:600;color:#fff;line-height:1.1}
+.budget-total span{font-size:1.2rem;opacity:.6;font-weight:400}
+.budget-pp{font-size:.85rem;color:rgba(255,255,255,.55);margin-top:.3rem}
+.budget-breakdown{display:flex;flex-direction:column;gap:.5rem;min-width:220px}
+.budget-item-row{display:flex;justify-content:space-between;align-items:center;font-size:.82rem}
+.budget-item-label{color:rgba(255,255,255,.65)}
+.budget-item-val{font-weight:600;color:#fff}
+.budget-note{font-size:.75rem;color:rgba(255,255,255,.4);margin-top:.8rem;padding-top:.8rem;border-top:1px solid rgba(255,255,255,.1)}
+@media(max-width:600px){
+  .compare-selectors{grid-template-columns:1fr;gap:.5rem}
+  .compare-vs{display:none}
+  .compare-grid{grid-template-columns:1fr}
+  .budget-controls{grid-template-columns:1fr}
+  .budget-result{grid-template-columns:1fr}
+}
+
 /* ── VOTES ── */
 .vote-btn{display:flex;align-items:center;justify-content:center;gap:.5rem;width:100%;margin-top:.6rem;padding:.55rem;border-radius:8px;border:2px solid var(--border);background:#fff;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .2s;color:var(--slate)}
 .vote-btn:hover{border-color:#f43f5e;color:#f43f5e;background:#fff5f7}
@@ -567,6 +629,73 @@ footer .fr{font-size:.72rem;color:rgba(255,255,255,.2)}
 
 
 <!-- LEADERBOARD -->
+
+<!-- COMPARATEUR -->
+<section class="compare-section" id="comparateur">
+  <div class="compare-inner">
+    <h2>⚖️ Comparer deux destinations</h2>
+    <p>Sélectionne deux destinations et compare budget, durée de vol, type de voyage et points forts côte à côte.</p>
+    <div class="compare-selectors">
+      <select class="compare-select" id="cmpA" onchange="renderCompare()">
+        <option value="">— Choisir une destination —</option>
+      </select>
+      <div class="compare-vs">VS</div>
+      <select class="compare-select" id="cmpB" onchange="renderCompare()">
+        <option value="">— Choisir une destination —</option>
+      </select>
+    </div>
+    <div class="compare-grid" id="compareGrid">
+      <div class="compare-placeholder">👈 Choisis une première destination</div>
+      <div class="compare-placeholder">👆 Puis une deuxième</div>
+    </div>
+  </div>
+</section>
+
+<!-- CALCULATEUR BUDGET -->
+<section class="budget-section" id="calculateur">
+  <div class="budget-inner">
+    <h2>🧮 Calculateur de budget</h2>
+    <p>Ajuste les paramètres pour estimer le coût réel de ton voyage.</p>
+    <div class="budget-controls">
+      <div class="budget-control-group">
+        <label>Destination</label>
+        <select class="budget-dest-select" id="budgetDest" onchange="renderBudget()">
+          <option value="">— Choisir —</option>
+        </select>
+      </div>
+      <div class="budget-control-group">
+        <label>Nombre de voyageurs</label>
+        <div class="person-counter">
+          <button class="person-btn" onclick="changePeople(-1)">−</button>
+          <div class="person-count" id="peopleCount">2</div>
+          <button class="person-btn" onclick="changePeople(+1)">+</button>
+          <span style="font-size:.82rem;color:var(--slate);margin-left:.3rem">personne(s)</span>
+        </div>
+      </div>
+      <div class="budget-control-group" style="grid-column:1/-1">
+        <label>Catégorie d'hébergement</label>
+        <div class="cat-btns">
+          <button class="cat-btn" data-cat="budget" onclick="setCat(this)">🏕️ Budget / Hostel</button>
+          <button class="cat-btn active" data-cat="standard" onclick="setCat(this)">🏨 Standard</button>
+          <button class="cat-btn" data-cat="confort" onclick="setCat(this)">🛎️ Confort</button>
+          <button class="cat-btn" data-cat="luxe" onclick="setCat(this)">✨ Luxe</button>
+        </div>
+      </div>
+    </div>
+    <div id="budgetResult" style="opacity:.4;pointer-events:none">
+      <div class="budget-result">
+        <div class="budget-result-left">
+          <h3 id="budgetResultName">Sélectionne une destination</h3>
+          <div class="budget-total" id="budgetResultTotal">— <span>€</span></div>
+          <div class="budget-pp" id="budgetResultPP">pour — personne(s)</div>
+        </div>
+        <div class="budget-breakdown" id="budgetBreakdown"></div>
+      </div>
+      <div class="budget-note" id="budgetNote" style="color:var(--slate);font-size:.78rem;margin-top:.8rem">* Estimations basées sur un voyage de 4 semaines en août, hébergement partagé inclus. Hors dépenses personnelles.</div>
+    </div>
+  </div>
+</section>
+
 <section class="leaderboard-section" id="leaderboard">
   <h2>🏆 Classement des votes</h2>
   <p>Votes de tous les amis — mis à jour en temps réel</p>
@@ -1057,6 +1186,214 @@ const obs=new IntersectionObserver(entries=>{
 },{threshold:.1});
 document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
 
+
+// ══════════════════════════════════════════════════════════════════
+// COMPARATEUR
+// ══════════════════════════════════════════════════════════════════
+const CMP_LABELS = {
+  budget:   {label:'Budget estimé',   emoji:'💰'},
+  climate:  {label:'Météo août',      emoji:'☀️'},
+  flight:   {label:'Vol depuis Paris',emoji:'✈️'},
+  type:     {label:'Type de voyage',  emoji:'🎒'},
+  tags:     {label:'Points forts',    emoji:'⭐'},
+};
+
+const CMP_FLIGHTS = {
+  norvege:'2h30 · Direct',kenya:'13h · Escale',balkans:'2h30 · Direct',
+  armenie:'4h30 · Direct',costarica:'12h · Escale',srilanka:'10h · Escale',
+  japon:'12h · Direct',colombie:'11h · Escale',afrique:'11h · Direct',tahiti:'22h · Escale'
+};
+
+function initCompare() {
+  const opts = DESTS.map(d => `<option value="${d.id}">${d.flag} ${d.name}</option>`).join('');
+  document.getElementById('cmpA').innerHTML = '<option value="">— Destination A —</option>' + opts;
+  document.getElementById('cmpB').innerHTML = '<option value="">— Destination B —</option>' + opts;
+}
+
+function renderCompare() {
+  const idA = document.getElementById('cmpA').value;
+  const idB = document.getElementById('cmpB').value;
+  const grid = document.getElementById('compareGrid');
+  const dA = DESTS.find(d => d.id === idA);
+  const dB = DESTS.find(d => d.id === idB);
+
+  if (!dA && !dB) {
+    grid.innerHTML = '<div class="compare-placeholder">👈 Choisis une première destination</div><div class="compare-placeholder">👆 Puis une deuxième</div>';
+    return;
+  }
+  if (!dA) {
+    grid.innerHTML = buildCompareCard(null, dB, null) + buildCompareCard(dB, dB, dA);
+    return;
+  }
+  if (!dB) {
+    grid.innerHTML = buildCompareCard(dA, dA, dB) + buildCompareCard(null, dA, null);
+    return;
+  }
+
+  const totalA = dA.budgetDetail ? dA.budgetDetail.total : 0;
+  const totalB = dB.budgetDetail ? dB.budgetDetail.total : 0;
+  const winnerBudget = totalA < totalB ? 'A' : totalB < totalA ? 'B' : null;
+
+  grid.innerHTML = buildCompareCard(dA, dA, dB, winnerBudget === 'A') + buildCompareCard(dB, dB, dA, winnerBudget === 'B');
+}
+
+function buildCompareCard(d, self, other, isCheaper) {
+  if (!d) return '<div class="compare-placeholder">Sélectionne une destination</div>';
+  const total = d.budgetDetail ? d.budgetDetail.total : 0;
+  const otherTotal = other && other.budgetDetail ? other.budgetDetail.total : total;
+  const maxTotal = Math.max(total, otherTotal) || 1;
+  const pct = Math.round((total / maxTotal) * 100);
+
+  const items = d.budgetDetail ? d.budgetDetail.items.map(it => {
+    const otherItem = other && other.budgetDetail ? other.budgetDetail.items.find(x => x.label === it.label) : null;
+    const otherVal = otherItem ? otherItem.val : it.val;
+    const maxVal = Math.max(it.val, otherVal) || 1;
+    const iPct = Math.round((it.val / maxVal) * 100);
+    const cheaper = it.val <= otherVal;
+    return `<div class="compare-row">
+      <span class="compare-label">${it.label}</span>
+      <div style="flex:1;margin:0 .8rem">
+        <div class="compare-bar-bg"><div class="compare-bar-fill" style="width:${iPct}%;background:${d.color}"></div></div>
+      </div>
+      <span class="compare-val" style="color:${cheaper && otherItem ? '#059669' : 'var(--dark)'}">${it.val.toLocaleString('fr-FR')} €</span>
+    </div>`;
+  }).join('') : '';
+
+  const tags3 = (d.tags || []).slice(0,3).join(' · ');
+
+  return `<div class="compare-card ${d ? 'active' : ''}">
+    <div class="compare-card-header">
+      <div class="compare-flag">${d.flag}</div>
+      <div>
+        <div class="compare-card-title">${d.name}</div>
+        <div class="compare-card-sub">${d.sub}</div>
+      </div>
+    </div>
+    <div class="compare-row">
+      <span class="compare-label">☀️ Météo août</span>
+      <span class="compare-val">${d.climate || '—'}</span>
+    </div>
+    <div class="compare-row">
+      <span class="compare-label">✈️ Vol Paris</span>
+      <span class="compare-val">${CMP_FLIGHTS[d.id] || '—'}</span>
+    </div>
+    <div class="compare-row">
+      <span class="compare-label">⭐ Points forts</span>
+      <span class="compare-val" style="font-size:.78rem;text-align:right;max-width:160px">${tags3}</span>
+    </div>
+    <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)">
+      <div style="font-size:.78rem;color:var(--slate);margin-bottom:.5rem;font-weight:600">💰 Budget total estimé (2 pers.)</div>
+      ${items}
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:.8rem;padding-top:.6rem;border-top:2px solid var(--border)">
+        <span style="font-weight:700;font-size:.9rem">Total</span>
+        <span style="font-weight:800;font-size:1.15rem;color:${d.color}">${total.toLocaleString('fr-FR')} €</span>
+      </div>
+    </div>
+    <div class="compare-bar-wrap"><div class="compare-bar-bg"><div class="compare-bar-fill" style="width:${pct}%;background:${d.color}"></div></div></div>
+    ${isCheaper ? '<div class="compare-winner">✓ Option la moins chère</div>' : ''}
+  </div>`;
+}
+
+// ══════════════════════════════════════════════════════════════════
+// CALCULATEUR BUDGET
+// ══════════════════════════════════════════════════════════════════
+let budgetPeople = 2;
+let budgetCat = 'standard';
+
+// Multiplicateurs par catégorie (s'appliquent sur l'hébergement et partiellement restauration)
+const CAT_MULT = {
+  budget:   { heberg: 0.55, resto: 0.80, activites: 0.85, transport: 0.90 },
+  standard: { heberg: 1.00, resto: 1.00, activites: 1.00, transport: 1.00 },
+  confort:  { heberg: 1.55, resto: 1.20, activites: 1.20, transport: 1.10 },
+  luxe:     { heberg: 2.50, resto: 1.60, activites: 1.50, transport: 1.20 },
+};
+
+// Budget base = 2 personnes. Modèle de montée par personnes :
+// Vols : x personnes
+// Hébergement : base 2p → +45% par personne supplémentaire
+// Transport local : +20% par personne suppl.
+// Activités + resto : x personnes
+function calcBudget(dest, people, cat) {
+  if (!dest || !dest.budgetDetail) return null;
+  const items = dest.budgetDetail.items;
+  const mult = CAT_MULT[cat];
+  const extraFactor = people <= 2 ? (people / 2) : (1 + (people - 2) * 0.5); // dégression groupe
+
+  const result = items.map(it => {
+    let val;
+    const lbl = it.label;
+    if (lbl.includes('Vol')) {
+      val = Math.round(it.val * (people / 2));
+    } else if (lbl.includes('Hébergement')) {
+      const base2p = it.val * mult.heberg;
+      val = people <= 2 ? Math.round(base2p * (people / 2)) : Math.round(base2p * (1 + (people - 2) * 0.45));
+    } else if (lbl.includes('Transport')) {
+      const base2p = it.val * mult.transport;
+      val = Math.round(base2p * (1 + (people - 2) * 0.2));
+    } else if (lbl.includes('Activité')) {
+      val = Math.round(it.val * mult.activites * (people / 2));
+    } else if (lbl.includes('Restauration')) {
+      val = Math.round(it.val * mult.resto * (people / 2));
+    } else {
+      val = Math.round(it.val * extraFactor);
+    }
+    return { label: it.label, val: Math.max(val, 0) };
+  });
+
+  const total = result.reduce((s, x) => s + x.val, 0);
+  return { items: result, total };
+}
+
+function initBudget() {
+  const opts = DESTS.map(d => `<option value="${d.id}">${d.flag} ${d.name}</option>`).join('');
+  document.getElementById('budgetDest').innerHTML = '<option value="">— Choisir une destination —</option>' + opts;
+}
+
+function changePeople(delta) {
+  budgetPeople = Math.min(8, Math.max(1, budgetPeople + delta));
+  document.getElementById('peopleCount').textContent = budgetPeople;
+  renderBudget();
+}
+
+function setCat(btn) {
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  budgetCat = btn.dataset.cat;
+  renderBudget();
+}
+
+function renderBudget() {
+  const id = document.getElementById('budgetDest').value;
+  const dest = DESTS.find(d => d.id === id);
+  const result = document.getElementById('budgetResult');
+
+  if (!dest) {
+    result.style.opacity = '.4';
+    result.style.pointerEvents = 'none';
+    return;
+  }
+
+  result.style.opacity = '1';
+  result.style.pointerEvents = 'auto';
+
+  const calc = calcBudget(dest, budgetPeople, budgetCat);
+  if (!calc) return;
+
+  const catLabels = { budget:'Budget / Hostel', standard:'Standard', confort:'Confort', luxe:'Luxe' };
+  document.getElementById('budgetResultName').textContent = dest.flag + ' ' + dest.name + ' · ' + catLabels[budgetCat];
+  document.getElementById('budgetResultTotal').innerHTML = calc.total.toLocaleString('fr-FR') + ' <span>€</span>';
+  document.getElementById('budgetResultPP').textContent = 'pour ' + budgetPeople + ' voyageur' + (budgetPeople > 1 ? 's' : '') + ' · ' + Math.round(calc.total / budgetPeople).toLocaleString('fr-FR') + ' €/pers.';
+
+  const colors = ['#0ea5e9','#10b981','#f59e0b','#8b5cf6','#f43f5e'];
+  document.getElementById('budgetBreakdown').innerHTML = calc.items.map((it, i) =>
+    `<div class="budget-item-row">
+      <span class="budget-item-label">${it.label}</span>
+      <span class="budget-item-val" style="color:${colors[i % colors.length]}">${it.val.toLocaleString('fr-FR')} €</span>
+    </div>`
+  ).join('') + `<div style="display:flex;justify-content:space-between;padding-top:.6rem;margin-top:.4rem;border-top:1px solid rgba(255,255,255,.2)"><span style="color:#fff;font-weight:700">Total</span><span style="color:#fff;font-weight:800">${calc.total.toLocaleString('fr-FR')} €</span></div>`;
+}
+
+
 // COMMENT FORM
 document.getElementById('commentForm').addEventListener('submit', async function(e) {
   e.preventDefault();
@@ -1357,7 +1694,11 @@ function renderLeaderboard() {
 }
 
 // Init au chargement
-window.addEventListener('load', () => { setTimeout(initVotes, 500); });
+window.addEventListener('load', () => {
+  setTimeout(initVotes, 500);
+  initCompare();
+  initBudget();
+});
 
 // Rafraîchir toutes les 30 secondes
 setInterval(initVotes, 30000);
