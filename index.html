@@ -4,6 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Les Vacances de Mar et Ben ✈️</title>
+<script>
+// Anti-flash : appliquer le thème avant le rendu
+(function(){
+  var t = localStorage.getItem('theme');
+  var d = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if(t === 'dark' || (!t && d)) document.documentElement.setAttribute('data-theme','dark');
+})();
+</script>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;0,700;1,300;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -13,13 +21,183 @@
   --teal:#0d9488;--teal2:#14b8a6;--gold:#c8943a;--white:#fff;
   --border:#e8e0d5;--shadow:0 4px 24px rgba(0,0,0,.09);
 }
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--dark);overflow-x:hidden}
-img{display:block;width:100%;object-fit:cover}
-::-webkit-scrollbar{width:6px}
-::-webkit-scrollbar-track{background:#f0ede8}
-::-webkit-scrollbar-thumb{background:var(--teal);border-radius:3px}
+
+/* ══════════════════════════════════════════════════════════
+   MODE SOMBRE — variables de base
+══════════════════════════════════════════════════════════ */
+[data-theme="dark"]{
+  --bg:#0d1117;
+  --card:#161b22;
+  --dark:#e6edf3;
+  --slate:#8b949e;
+  --border:#30363d;
+  --shadow:0 4px 24px rgba(0,0,0,.5);
+  --teal:#2dd4bf;
+  --teal2:#14b8a6;
+  --gold:#d4a84b;
+}
+
+/* Transition douce uniquement sur les propriétés visuelles */
+[data-theme="dark"] *{
+  transition:background-color .25s ease,border-color .25s ease,color .2s ease !important;
+}
+/* Ne pas toucher aux animations existantes */
+[data-theme="dark"] .hero-bg,
+[data-theme="dark"] img,
+[data-theme="dark"] .card-photo,
+[data-theme="dark"] .compare-bar-fill,
+[data-theme="dark"] .lb-bar{
+  transition:none !important;
+}
+
+/* ── Layout global ── */
+[data-theme="dark"] body{background:var(--bg);color:var(--dark)}
+
+/* ── Navigation ── */
+[data-theme="dark"] nav{background:rgba(13,17,23,.97);border-bottom-color:var(--border)}
+[data-theme="dark"] .nav-logo{color:var(--dark)}
+[data-theme="dark"] nav a{color:var(--slate)}
+[data-theme="dark"] nav a:hover,[data-theme="dark"] nav a.active{color:var(--teal)}
+[data-theme="dark"] .nav-countdown{background:rgba(45,212,191,.1);border-color:rgba(45,212,191,.25);color:var(--teal)}
+
+/* ── Hero ── */
+[data-theme="dark"] .hero-ov{background:linear-gradient(to top,rgba(0,0,0,.95) 0%,rgba(0,0,0,.5) 50%,rgba(0,0,0,.1) 100%)}
+
+/* ── Filtres ── */
+[data-theme="dark"] .filter-bar{background:var(--bg);border-bottom-color:var(--border)}
+[data-theme="dark"] .filter-btn{background:var(--card);border-color:var(--border);color:var(--slate)}
+[data-theme="dark"] .filter-btn:hover,[data-theme="dark"] .filter-btn.active{background:var(--teal);border-color:var(--teal);color:#fff}
+
+/* ── Cartes destinations ── */
+[data-theme="dark"] .dest-card,[data-theme="dark"] .card{background:var(--card);border-color:var(--border)}
+[data-theme="dark"] .card-body{background:var(--card)}
+[data-theme="dark"] .card-body h3,[data-theme="dark"] .card-name{color:var(--dark)}
+[data-theme="dark"] .card-body p,[data-theme="dark"] .card-sub,[data-theme="dark"] .card-tagline{color:var(--slate)}
+[data-theme="dark"] .card-tag{background:#21262d;color:var(--slate);border-color:var(--border)}
+[data-theme="dark"] .card-budget{background:rgba(45,212,191,.12);color:var(--teal);border-color:rgba(45,212,191,.25)}
+[data-theme="dark"] .card-cta{background:var(--teal);color:#fff;border-color:var(--teal)}
+[data-theme="dark"] .card-cta:hover{background:var(--teal2)}
+[data-theme="dark"] .vote-btn{background:var(--card);border-color:var(--border);color:var(--slate)}
+[data-theme="dark"] .vote-btn:hover{border-color:var(--teal);color:var(--teal)}
+[data-theme="dark"] .vote-btn.voted{background:#f43f5e;border-color:#f43f5e;color:#fff}
+
+/* ── Modale ── */
+[data-theme="dark"] .modal-overlay,[data-theme="dark"] #modalBg{background:rgba(0,0,0,.88)}
+[data-theme="dark"] .modal-box{background:var(--card);border-color:var(--border)}
+[data-theme="dark"] .modal-left,[data-theme="dark"] .modal-right{background:var(--card)}
+[data-theme="dark"] .modal-left h3,[data-theme="dark"] .modal-right h3{color:var(--dark)}
+[data-theme="dark"] .modal-tag{background:#21262d;color:var(--slate);border-color:var(--border)}
+[data-theme="dark"] .mweek{border-bottom-color:var(--border)}
+[data-theme="dark"] .mwbadge{color:#fff}
+[data-theme="dark"] .mwbody h4{color:var(--dark)}
+[data-theme="dark"] .mwbody p{color:var(--slate)}
+[data-theme="dark"] .micard{background:#21262d;border-color:var(--border)}
+[data-theme="dark"] .micard h5{color:inherit}
+[data-theme="dark"] .micard p{color:var(--slate)}
+[data-theme="dark"] .modal-close{background:var(--card);color:var(--dark);border-color:var(--border)}
+
+/* ── Must See ── */
+[data-theme="dark"] .mustsee-block{border-top-color:var(--border)}
+[data-theme="dark"] .mustsee-title{color:var(--dark)}
+[data-theme="dark"] .mustsee-item{background:#21262d;border-color:var(--border)}
+[data-theme="dark"] .mustsee-item:hover{background:#2d333b;border-color:var(--teal)}
+[data-theme="dark"] .mustsee-desc{color:var(--slate)}
+
+/* ── Commentaires modale ── */
+[data-theme="dark"] .mc-title{color:var(--dark)}
+[data-theme="dark"] .mc-item{background:#21262d;border-color:var(--border)}
+[data-theme="dark"] .mc-msg{color:var(--dark)}
+[data-theme="dark"] .mc-date{color:var(--slate)}
+[data-theme="dark"] .mc-empty{color:var(--slate)}
+[data-theme="dark"] .mc-form input,
+[data-theme="dark"] .mc-form textarea{background:#21262d;border-color:var(--border);color:var(--dark)}
+[data-theme="dark"] .mc-form input::placeholder,
+[data-theme="dark"] .mc-form textarea::placeholder{color:var(--slate)}
+[data-theme="dark"] .mc-submit{background:var(--teal);color:#fff}
+
+/* ── Profils (section quiz) ── */
+[data-theme="dark"] .pcard{background:#21262d;border-color:var(--border)}
+[data-theme="dark"] .pcard h4,[data-theme="dark"] .pcard p{color:var(--dark)}
+
+/* ── Comparateur ── */
+[data-theme="dark"] .compare-section{background:#0d1117;border-top-color:var(--teal)}
+[data-theme="dark"] .compare-inner>h2,[data-theme="dark"] .compare-inner>p{color:var(--dark)}
+[data-theme="dark"] .compare-inner>p{color:var(--slate)}
+[data-theme="dark"] .compare-card{background:var(--card);border-color:var(--border)}
+[data-theme="dark"] .compare-card-title{color:var(--dark)}
+[data-theme="dark"] .compare-card-sub{color:var(--slate)}
+[data-theme="dark"] .compare-label{color:var(--slate)}
+[data-theme="dark"] .compare-val{color:var(--dark)}
+[data-theme="dark"] .compare-row{border-bottom-color:var(--border)}
+[data-theme="dark"] .compare-bar-bg{background:#21262d}
+[data-theme="dark"] .compare-placeholder{color:var(--slate)}
+[data-theme="dark"] .compare-vs{color:var(--teal)}
+
+/* ── Custom dropdowns ── */
+[data-theme="dark"] .cdd-trigger{background:#21262d;border-color:var(--border);color:var(--dark)}
+[data-theme="dark"] .cdd-trigger:hover,[data-theme="dark"] .cdd-trigger.open{border-color:var(--teal)}
+[data-theme="dark"] .cdd-list{background:#161b22;border-color:var(--teal);box-shadow:0 8px 24px rgba(0,0,0,.5)}
+[data-theme="dark"] .cdd-option{color:var(--dark)}
+[data-theme="dark"] .cdd-option:hover{background:#21262d}
+[data-theme="dark"] .cdd-option.selected{background:rgba(45,212,191,.1);color:var(--teal)}
+[data-theme="dark"] .cdd-option .cdd-sub{color:var(--slate)}
+[data-theme="dark"] .cdd-placeholder{color:var(--slate)}
+
+/* ── Calculateur budget ── */
+[data-theme="dark"] .budget-section{background:#0a0d12;border-top-color:var(--border)}
+[data-theme="dark"] .budget-inner>h2{color:var(--dark)}
+[data-theme="dark"] .budget-inner>p{color:var(--slate)}
+[data-theme="dark"] .budget-control-group{background:#161b22;border:1px solid var(--border)}
+[data-theme="dark"] .budget-control-group label{color:var(--teal)}
+[data-theme="dark"] .person-count{color:var(--dark)}
+[data-theme="dark"] .person-btn{border-color:var(--teal);color:var(--teal)}
+[data-theme="dark"] .person-btn:hover{background:var(--teal);color:#fff}
+[data-theme="dark"] .cat-btn{background:#21262d;border-color:var(--border);color:var(--slate)}
+[data-theme="dark"] .cat-btn.active{background:var(--teal);border-color:var(--teal);color:#fff}
+[data-theme="dark"] .budget-result{background:linear-gradient(135deg,#0a0d12 0%,#0f1f3a 100%)}
+[data-theme="dark"] .budget-result-left h3{color:rgba(230,237,243,.6)}
+[data-theme="dark"] .budget-total{color:var(--dark)}
+[data-theme="dark"] .budget-pp{color:rgba(230,237,243,.5)}
+[data-theme="dark"] .budget-note{color:var(--slate)}
+
+/* ── Leaderboard ── */
+[data-theme="dark"] .leaderboard-section{background:#080b10}
+[data-theme="dark"] .leaderboard-section h2,[data-theme="dark"] .leaderboard-section p{color:rgba(230,237,243,.85)}
+[data-theme="dark"] .lb-card{background:#161b22;border-color:var(--border)}
+[data-theme="dark"] .lb-name,[data-theme="dark"] .lb-count{color:var(--dark)}
+
+/* ── Section commentaires globale ── */
+[data-theme="dark"] .comments-section{background:#0a0d12;border-top-color:var(--teal)}
+[data-theme="dark"] .comments-inner h2,[data-theme="dark"] .comments-inner p{color:var(--dark)}
+[data-theme="dark"] .comments-inner>p{color:var(--slate)}
+[data-theme="dark"] .comment-form input,
+[data-theme="dark"] .comment-form textarea,
+[data-theme="dark"] .comment-form select{background:#161b22;border-color:var(--border);color:var(--dark)}
+[data-theme="dark"] .comment-form input::placeholder,
+[data-theme="dark"] .comment-form textarea::placeholder{color:var(--slate)}
+[data-theme="dark"] .cf-btn{background:var(--teal);color:#fff}
+
+/* ── Section carte monde ── */
+[data-theme="dark"] .wmap-section{background:#0a0d12}
+[data-theme="dark"] .wmap-section h2,[data-theme="dark"] .wmap-section p{color:var(--dark)}
+[data-theme="dark"] .wmap-pill{background:#21262d;color:var(--dark)}
+
+/* ── Scrollbar ── */
+[data-theme="dark"] ::-webkit-scrollbar-track{background:#161b22}
+[data-theme="dark"] ::-webkit-scrollbar-thumb{background:var(--teal)}
+
+/* ── Toggle bouton ── */
+.theme-toggle{
+  display:flex;align-items:center;justify-content:center;
+  width:36px;height:36px;border-radius:50%;
+  border:2px solid var(--border);background:var(--card);
+  cursor:pointer;font-size:1rem;
+  flex-shrink:0;margin-left:.5rem;
+  transition:border-color .2s,background .2s,transform .2s !important;
+}
+.theme-toggle:hover{border-color:var(--teal);transform:rotate(20deg)}
+[data-theme="dark"] .theme-toggle{background:#21262d;border-color:var(--border)}
+
 
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;
@@ -29,10 +207,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
 .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:500;
   color:var(--dark);display:flex;align-items:center;gap:.5rem}
 .nav-logo span{color:var(--teal)}
-nav ul{display:flex;gap:1.5rem;list-style:none}
-nav a{font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;color:var(--slate);
-  transition:color .2s;font-weight:500;text-decoration:none}
-nav a:hover{color:var(--teal)}
+nav ul{display:flex;gap:1rem;list-style:none;flex-wrap:wrap}
+nav a{font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--slate);
+  transition:color .2s;font-weight:500;text-decoration:none;padding:.3rem .5rem;border-radius:5px}
+nav a:hover,nav a.active{color:var(--teal)}
+.nav-countdown{font-size:.72rem;font-weight:700;color:var(--teal);background:rgba(0,153,153,.1);
+  padding:.28rem .7rem;border-radius:20px;border:1px solid rgba(0,153,153,.25);white-space:nowrap;
+  font-family:'Cormorant Garamond',serif;font-size:.85rem}
+.nav-countdown span{font-size:.7rem;font-weight:500;color:var(--slate);font-family:inherit}
 
 /* HERO */
 .hero{height:100vh;position:relative;display:flex;align-items:flex-end;overflow:hidden}
@@ -380,6 +562,25 @@ footer .fr{font-size:.72rem;color:rgba(255,255,255,.2)}
 .wmap-pill:hover{background:var(--teal);color:#fff;border-color:var(--teal)}
 
 
+
+/* ── COMMENTAIRES MODALE ── */
+.modal-comments{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border)}
+.mc-title{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--dark);margin-bottom:1rem}
+.mc-list{display:flex;flex-direction:column;gap:.8rem;margin-bottom:1.2rem;max-height:220px;overflow-y:auto}
+.mc-item{background:#f7f5f0;border-radius:8px;padding:.7rem .9rem}
+.mc-item-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.3rem}
+.mc-nom{font-weight:700;font-size:.82rem;color:var(--teal)}
+.mc-date{font-size:.72rem;color:var(--slate)}
+.mc-msg{font-size:.83rem;color:var(--dark);line-height:1.5}
+.mc-empty{font-size:.82rem;color:var(--slate);font-style:italic;text-align:center;padding:.8rem 0}
+.mc-form{display:flex;flex-direction:column;gap:.6rem}
+.mc-form input,.mc-form textarea{padding:.55rem .8rem;border:1.5px solid var(--border);border-radius:8px;font-family:inherit;font-size:.82rem;color:var(--dark);background:#fff;transition:border-color .2s;resize:none}
+.mc-form input:focus,.mc-form textarea:focus{outline:none;border-color:var(--teal)}
+.mc-form textarea{min-height:70px}
+.mc-submit{padding:.55rem 1.2rem;background:var(--teal);color:#fff;border:none;border-radius:8px;font-size:.82rem;font-weight:600;cursor:pointer;transition:background .2s;align-self:flex-end}
+.mc-submit:hover{background:#0d9488}
+.mc-success{font-size:.8rem;color:#059669;font-weight:600;text-align:center;display:none}
+
 /* ── MUST SEE ── */
 .mustsee-block{margin-top:1.5rem;padding-top:1.2rem;border-top:1px solid var(--border)}
 .mustsee-title{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--dark);margin-bottom:.8rem}
@@ -388,6 +589,28 @@ footer .fr{font-size:.72rem;color:rgba(255,255,255,.2)}
 .mustsee-name{font-weight:600;font-size:.85rem;color:var(--teal);margin-bottom:.15rem}
 .mustsee-desc{font-size:.78rem;color:var(--slate);line-height:1.4}
 
+
+
+/* ── CUSTOM DROPDOWN ── */
+.cdd-wrap{position:relative;user-select:none}
+.cdd-trigger{display:flex;align-items:center;justify-content:space-between;gap:.6rem;
+  padding:.7rem 1rem;border:2px solid var(--border);border-radius:10px;background:#fff;
+  cursor:pointer;transition:border-color .2s;font-size:.92rem;color:var(--dark)}
+.cdd-trigger:hover,.cdd-trigger.open{border-color:var(--teal)}
+.cdd-trigger .cdd-arrow{font-size:.65rem;color:var(--teal);transition:transform .2s;margin-left:auto}
+.cdd-trigger.open .cdd-arrow{transform:rotate(180deg)}
+.cdd-trigger .cdd-placeholder{color:var(--slate);font-size:.85rem}
+.cdd-list{position:absolute;top:calc(100% + 4px);left:0;right:0;background:#fff;
+  border:2px solid var(--teal);border-radius:10px;z-index:999;max-height:280px;
+  overflow-y:auto;box-shadow:0 8px 24px rgba(0,0,0,.12)}
+.cdd-option{display:flex;align-items:center;gap:.7rem;padding:.6rem 1rem;cursor:pointer;
+  font-size:.88rem;color:var(--dark);transition:background .15s}
+.cdd-option:hover{background:#f0fdfa}
+.cdd-option.selected{background:rgba(0,153,153,.08);color:var(--teal);font-weight:600}
+.cdd-option .cdd-emoji{flex-shrink:0;display:flex;align-items:center;justify-content:center;width:28px;height:20px}
+.cdd-option .cdd-text{flex:1}
+.cdd-option .cdd-sub{font-size:.72rem;color:var(--slate)}
+.cdd-selected-emoji{flex-shrink:0;display:flex;align-items:center}
 
 /* ── COMPARATEUR ── */
 .compare-section{padding:4rem 3rem;background:#f7f5f0;border-top:3px solid var(--teal)}
@@ -478,12 +701,18 @@ footer .fr{font-size:.72rem;color:rgba(255,255,255,.2)}
 <body>
 
 <!-- NAV -->
-<nav>
+<nav id="mainNav">
   <div class="nav-logo">✦ <span>Mar et Ben</span> · Été 2026</div>
   <ul>
-    <li><a href="#destinations">Destinations</a></li>
-    <li><a href="#destinations">✨ Tahiti</a></li>
+    <li><a href="#destinations">🌍 Destinations</a></li>
+    <li><a href="#comparateur">⚖️ Comparer</a></li>
+    <li><a href="#calculateur">🧮 Budget</a></li>
+    <li><a href="#carte">🗺️ Carte</a></li>
+    <li><a href="#leaderboard">🏆 Votes</a></li>
+    <li><a href="#commentaires">💬 Avis</a></li>
   </ul>
+  <div class="nav-countdown" id="navCountdown">⏳ <span>Calcul…</span></div>
+  <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Mode sombre / clair">🌙</button>
 </nav>
 
 <!-- HERO -->
@@ -610,7 +839,7 @@ footer .fr{font-size:.72rem;color:rgba(255,255,255,.2)}
     </div>
     <div class="modal-tags" id="mTags"></div>
     <div class="modal-cols" id="mCols">
-      <div class="modal-left"><h3>🗓️ Itinéraire — 4 semaines</h3><div id="mWeeks"></div><div id="mVideos"></div></div>
+      <div class="modal-left"><h3>🗓️ Itinéraire — 4 semaines</h3><div id="mWeeks"></div><div id="mVideos"></div><div id="mComments" class="modal-comments"></div></div>
       <div class="modal-right"><h3>Informations pratiques</h3><div id="mInfo"></div><div id="mBudget"></div></div>
     </div>
     <div class="modal-map-wrap">
@@ -636,13 +865,21 @@ footer .fr{font-size:.72rem;color:rgba(255,255,255,.2)}
     <h2>⚖️ Comparer deux destinations</h2>
     <p>Sélectionne deux destinations et compare budget, durée de vol, type de voyage et points forts côte à côte.</p>
     <div class="compare-selectors">
-      <select class="compare-select" id="cmpA" onchange="renderCompare()">
-        <option value="">— Choisir une destination —</option>
-      </select>
+      <div class="cdd-wrap" id="cddWrapA">
+        <div class="cdd-trigger" id="cddTrigA" onclick="toggleCdd('A')">
+          <span class="cdd-placeholder" id="cddLabelA">— Destination A —</span>
+          <span class="cdd-arrow">▼</span>
+        </div>
+        <div class="cdd-list" id="cddListA" style="display:none"></div>
+      </div>
       <div class="compare-vs">VS</div>
-      <select class="compare-select" id="cmpB" onchange="renderCompare()">
-        <option value="">— Choisir une destination —</option>
-      </select>
+      <div class="cdd-wrap" id="cddWrapB">
+        <div class="cdd-trigger" id="cddTrigB" onclick="toggleCdd('B')">
+          <span class="cdd-placeholder" id="cddLabelB">— Destination B —</span>
+          <span class="cdd-arrow">▼</span>
+        </div>
+        <div class="cdd-list" id="cddListB" style="display:none"></div>
+      </div>
     </div>
     <div class="compare-grid" id="compareGrid">
       <div class="compare-placeholder">👈 Choisis une première destination</div>
@@ -659,9 +896,13 @@ footer .fr{font-size:.72rem;color:rgba(255,255,255,.2)}
     <div class="budget-controls">
       <div class="budget-control-group">
         <label>Destination</label>
-        <select class="budget-dest-select" id="budgetDest" onchange="renderBudget()">
-          <option value="">— Choisir —</option>
-        </select>
+        <div class="cdd-wrap" id="cddWrapBudget">
+          <div class="cdd-trigger" id="cddTrigBudget" onclick="toggleCdd('Budget')">
+            <span class="cdd-placeholder" id="cddLabelBudget">— Choisir une destination —</span>
+            <span class="cdd-arrow">▼</span>
+          </div>
+          <div class="cdd-list" id="cddListBudget" style="display:none"></div>
+        </div>
       </div>
       <div class="budget-control-group">
         <label>Nombre de voyageurs</label>
@@ -762,7 +1003,7 @@ function img(id, w, q) {
 // ═══════════════════════════════════════════
 const DESTS = [
   {
-    id:'norvege', num:'01', flag:'🇳🇴', name:'Norvège', sub:'Fjords & Lofoten',
+    id:'norvege', num:'01', flag:'🇳🇴', flagImg:'https://flagcdn.com/24x18/no.png', name:'Norvège', sub:'Fjords & Lofoten',
     cats:['nature'], color:'#0ea5e9', visited:false, marionVisited:false,
     budget:'3 200 – 4 200 €', climate:'12–20°C · Tempéré',
     heroImg: 'https://loremflickr.com/1200/700/norway,fjord',
@@ -786,7 +1027,7 @@ const DESTS = [
       legend:[{c:'#0ea5e9',l:'Itinéraire van'},{c:'#f59e0b',l:'Incontournable'}]}
   }
   ,{
-    id:'kenya', num:'02', flag:'🦁', name:'Kenya & Tanzanie', sub:'Safari · Grande Migration · Zanzibar',
+    id:'kenya', num:'02', flag:'🦁',  flagImg:'https://flagcdn.com/24x18/ke.png', name:'Kenya & Tanzanie', sub:'Safari · Grande Migration · Zanzibar',
     cats:['grand'], color:'#ea580c', visited:false, marionVisited:false,
     budget:'4 800 – 7 000 €', climate:'22–30°C · Saison sèche en août',
     heroImg: 'https://picsum.photos/seed/kenya/1200/700',
@@ -810,7 +1051,7 @@ const DESTS = [
       legend:[{c:'#ea580c',l:'Route Safari'},{c:'#fbbf24',l:'Incontournable'},{c:'#0891b2',l:'Ile & mer'}]}
   }
   ,{
-    id:'balkans', num:'03', flag:'🌊', name:'Balkans', sub:'Croatie · Monténégro · Albanie',
+    id:'balkans', num:'03', flag:'🌊',  flagImg:'https://flagcdn.com/24x18/hr.png', name:'Balkans', sub:'Croatie · Monténégro · Albanie',
     cats:['mer'], color:'#7c3aed', visited:false, marionVisited:false,
     budget:'2 800 – 3 800 €', climate:'28–34°C · Chaud',
     heroImg: 'https://loremflickr.com/1200/700/dubrovnik,croatia',
@@ -834,7 +1075,7 @@ const DESTS = [
       legend:[{c:'#7c3aed',l:'Road trip Balkans'},{c:'#fbbf24',l:'Incontournable'}]}
   }
   ,{
-    id:'armenie', num:'04', flag:'🇦🇲', name:'Arménie', sub:'Monastères · Gorges · Caucase',
+    id:'armenie', num:'04', flag:'🇦🇲', flagImg:'https://flagcdn.com/24x18/am.png', name:'Arménie', sub:'Monastères · Gorges · Caucase',
     cats:['nature'], color:'#9333ea', visited:false, marionVisited:false,
     budget:'2 000 – 2 800 €', climate:'25–32°C · Chaud et sec',
     heroImg: 'https://picsum.photos/seed/armenia/1200/700',
@@ -858,7 +1099,7 @@ const DESTS = [
       legend:[{c:'#9333ea',l:'Route Arménie'},{c:'#fbbf24',l:'Incontournable'}]}
   }
   ,{
-    id:'costarica', num:'05', flag:'🇨🇷', name:'Costa Rica', sub:'Surf · Jungle · Volcans',
+    id:'costarica', num:'05', flag:'🇨🇷', flagImg:'https://flagcdn.com/24x18/cr.png', name:'Costa Rica', sub:'Surf · Jungle · Volcans',
     cats:['mer'], color:'#0d9488', visited:false, marionVisited:false,
     budget:'3 000 – 4 200 €', climate:'28–34°C · Côte Pacifique sèche en août',
     heroImg: 'https://picsum.photos/seed/costarica/1200/700',
@@ -882,7 +1123,7 @@ const DESTS = [
       legend:[{c:'#0d9488',l:'Route Costa Rica'},{c:'#fbbf24',l:'Surf & Incontournable'}]}
   }
   ,{
-    id:'srilanka', num:'06', flag:'🇱🇰', name:'Sri Lanka', sub:'Surf · Temples · Éléphants',
+    id:'srilanka', num:'06', flag:'🇱🇰', flagImg:'https://flagcdn.com/24x18/lk.png', name:'Sri Lanka', sub:'Surf · Temples · Éléphants',
     cats:['mer'], color:'#b45309', visited:false, marionVisited:false,
     budget:'2 800 – 3 800 €', climate:'28–34°C · Côte est sèche en août',
     heroImg: 'https://picsum.photos/seed/srilanka/1200/700',
@@ -906,7 +1147,7 @@ const DESTS = [
       legend:[{c:'#b45309',l:'Route Sri Lanka'},{c:'#fbbf24',l:'Incontournable'}]}
   }
   ,{
-    id:'japon', num:'07', flag:'🇯🇵', name:'Japon', sub:'Hokkaido & Kyushu',
+    id:'japon', num:'07', flag:'🇯🇵', flagImg:'https://flagcdn.com/24x18/jp.png', name:'Japon', sub:'Hokkaido & Kyushu',
     cats:['grand'], color:'#c2410c', visited:false, marionVisited:false,
     budget:'4 200 – 5 800 €', climate:'20–26°C Hokkaido',
     heroImg: 'https://loremflickr.com/1200/700/japan,fuji',
@@ -934,7 +1175,7 @@ const DESTS = [
       legend:[{c:'#c2410c',l:'Hokkaido'},{c:'#9a3412',l:'Kyushu'},{c:'#fbbf24',l:'Escale / Star'}]}
   }
   ,{
-    id:'colombie', num:'08', flag:'🇨🇴', name:'Colombie', sub:'Caraïbes · Café · Caño Cristales',
+    id:'colombie', num:'08', flag:'🇨🇴', flagImg:'https://flagcdn.com/24x18/co.png', name:'Colombie', sub:'Caraïbes · Café · Caño Cristales',
     cats:['grand'], color:'#16a34a', visited:false, marionVisited:false,
     budget:'3 000 – 4 000 €', climate:'28–34°C · Humide',
     heroImg: 'https://loremflickr.com/1200/700/cartagena,colombia',
@@ -958,7 +1199,7 @@ const DESTS = [
       legend:[{c:'#16a34a',l:'Road trip Colombie'},{c:'#fbbf24',l:'Phénomène unique'}]}
   }
   ,{
-    id:'afrique', num:'09', flag:'🇿🇦', name:'Afrique du Sud', sub:'Garden Route & Drakensberg',
+    id:'afrique', num:'09', flag:'🇿🇦', flagImg:'https://flagcdn.com/24x18/za.png', name:'Afrique du Sud', sub:'Garden Route & Drakensberg',
     cats:['grand'], color:'#b45309', visited:false, marionVisited:false,
     budget:'3 500 – 4 800 €', climate:'16–24°C · Hiver sec ✓',
     heroImg: 'https://loremflickr.com/1200/700/capetown,africa',
@@ -982,7 +1223,7 @@ const DESTS = [
       legend:[{c:'#b45309',l:'Garden Route'},{c:'#fbbf24',l:'Incontournable'}]}
   }
   ,{
-    id:'tahiti', num:'10', flag:'🌺', name:'Tahiti & Îles Authentiques', sub:'Polynésie hors des sentiers',
+    id:'tahiti', num:'10', flag:'🌺',  flagImg:'https://flagcdn.com/24x18/pf.png', name:'Tahiti & Îles Authentiques', sub:'Polynésie hors des sentiers',
     cats:['exception'], color:'#c8943a', visited:false, marionVisited:false,
     special:true,
     budget:'5 500 – 7 500 €', climate:'26–30°C · Tropical',
@@ -1077,7 +1318,12 @@ function openModal(id) {
   if(!d) return;
   document.getElementById('mHeroImg').src = d.heroImg;
   document.getElementById('mHeroImg').onerror = function(){this.src=FALLBACK};
-  document.getElementById('mFlag').textContent = d.flag;
+  const mFlagEl = document.getElementById('mFlag');
+  if (d.flagImg) {
+    mFlagEl.innerHTML = '<img src="' + d.flagImg + '" alt="' + d.name + '" style="width:36px;height:27px;border-radius:3px;object-fit:cover;vertical-align:middle">';
+  } else {
+    mFlagEl.textContent = d.flag;
+  }
   document.getElementById('mName').textContent = d.name + ' — ' + d.sub;
   document.getElementById('mSub').textContent = d.tagline;
   document.getElementById('mCols').style.borderColor = d.color;
@@ -1136,6 +1382,7 @@ function openModal(id) {
         </div>`).join('')}
       </div></div>`;}
   else{document.getElementById('mVideos').innerHTML='';}
+  loadModalComments(id);
   document.getElementById('mMapTitle').textContent = `🗺️ Road Trip — ${d.name}`;
   document.getElementById('mLegend').innerHTML = d.map.legend.map(l=>
     `<div class="leg"><div class="leg-dot" style="background:${l.c}"></div>${l.l}</div>`).join('');
@@ -1187,6 +1434,234 @@ const obs=new IntersectionObserver(entries=>{
 document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
 
 
+
+
+// ══════════════════════════════════════════════════════════════════
+// DARK MODE TOGGLE
+// ══════════════════════════════════════════════════════════════════
+(function() {
+  // Lire la préférence sauvegardée ou la préférence système
+  const saved = localStorage.getItem('theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const isDark = saved ? saved === 'dark' : prefersDark;
+  if (isDark) applyTheme('dark');
+})();
+
+function applyTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  const btn = document.getElementById('themeToggle');
+  if (btn) btn.textContent = theme === 'dark' ? '☀️' : '🌙';
+  localStorage.setItem('theme', theme);
+}
+
+function toggleTheme() {
+  // Activer la transition seulement pendant le switch
+  document.body.classList.add('theme-transitioning');
+  const current = document.documentElement.getAttribute('data-theme');
+  applyTheme(current === 'dark' ? 'light' : 'dark');
+  setTimeout(() => document.body.classList.remove('theme-transitioning'), 400);
+}
+
+// ══════════════════════════════════════════════════════════════════
+// COMPTE À REBOURS NAV
+// ══════════════════════════════════════════════════════════════════
+function updateCountdown() {
+  const depart = new Date('2026-08-08T00:00:00');
+  const now = new Date();
+  const diff = depart - now;
+  const el = document.getElementById('navCountdown');
+  if (!el) return;
+  if (diff <= 0) { el.innerHTML = '🎉 <span>Bon voyage !</span>'; return; }
+  const jours = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const heures = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  if (jours > 1) el.innerHTML = '✈️ J − ' + jours + ' <span>jours</span>';
+  else if (jours === 1) el.innerHTML = '✈️ <span>Demain on part !</span>';
+  else el.innerHTML = '🎉 <span>Bon voyage !</span>';
+}
+updateCountdown();
+setInterval(updateCountdown, 60000);
+
+// Nav active section highlight
+(function() {
+  const sections = ['destinations','comparateur','calculateur','carte','leaderboard','commentaires'];
+  const links = document.querySelectorAll('nav a');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(a => {
+          a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id);
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) observer.observe(el);
+  });
+})();
+
+// ══════════════════════════════════════════════════════════════════
+// CUSTOM DROPDOWNS
+// ══════════════════════════════════════════════════════════════════
+const cddState = { A: null, B: null, Budget: null };
+
+// Mapping drapeaux → ISO code (compatible Windows)
+const FLAG_ISO = {
+  norvege:'no',kenya:'ke',balkans:'hr',armenie:'am',costarica:'cr',
+  srilanka:'lk',japon:'jp',colombie:'co',afrique:'za',tahiti:'pf'
+};
+function flagImg(id,size){
+  const iso = FLAG_ISO[id] || 'un';
+  return '<img src="https://flagcdn.com/' + size + '/' + iso + '.png" alt="" style="width:' + (size==='24x18'?'24px':'32px') + ';height:auto;border-radius:2px;flex-shrink:0">';
+}
+
+function initCdds() {
+  ['A','B','Budget'].forEach(key => {
+    const list = document.getElementById('cddList' + key);
+    if (!list) return;
+    list.innerHTML = DESTS.map(d => `
+      <div class="cdd-option" data-id="${d.id}" onclick="selectCdd('${key}','${d.id}')">
+        <span class="cdd-emoji">${d.flagImg
+          ? `<img src="${d.flagImg}" alt="${d.name}" style="width:24px;height:18px;border-radius:2px;object-fit:cover;display:block">`
+          : d.flag}</span>
+        <div class="cdd-text">
+          <div>${d.name}</div>
+          <div class="cdd-sub">${d.sub}</div>
+        </div>
+      </div>`).join('');
+  });
+}
+
+function toggleCdd(key) {
+  const list = document.getElementById('cddList' + key);
+  const trig = document.getElementById('cddTrig' + key);
+  const isOpen = list.style.display !== 'none';
+  // Fermer tous les autres
+  ['A','B','Budget'].forEach(k => {
+    const l = document.getElementById('cddList' + k);
+    const t = document.getElementById('cddTrig' + k);
+    if (l) l.style.display = 'none';
+    if (t) t.classList.remove('open');
+  });
+  if (!isOpen) {
+    list.style.display = 'block';
+    trig.classList.add('open');
+  }
+}
+
+function selectCdd(key, id) {
+  cddState[key] = id;
+  const d = DESTS.find(x => x.id === id);
+  const label = document.getElementById('cddLabel' + key);
+  const trig = document.getElementById('cddTrig' + key);
+  const list = document.getElementById('cddList' + key);
+  // Mettre à jour le label
+  const flagHtml = d.flagImg
+    ? '<img src="' + d.flagImg + '" alt="' + d.name + '" style="width:24px;height:18px;border-radius:2px;object-fit:cover;vertical-align:middle;margin-right:.6rem">'
+    : '<span style="font-size:1.3rem;margin-right:.6rem">' + d.flag + '</span>';
+  label.innerHTML = flagHtml + d.name;
+  label.classList.remove('cdd-placeholder');
+  // Marquer la sélection
+  list.querySelectorAll('.cdd-option').forEach(opt => {
+    opt.classList.toggle('selected', opt.dataset.id === id);
+  });
+  // Fermer
+  list.style.display = 'none';
+  trig.classList.remove('open');
+  // Déclencher la mise à jour
+  if (key === 'A' || key === 'B') renderCompare();
+  if (key === 'Budget') renderBudget();
+}
+
+// Fermer les dropdowns si clic extérieur
+document.addEventListener('click', e => {
+  if (!e.target.closest('.cdd-wrap')) {
+    ['A','B','Budget'].forEach(k => {
+      const l = document.getElementById('cddList' + k);
+      const t = document.getElementById('cddTrig' + k);
+      if (l) l.style.display = 'none';
+      if (t) t.classList.remove('open');
+    });
+  }
+});
+
+// ══════════════════════════════════════════════════════════════════
+// COMMENTAIRES PAR DESTINATION (dans la modale)
+// ══════════════════════════════════════════════════════════════════
+async function loadModalComments(destId) {
+  const wrap = document.getElementById('mComments');
+  if (!wrap) return;
+  wrap.innerHTML = `
+    <div class="mc-title">💬 Avis & impressions</div>
+    <div class="mc-list" id="mcList-${destId}"><div class="mc-empty">Chargement…</div></div>
+    <form class="mc-form" id="mcForm-${destId}" onsubmit="submitModalComment(event,'${destId}')">
+      <input type="text" placeholder="Ton prénom" id="mcNom-${destId}" maxlength="30">
+      <textarea placeholder="Ton avis sur cette destination…" id="mcMsg-${destId}" maxlength="500"></textarea>
+      <button type="submit" class="mc-submit">Envoyer 📩</button>
+      <div class="mc-success" id="mcOk-${destId}">✅ Avis envoyé !</div>
+    </form>`;
+
+  // Charger les commentaires depuis Supabase
+  try {
+    const { data, error } = await supa.from('comments')
+      .select('nom,message,created_at')
+      .eq('destination', destId)
+      .order('created_at', { ascending: false })
+      .limit(20);
+
+    const list = document.getElementById('mcList-' + destId);
+    if (!list) return;
+
+    if (error || !data || data.length === 0) {
+      list.innerHTML = '<div class="mc-empty">Sois le premier à laisser un avis ! 👇</div>';
+    } else {
+      list.innerHTML = data.map(c => {
+        const d = new Date(c.created_at);
+        const dateStr = d.toLocaleDateString('fr-FR', { day:'numeric', month:'short' });
+        return `<div class="mc-item">
+          <div class="mc-item-header">
+            <span class="mc-nom">${escHtml(c.nom || 'Anonyme')}</span>
+            <span class="mc-date">${dateStr}</span>
+          </div>
+          <div class="mc-msg">${escHtml(c.message || '')}</div>
+        </div>`;
+      }).join('');
+    }
+  } catch(e) {
+    const list = document.getElementById('mcList-' + destId);
+    if (list) list.innerHTML = '<div class="mc-empty">Sois le premier à laisser un avis ! 👇</div>';
+  }
+}
+
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+async function submitModalComment(e, destId) {
+  e.preventDefault();
+  const nom = (document.getElementById('mcNom-' + destId).value.trim()) || 'Anonyme';
+  const msg = document.getElementById('mcMsg-' + destId).value.trim();
+  if (!msg) return;
+  const btn = e.target.querySelector('.mc-submit');
+  const ok = document.getElementById('mcOk-' + destId);
+  btn.disabled = true;
+  btn.textContent = 'Envoi…';
+  try {
+    await supa.from('comments').insert({ nom, message: msg, destination: destId });
+  } catch(err) {
+    // Fallback local si Supabase indispo
+    const saves = JSON.parse(localStorage.getItem('local_comments') || '[]');
+    saves.push({ nom, message: msg, destination: destId, date: new Date().toISOString() });
+    localStorage.setItem('local_comments', JSON.stringify(saves));
+  }
+  ok.style.display = 'block';
+  e.target.reset();
+  btn.style.display = 'none';
+  // Recharger les commentaires
+  setTimeout(() => loadModalComments(destId), 800);
+}
+
+
 // ══════════════════════════════════════════════════════════════════
 // COMPARATEUR
 // ══════════════════════════════════════════════════════════════════
@@ -1205,14 +1680,12 @@ const CMP_FLIGHTS = {
 };
 
 function initCompare() {
-  const opts = DESTS.map(d => `<option value="${d.id}">${d.flag} ${d.name}</option>`).join('');
-  document.getElementById('cmpA').innerHTML = '<option value="">— Destination A —</option>' + opts;
-  document.getElementById('cmpB').innerHTML = '<option value="">— Destination B —</option>' + opts;
+  initCdds();
 }
 
 function renderCompare() {
-  const idA = document.getElementById('cmpA').value;
-  const idB = document.getElementById('cmpB').value;
+  const idA = cddState['A'];
+  const idB = cddState['B'];
   const grid = document.getElementById('compareGrid');
   const dA = DESTS.find(d => d.id === idA);
   const dB = DESTS.find(d => d.id === idB);
@@ -1263,7 +1736,7 @@ function buildCompareCard(d, self, other, isCheaper) {
 
   return `<div class="compare-card ${d ? 'active' : ''}">
     <div class="compare-card-header">
-      <div class="compare-flag">${d.flag}</div>
+      <div class="compare-flag">${d.flagImg ? '<img src="' + d.flagImg + '" alt="' + d.name + '" style="width:32px;height:24px;border-radius:3px;object-fit:cover">' : d.flag}</div>
       <div>
         <div class="compare-card-title">${d.name}</div>
         <div class="compare-card-sub">${d.sub}</div>
@@ -1345,8 +1818,7 @@ function calcBudget(dest, people, cat) {
 }
 
 function initBudget() {
-  const opts = DESTS.map(d => `<option value="${d.id}">${d.flag} ${d.name}</option>`).join('');
-  document.getElementById('budgetDest').innerHTML = '<option value="">— Choisir une destination —</option>' + opts;
+  // Le dropdown Budget est initialisé via initCdds()
 }
 
 function changePeople(delta) {
@@ -1363,7 +1835,7 @@ function setCat(btn) {
 }
 
 function renderBudget() {
-  const id = document.getElementById('budgetDest').value;
+  const id = cddState['Budget'];
   const dest = DESTS.find(d => d.id === id);
   const result = document.getElementById('budgetResult');
 
