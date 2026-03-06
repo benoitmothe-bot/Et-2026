@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 <title>Les Vacances de Mar et Ben ✈️</title>
 <script>
 // Anti-flash : appliquer le thème avant le rendu
@@ -20,7 +20,10 @@
   --bg:#f5f3ef;--card:#fff;--dark:#1a1a2e;--slate:#5a6a7a;
   --teal:#0d9488;--teal2:#14b8a6;--gold:#c8943a;--white:#fff;
   --border:#e8e0d5;--shadow:0 4px 24px rgba(0,0,0,.09);
+  --px:3rem;--py:4rem;
 }
+@media(max-width:900px){:root{--px:1.2rem;--py:2.5rem}}
+@media(max-width:600px){:root{--px:1rem;--py:2rem}}
 
 /* ══════════════════════════════════════════════════════════
    MODE SOMBRE — variables de base
@@ -188,20 +191,45 @@
 
 /* ── Toggle bouton ── */
 .theme-toggle{
-  display:flex;align-items:center;justify-content:center;
-  width:36px;height:36px;border-radius:50%;
-  border:2px solid var(--border);background:var(--card);
-  cursor:pointer;font-size:1rem;
-  flex-shrink:0;margin-left:.5rem;
-  transition:border-color .2s,background .2s,transform .2s !important;
+  display:flex;align-items:center;gap:.45rem;
+  padding:.3rem .75rem .3rem .55rem;
+  border-radius:20px;flex-shrink:0;margin-left:.5rem;
+  border:1.5px solid var(--border);background:var(--card);
+  cursor:pointer;font-size:.78rem;font-weight:600;
+  color:var(--slate);letter-spacing:.02em;
+  transition:border-color .2s,background .2s,color .2s !important;
+  white-space:nowrap;
 }
-.theme-toggle:hover{border-color:var(--teal);transform:rotate(20deg)}
-[data-theme="dark"] .theme-toggle{background:#21262d;border-color:var(--border)}
+.theme-toggle:hover{border-color:var(--teal);color:var(--teal)}
+.theme-toggle .tt-icon{font-size:1rem;line-height:1;flex-shrink:0}
+.theme-toggle .tt-label{font-size:.72rem;font-weight:600}
+
+/* Mode clair actif → fond blanc, texte sombre */
+:not([data-theme="dark"]) .theme-toggle{
+  background:#fff;border-color:#d1d5db;color:#374151
+}
+:not([data-theme="dark"]) .theme-toggle:hover{
+  border-color:var(--teal);color:var(--teal)
+}
+
+/* Mode sombre actif → fond sombre, contour teal, texte clair */
+[data-theme="dark"] .theme-toggle{
+  background:#1e2130;border-color:var(--teal);color:#e2e8f0
+}
+[data-theme="dark"] .theme-toggle:hover{
+  background:#2a3045;color:#fff
+}
+
+/* Sur mobile : cacher le label, garder juste l'icône */
+@media(max-width:600px){
+  .theme-toggle .tt-label{display:none}
+  .theme-toggle{padding:.3rem .45rem}
+}
 
 
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;
-  justify-content:space-between;padding:.8rem 2.5rem;
+  justify-content:space-between;padding:.8rem 2.5rem;gap:.8rem;
   background:rgba(245,243,239,.93);backdrop-filter:blur(12px);
   border-bottom:1px solid var(--border)}
 .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:500;
@@ -223,7 +251,7 @@ nav a:hover,nav a.active{color:var(--teal)}
 @keyframes hzoom{from{transform:scale(1.03)}to{transform:scale(1.09)}}
 .hero-ov{position:absolute;inset:0;
   background:linear-gradient(to top,rgba(26,26,46,.95) 0%,rgba(26,26,46,.5) 50%,rgba(26,26,46,.1) 100%)}
-.hero-body{position:relative;z-index:2;padding:5rem 3rem;width:100%;max-width:1300px;display:flex;align-items:flex-end;gap:3rem;flex-wrap:wrap}
+.hero-body{position:relative;z-index:2;padding:var(--py) var(--px);width:100%;max-width:1300px;display:flex;align-items:flex-end;gap:3rem;flex-wrap:wrap}
 .hero-chip{display:inline-block;background:var(--teal);color:#fff;font-size:.68rem;
   font-weight:600;letter-spacing:.16em;text-transform:uppercase;padding:.3rem .9rem;margin-bottom:1.5rem}
 .hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3.5rem,8vw,6.5rem);
@@ -242,7 +270,7 @@ nav a:hover,nav a.active{color:var(--teal)}
 @keyframes sbounce{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
 
 /* PROFILES */
-.profiles-section{background:var(--dark);padding:4.5rem 3rem}
+.profiles-section{background:var(--dark);padding:var(--py) var(--px)}
 .profiles-inner{max-width:1100px;margin:0 auto;display:grid;
   grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
 .profiles-inner h2{font-family:'Cormorant Garamond',serif;
@@ -260,7 +288,7 @@ nav a:hover,nav a.active{color:var(--teal)}
   padding:.65rem 1.1rem;font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.6rem}
 
 /* FILTER */
-.filter-section{padding:3rem 3rem 1.5rem;max-width:1200px;margin:0 auto}
+.filter-section{padding:var(--py) var(--px) 1.5rem;max-width:1200px;margin:0 auto}
 .filter-section h2{font-family:'Cormorant Garamond',serif;font-size:2rem;
   font-weight:500;color:var(--dark);margin-bottom:1.5rem}
 .filter-tabs{display:flex;flex-wrap:wrap;gap:.5rem}
@@ -275,7 +303,7 @@ nav a:hover,nav a.active{color:var(--teal)}
 
 /* CARDS GRID */
 .cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;
-  padding:1.5rem 3rem 4rem;max-width:1200px;margin:0 auto}
+  padding:1.5rem var(--px) 4rem;max-width:1200px;margin:0 auto}
 .dest-card{background:var(--card);overflow:hidden;cursor:pointer;
   box-shadow:var(--shadow);transition:transform .3s,box-shadow .3s;position:relative}
 .dest-card:hover{transform:translateY(-5px);box-shadow:0 12px 40px rgba(0,0,0,.14)}
@@ -294,7 +322,7 @@ nav a:hover,nav a.active{color:var(--teal)}
   font-size:.6rem;letter-spacing:.08em;padding:.2rem .55rem;text-transform:uppercase}
 .badge-marion{background:rgba(239,68,68,.8);color:#fff;
   font-size:.6rem;letter-spacing:.08em;padding:.2rem .55rem;text-transform:uppercase}
-.card-flag{position:absolute;bottom:.7rem;left:.8rem;font-size:1.5rem;line-height:1}
+.card-flag{position:absolute;bottom:.7rem;left:.8rem;font-size:1.5rem;line-height:1;display:flex;align-items:center}
 .card-body{padding:1.1rem 1.2rem 1.3rem}
 .card-body h3{font-family:'Cormorant Garamond',serif;font-size:1.35rem;
   font-weight:600;color:var(--dark);margin-bottom:.1rem}
@@ -318,6 +346,9 @@ nav a:hover,nav a.active{color:var(--teal)}
 .modal{background:var(--bg);width:100%;max-width:1050px;
   margin:auto;position:relative;animation:mslide .35s ease}
 @keyframes mslide{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@media(max-width:600px){
+  @keyframes mslide{from{opacity:0;transform:translateY(60px)}to{opacity:1;transform:none}}
+}
 .modal-close{position:absolute;top:1rem;right:1rem;z-index:10;width:36px;height:36px;
   background:rgba(0,0,0,.5);border:none;cursor:pointer;
   color:#fff;font-size:1rem;display:flex;align-items:center;justify-content:center}
@@ -418,7 +449,7 @@ nav a:hover,nav a.active{color:var(--teal)}
 .tahiti-note strong{color:rgba(200,148,58,.9)}
 
 /* FOOTER */
-footer{background:var(--dark);padding:2rem 3rem;display:flex;align-items:center;
+footer{background:var(--dark);padding:var(--py) var(--px);display:flex;align-items:center;
   justify-content:space-between;flex-wrap:wrap;gap:1rem;border-top:3px solid var(--teal)}
 footer .fl{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--teal2)}
 footer .fm{font-size:.78rem;color:rgba(255,255,255,.35);text-align:center}
@@ -430,17 +461,153 @@ footer .fr{font-size:.72rem;color:rgba(255,255,255,.2)}
 .rv.d1{transition-delay:.15s}.rv.d2{transition-delay:.3s}.rv.d3{transition-delay:.45s}
 
 /* RESPONSIVE */
+/* ══ TABLETTE (≤900px) ══ */
 @media(max-width:900px){
+  /* Nav */
+  nav{padding:.6rem 1.2rem;gap:.6rem}
   nav ul{display:none}
+  .nav-logo{font-size:.95rem}
+  .nav-countdown{font-size:.75rem;padding:.22rem .55rem}
+
+  /* Hero */
+  .hero-body{padding:3rem 1.2rem}
+  .hero h1{font-size:clamp(2.8rem,7vw,4.5rem)}
+  .hero-sub{font-size:.9rem}
+
+  /* Sections padding */
+  .profiles-section{padding:3rem 1.2rem}
+  .filter-section{padding:2rem 1.2rem 1rem}
+  .cards-grid{padding:1rem 1.2rem 3rem}
+  .compare-section,.budget-section{padding:2.5rem 1.2rem}
+  .leaderboard-section{padding:2.5rem 1.2rem}
+  .comments-section{padding:2.5rem 1.2rem}
+  .tahiti-section{padding-left:1.2rem;padding-right:1.2rem}
+
+  /* Grilles */
   .profiles-inner,.cards-grid,.tahiti-grid,.modal-cols,.tcards{grid-template-columns:1fr}
-  .cards-grid,.filter-section,.hero-body,.profiles-section,.tahiti-section{padding-left:1.2rem;padding-right:1.2rem}
   .tgallery{grid-template-columns:1fr 1fr}
   .modal-gallery{grid-template-columns:1fr 1fr}
   .modal-gallery img:last-child{display:none}
+
+  /* Modal */
+  .modal-bg{padding:.5rem}
+  .modal{border-radius:12px}
+  .modal-hero{height:240px}
+  .modal-hero-body h2{font-size:2rem}
+  .modal-left,.modal-right{padding:1.4rem 1.2rem}
+
+  /* Compare */
+  .compare-selectors{grid-template-columns:1fr;gap:.6rem}
+  .compare-vs{display:none}
+  .compare-grid{grid-template-columns:1fr}
+  .budget-controls{grid-template-columns:1fr}
+  .budget-result{grid-template-columns:1fr;gap:1.2rem}
+  .budget-breakdown{min-width:unset}
+
+  /* Leaderboard */
+  .lb-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
 }
+
+/* ══ MOBILE (≤600px) ══ */
 @media(max-width:600px){
-  .hero h1{font-size:3rem}
-  .cards-grid{grid-template-columns:1fr}
+  /* Nav */
+  nav{padding:.55rem 1rem;gap:.5rem}
+  .nav-logo span{display:none}
+  .nav-countdown{display:none}
+
+  /* Hero */
+  .hero-body{padding:2.5rem 1rem;gap:1.2rem}
+  .hero h1{font-size:2.5rem;line-height:1.05}
+  .hero-sub{font-size:.85rem;max-width:100%}
+  .hero-btns{flex-direction:column;gap:.6rem;align-items:flex-start}
+
+  /* Sections */
+  .profiles-section{padding:2rem 1rem}
+  .filter-section{padding:1.5rem 1rem .8rem}
+  .cards-grid{padding:.8rem 1rem 2.5rem}
+  .compare-section,.budget-section{padding:2rem 1rem}
+  .leaderboard-section{padding:2rem 1rem}
+  .comments-section{padding:2rem 1rem}
+  .tahiti-section{padding:2rem 1rem!important}
+
+  /* Filtres */
+  .filter-bar{gap:.4rem;flex-wrap:wrap}
+  .filter-btn{font-size:.7rem;padding:.4rem .8rem}
+
+  /* Cartes */
+  .dest-card{border-radius:12px}
+  .card-photo{height:180px}
+  .card-body{padding:1rem 1.1rem}
+  .card-name{font-size:1.3rem}
+  .card-tags{gap:.3rem}
+  .ctag{font-size:.66rem;padding:.18rem .5rem}
+  .card-cta{font-size:.78rem;padding:.55rem 1rem}
+  .vote-btn{font-size:.78rem;padding:.45rem}
+
+  /* Profils */
+  .profiles-inner{gap:1.2rem}
+  .pcard{padding:.8rem 1rem}
+  .pcard h4{font-size:.62rem}
+  .pcard p{font-size:.78rem}
+
+  /* Modal — plein écran sur mobile */
+  .modal-bg{padding:0;align-items:flex-end}
+  .modal{border-radius:16px 16px 0 0;max-height:92vh;overflow-y:auto;margin:0;width:100%}
+  .modal-hero{height:180px}
+  .modal-hero-body{padding:1.2rem}
+  .modal-hero-body h2{font-size:1.7rem}
+  .mhsub{font-size:.82rem}
+  .modal-tags{padding:.7rem 1rem;gap:.3rem}
+  .mtag{font-size:.65rem}
+  .modal-left,.modal-right{padding:1.2rem 1rem}
+  .modal-left h3,.modal-right h3{font-size:1.1rem;margin-bottom:1rem}
+  .mweek{grid-template-columns:38px 1fr;gap:.6rem;margin-bottom:.9rem}
+  .mwbadge{width:36px;height:36px;font-size:.55rem}
+  .mwbody h4{font-size:.82rem}
+  .mwbody p{font-size:.76rem}
+  .micard{padding:.8rem 1rem;margin-bottom:.6rem}
+  .micard h5{font-size:.6rem}
+  .micard p{font-size:.76rem}
+  .modal-map-wrap .map-box{height:220px!important}
+  .mustsee-item{padding:.5rem .7rem}
+  .mustsee-name{font-size:.8rem}
+  .mustsee-desc{font-size:.72rem}
+  .mc-form input,.mc-form textarea{font-size:.85rem}
+
+  /* Comparateur */
+  .compare-inner>h2,.budget-inner>h2{font-size:1.5rem}
+  .compare-card{padding:1.1rem}
+  .compare-card-title{font-size:1.05rem}
+  .compare-row{font-size:.78rem}
+  .compare-label{font-size:.72rem}
+
+  /* Budget */
+  .budget-control-group{padding:1rem}
+  .budget-total{font-size:2.2rem}
+  .budget-result{padding:1.5rem}
+  .budget-item-row{font-size:.78rem}
+  .cat-btn{font-size:.73rem;padding:.38rem .75rem}
+
+  /* Leaderboard */
+  .lb-grid{grid-template-columns:1fr 1fr;gap:.7rem}
+  .lb-card{padding:.9rem}
+  .lb-name{font-size:.82rem}
+  .lb-count{font-size:.75rem}
+
+  /* Commentaires */
+  .comments-inner>h2{font-size:1.5rem}
+  .cf-row{grid-template-columns:1fr!important}
+  .cf-btn{font-size:.85rem;padding:.65rem 1.2rem}
+  .mc-title{font-size:1rem}
+
+  /* Tahiti */
+  .tahiti-inner h2{font-size:1.6rem}
+  .tcards{gap:1rem}
+  .tcard{padding:1rem}
+
+  /* Fix overflow général */
+  section,div{max-width:100%;overflow-x:hidden}
+  img{width:100%;height:auto}
 }
 
 /* GOLD CARD — Tahiti special */
@@ -464,7 +631,7 @@ footer .fr{font-size:.72rem;color:rgba(255,255,255,.2)}
 .dest-card.gold-card .card-cta:hover{background:linear-gradient(90deg,#c8943a,#ffd700);color:#1a1a2e;}
 
 /* COMMENTS SECTION */
-.comments-section{background:#fff;padding:4rem 3rem;border-top:1px solid var(--border)}
+.comments-section{background:#fff;padding:var(--py) var(--px);border-top:1px solid var(--border)}
 .comments-inner{max-width:860px;margin:0 auto}
 .comments-inner h2{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:500;
   color:var(--dark);margin-bottom:.5rem}
@@ -472,7 +639,7 @@ footer .fr{font-size:.72rem;color:rgba(255,255,255,.2)}
 
 
 /* COMMENT FORM */
-.comments-section{background:#f7f5f0;padding:4rem 3rem;border-top:3px solid var(--teal)}
+.comments-section{background:#f7f5f0;padding:var(--py) var(--px);border-top:3px solid var(--teal)}
 .comments-inner{max-width:720px;margin:0 auto}
 .comments-inner h2{font-family:'Cormorant Garamond',serif;font-size:2rem;
   font-weight:500;color:var(--dark);margin-bottom:.5rem}
@@ -612,6 +779,46 @@ footer .fr{font-size:.72rem;color:rgba(255,255,255,.2)}
 .cdd-option .cdd-sub{font-size:.72rem;color:var(--slate)}
 .cdd-selected-emoji{flex-shrink:0;display:flex;align-items:center}
 
+
+/* ── WIDGET CARBONE ── */
+.mcarbon{margin-top:1.5rem;border-radius:12px;overflow:hidden;border:1px solid var(--border)}
+.mcarbon-header{display:flex;align-items:center;justify-content:space-between;
+  padding:.9rem 1.2rem;background:linear-gradient(135deg,#064e3b,#065f46)}
+.mcarbon-title{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(255,255,255,.7)}
+.mcarbon-total{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;
+  color:#fff;line-height:1}
+.mcarbon-pp{font-size:.72rem;color:rgba(255,255,255,.55);margin-top:.15rem}
+.mcarbon-body{padding:1rem 1.2rem;background:var(--card);display:flex;flex-direction:column;gap:.7rem}
+.mcarbon-row{display:flex;align-items:flex-start;gap:.7rem}
+.mcarbon-icon{font-size:1rem;flex-shrink:0;width:1.4rem;text-align:center;padding-top:.1rem}
+.mcarbon-detail{flex:1}
+.mcarbon-detail-label{font-size:.72rem;font-weight:700;color:var(--dark);margin-bottom:.2rem}
+.mcarbon-detail-sub{font-size:.7rem;color:var(--slate);line-height:1.4}
+.mcarbon-val{font-size:.82rem;font-weight:700;color:#059669;white-space:nowrap}
+.mcarbon-bar-wrap{margin:.25rem 0}
+.mcarbon-bar-bg{height:5px;background:var(--border);border-radius:3px;overflow:hidden}
+.mcarbon-bar-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,#059669,#34d399);
+  transition:width .8s cubic-bezier(.4,0,.2,1)}
+.mcarbon-bar-fill.high{background:linear-gradient(90deg,#d97706,#fbbf24)}
+.mcarbon-bar-fill.very-high{background:linear-gradient(90deg,#dc2626,#f87171)}
+.mcarbon-divider{height:1px;background:var(--border);margin:.2rem 0}
+.mcarbon-equiv{display:flex;align-items:center;gap:.5rem;padding:.55rem .8rem;
+  background:#f0fdf4;border-radius:8px;font-size:.73rem;color:#065f46}
+[data-theme="dark"] .mcarbon-equiv{background:#052e16;color:#6ee7b7}
+.mcarbon-comp{display:flex;align-items:center;justify-content:space-between;
+  padding:.6rem .8rem;background:#fff7ed;border-radius:8px;border:1px solid #fed7aa}
+[data-theme="dark"] .mcarbon-comp{background:#1c0a00;border-color:#7c2d12}
+.mcarbon-comp-label{font-size:.72rem;color:#9a3412;font-weight:600}
+[data-theme="dark"] .mcarbon-comp-label{color:#fb923c}
+.mcarbon-comp-val{font-size:.9rem;font-weight:800;color:#c2410c}
+[data-theme="dark"] .mcarbon-comp-val{color:#fb923c}
+.mcarbon-mode-badge{display:inline-flex;align-items:center;gap:.3rem;font-size:.66rem;
+  font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.2rem .6rem;
+  border-radius:20px;margin-bottom:.6rem}
+.mcarbon-mode-badge.car{background:rgba(5,150,105,.15);color:#059669}
+.mcarbon-mode-badge.plane{background:rgba(2,132,199,.15);color:#0284c7}
+
 /* ── COMPARATEUR ── */
 .compare-section{padding:4rem 3rem;background:#f7f5f0;border-top:3px solid var(--teal)}
 .compare-inner{max-width:960px;margin:0 auto}
@@ -665,13 +872,7 @@ footer .fr{font-size:.72rem;color:rgba(255,255,255,.2)}
 .budget-item-label{color:rgba(255,255,255,.65)}
 .budget-item-val{font-weight:600;color:#fff}
 .budget-note{font-size:.75rem;color:rgba(255,255,255,.4);margin-top:.8rem;padding-top:.8rem;border-top:1px solid rgba(255,255,255,.1)}
-@media(max-width:600px){
-  .compare-selectors{grid-template-columns:1fr;gap:.5rem}
-  .compare-vs{display:none}
-  .compare-grid{grid-template-columns:1fr}
-  .budget-controls{grid-template-columns:1fr}
-  .budget-result{grid-template-columns:1fr}
-}
+/* budget mobile → voir media query global */
 
 /* ── VOTES ── */
 .vote-btn{display:flex;align-items:center;justify-content:center;gap:.5rem;width:100%;margin-top:.6rem;padding:.55rem;border-radius:8px;border:2px solid var(--border);background:#fff;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .2s;color:var(--slate)}
@@ -680,7 +881,7 @@ footer .fr{font-size:.72rem;color:rgba(255,255,255,.2)}
 .vote-btn .vcnt{background:rgba(0,0,0,.1);border-radius:20px;padding:.05rem .45rem;font-size:.78rem;min-width:1.4rem;text-align:center}
 .vote-btn.voted .vcnt{background:rgba(255,255,255,.3)}
 /* ── LEADERBOARD ── */
-.leaderboard-section{padding:3.5rem 3rem;background:var(--dark)}
+.leaderboard-section{padding:var(--py) var(--px);background:var(--dark)}
 .leaderboard-section h2{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:400;color:#fff;margin-bottom:.3rem;text-align:center}
 .leaderboard-section p{color:rgba(255,255,255,.5);font-size:.9rem;text-align:center;margin-bottom:2rem}
 .lb-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;max-width:1100px;margin:0 auto}
@@ -712,7 +913,10 @@ footer .fr{font-size:.72rem;color:rgba(255,255,255,.2)}
     <li><a href="#commentaires">💬 Avis</a></li>
   </ul>
   <div class="nav-countdown" id="navCountdown">⏳ <span>Calcul…</span></div>
-  <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Mode sombre / clair">🌙</button>
+  <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Basculer le mode">
+  <span class="tt-icon" id="ttIcon">🌙</span>
+  <span class="tt-label" id="ttLabel">Mode clair</span>
+</button>
 </nav>
 
 <!-- HERO -->
@@ -803,7 +1007,7 @@ footer .fr{font-size:.72rem;color:rgba(255,255,255,.2)}
 <!-- FILTER + GRID -->
 
 <!-- WORLD MAP -->
-<div class="worldmap-section">
+<div class="worldmap-section" id="carte">
   <h2>🗺️ Nos destinations dans le monde</h2>
   <p>Cliquez sur un marqueur pour voir le détail de la destination</p>
   <div id="worldMap"></div>
@@ -840,7 +1044,7 @@ footer .fr{font-size:.72rem;color:rgba(255,255,255,.2)}
     <div class="modal-tags" id="mTags"></div>
     <div class="modal-cols" id="mCols">
       <div class="modal-left"><h3>🗓️ Itinéraire — 4 semaines</h3><div id="mWeeks"></div><div id="mVideos"></div><div id="mComments" class="modal-comments"></div></div>
-      <div class="modal-right"><h3>Informations pratiques</h3><div id="mInfo"></div><div id="mBudget"></div></div>
+      <div class="modal-right"><h3>Informations pratiques</h3><div id="mInfo"></div><div id="mBudget"></div><div id="mCarbon"></div></div>
     </div>
     <div class="modal-map-wrap">
       <div class="modal-map-header">
@@ -1014,6 +1218,7 @@ const DESTS = [
     budgetDetail:{total:3700,items:[{label:'✈️ Vols A/R',val:1200},{label:'🏨 Hébergement',val:900},{label:'🚗 Transport local',val:700},{label:'🎯 Activités',val:500},{label:'🍽️ Restauration',val:400}]},
     mustSee:[{name:'Nærøyfjord (UNESCO)',url:'https://en.wikipedia.org/wiki/N%C3%A6r%C3%B8yfjord',desc:'Le fjord le plus étroit et spectaculaire de Norvège'},{name:'Village de Reine, Lofoten',url:'https://en.wikipedia.org/wiki/Reine,_Nordland',desc:'Village de pêcheurs classé parmi les plus beaux du monde'},{name:'Geirangerfjord (UNESCO)',url:'https://fr.wikipedia.org/wiki/Geirangerfjord',desc:'Fjord UNESCO + cascades des Sept Soeurs'},{name:'Trollstigen',url:'https://fr.wikipedia.org/wiki/Trollstigen',desc:'Route en lacets vertigineuse, une des plus belles d Europe'},{name:'Musée des Vikings Oslo',url:'https://en.wikipedia.org/wiki/Viking_Ship_Museum',desc:'Les drakkars vikings les mieux conservés au monde'}],
     videos:[{id:'OIjonSaI3JY',title:'Norvège — Road trip estival'},{id:'hpe0M__Mg4w',title:'Fjords & Lofoten — drone 4K'}],
+    carbon:{total2p:1473,totalPP:737,trajetPP:440,localPP:297,comp2p:37,mode:'car',label:'Voiture diesel depuis Paris',note:'Aller-retour ~3 700 km · Van diesel sur place (2 500 km)'},
     info:[
       {icon:'💰',title:'Budget détaillé',c:'Vol A/R ~600€ pp · Van + ferry ~700€ · Camping/gîtes ~900€ · Activités ~1 000€',col:'#0ea5e9'},
       {icon:'✈️',title:'Transport',c:'Vol direct Oslo (Air France / Norwegian) · CDG · 2h30 · Location van',col:'#0ea5e9',sky:'https://www.skyscanner.fr/transport/vols/PAR/OSL/20260808/20260907/?adults=2'},
@@ -1038,6 +1243,7 @@ const DESTS = [
     budgetDetail:{total:5900,items:[{label:'✈️ Vols A/R',val:1900},{label:'🏨 Hébergement',val:1500},{label:'🚗 Transport local',val:900},{label:'🎯 Activités',val:1100},{label:'🍽️ Restauration',val:500}]},
     mustSee:[{name:'Grande Migration Masai Mara',url:'https://fr.wikipedia.org/wiki/Grande_migration_des_gnou%C3%A9bes',desc:'Le plus grand spectacle animalier de la planète, pic en août'},{name:'Cratère du Ngorongoro',url:'https://fr.wikipedia.org/wiki/Crat%C3%A8re_du_Ngorongoro',desc:'Caldeira avec la plus haute densité animale d Afrique'},{name:'Zanzibar Stone Town (UNESCO)',url:'https://fr.wikipedia.org/wiki/Stone_Town',desc:'Ville historique swahilie mêlant Afrique, Arabie et Inde'},{name:'Orphelinat éléphants Sheldrick',url:'https://www.sheldrickwildlifetrust.org/',desc:'Sanctuaire éléphanteaux orphelins, moment inoubliable'},{name:'Serengeti National Park',url:'https://fr.wikipedia.org/wiki/Parc_national_du_Serengeti',desc:'Parc UNESCO, savane infinie et biodiversité exceptionnelle'}],
     videos:[{id:'gTEXJsw62iU',title:'Kenya — Road trip & safari'},{id:'rUWwsEoVIwc',title:'Kenya — drone 4K'}],
+    carbon:{total2p:4732,totalPP:2366,trajetPP:1946,localPP:420,comp2p:118,mode:'plane',label:'Vol Paris → Nairobi',note:'4×4 safari + vol domestique Nairobi → Zanzibar'},
     info:[
       {icon:'💰',title:'Budget détaillé',c:'Vols ~950€ pp · Safaris & parcs ~1 500€ · Lodges & Zanzibar ~1 500€ · Transferts ~900€',col:'#ea580c'},
       {icon:'✈️',title:'Transport',c:'Paris → Nairobi (~9h, escale) · Vols internes Kenya/Tanzanie · Retour depuis Zanzibar',col:'#ea580c',sky:'https://www.skyscanner.fr/transport/vols/PAR/NBO/20260808/20260907/?adults=2'},
@@ -1062,6 +1268,7 @@ const DESTS = [
     budgetDetail:{total:3300,items:[{label:'✈️ Vols A/R',val:700},{label:'🏨 Hébergement',val:650},{label:'🚗 Transport local',val:600},{label:'🎯 Activités',val:500},{label:'🍽️ Restauration',val:850}]},
     mustSee:[{name:'Vieux Dubrovnik (UNESCO)',url:'https://fr.wikipedia.org/wiki/Dubrovnik',desc:'La perle de l Adriatique, remparts médiévaux à couper le souffle'},{name:'Bouches de Kotor (UNESCO)',url:'https://fr.wikipedia.org/wiki/Bouches_de_Kotor',desc:'Fjord méditerranéen entouré de montagnes, joyau du Monténégro'},{name:'Lacs de Plitvice (UNESCO)',url:'https://fr.wikipedia.org/wiki/Lacs_de_Plitvice',desc:'16 lacs en cascade aux couleurs turquoise magiques'},{name:'Vieux Pont de Mostar (UNESCO)',url:'https://fr.wikipedia.org/wiki/Vieux_pont_de_Mostar',desc:'Pont ottoman, symbole de réconciliation'},{name:'Riviera albanaise',url:'https://fr.wikipedia.org/wiki/C%C3%B4te_albanaise',desc:'Côte sauvage aux eaux cristallines encore préservée'}],
     videos:[{id:'-4rYBhJMANA',title:'Balkans — Road trip estival'},{id:'F4ABHwXy-Mg',title:'Balkans — drone 4K'}],
+    carbon:{total2p:1259,totalPP:630,trajetPP:415,localPP:214,comp2p:31,mode:'car',label:'Voiture diesel depuis Paris',note:'Aller-retour ~3 500 km · Route inter-pays (1 800 km)'},
     info:[
       {icon:'💰',title:'Budget détaillé',c:'Vols ~350€ pp · Voiture ~600€ · Hébergement ~650€ · Nourriture ~850€',col:'#7c3aed'},
       {icon:'✈️',title:'Transport',c:'Vol Split (EasyJet/Ryanair) ~2h · Retour Zagreb · Voiture indispensable',col:'#7c3aed',sky:'https://www.skyscanner.fr/transport/vols/PAR/SPU/20260808/20260907/?adults=2'},
@@ -1086,6 +1293,7 @@ const DESTS = [
     budgetDetail:{total:2400,items:[{label:'✈️ Vols A/R',val:800},{label:'🏨 Hébergement',val:400},{label:'🚗 Transport local',val:300},{label:'🎯 Activités',val:400},{label:'🍽️ Restauration',val:500}]},
     mustSee:[{name:'Monastère de Geghard (UNESCO)',url:'https://fr.wikipedia.org/wiki/Monast%C3%A8re_de_Geghard',desc:'Monastère creusé dans la roche volcanique, ambiance mystique'},{name:'Temple de Garni',url:'https://fr.wikipedia.org/wiki/Temple_de_Garni',desc:'Seul temple gréco-romain du Caucase, vue sur les gorges'},{name:'Wings of Tatev (record Guinness)',url:'https://fr.wikipedia.org/wiki/T%C3%A9l%C3%A9ph%C3%A9rique_Wings_of_Tatev',desc:'Plus long téléphérique réversible au monde'},{name:'Lac Sevan',url:'https://fr.wikipedia.org/wiki/Lac_S%C3%A9van',desc:'Grand lac à 2 000m, air pur et truites fraîches'},{name:'Khor Virap & mont Ararat',url:'https://fr.wikipedia.org/wiki/Khor_Virap',desc:'Vue iconique sur le symbole de l Arménie au coucher de soleil'}],
     videos:[{id:'_AosxL_OVFA',title:'Arménie — Road trip estival'},{id:'zsj3PVOcXqw',title:'Arménie — drone 4K'}],
+    carbon:{total2p:2233,totalPP:1117,trajetPP:998,localPP:119,comp2p:56,mode:'car',label:'Voiture diesel depuis Paris',note:'Aller-retour ~8 400 km via Balkans · Road trip Arménie (1 000 km)'},
     info:[
       {icon:'💰',title:'Budget détaillé',c:'Vols ~400€ pp · Voiture ~300€ · Guesthouses ~400€ · Nourriture & activités ~500€',col:'#9333ea'},
       {icon:'✈️',title:'Transport',c:'Paris → Erevan via Turkish Airlines ou Pegasus · Escale Istanbul · ~5h de vol',col:'#9333ea',sky:'https://www.skyscanner.fr/transport/vols/PAR/EVN/20260808/20260907/?adults=2'},
@@ -1110,6 +1318,7 @@ const DESTS = [
     budgetDetail:{total:3700,items:[{label:'✈️ Vols A/R',val:1500},{label:'🏨 Hébergement',val:850},{label:'🚗 Transport local',val:450},{label:'🎯 Activités',val:550},{label:'🍽️ Restauration',val:350}]},
     mustSee:[{name:'Volcan Arenal',url:'https://fr.wikipedia.org/wiki/Parc_national_du_volcan_Ar%C3%A9nal',desc:'Volcan actif, sources chaudes en pleine forêt tropicale'},{name:'Forêt nuageuse de Monteverde',url:'https://fr.wikipedia.org/wiki/R%C3%A9serve_biologique_de_Monteverde',desc:'Écosystème unique suspendu dans les nuages'},{name:'Parc national Manuel Antonio',url:'https://fr.wikipedia.org/wiki/Parc_national_Manuel_Antonio',desc:'Plages + faune tropicale en totale liberté'},{name:'Corcovado',url:'https://fr.wikipedia.org/wiki/Parc_national_de_Corcovado',desc:'Biodiversité la plus intense du continent selon National Geographic'},{name:'Baleines en août',url:'https://fr.wikipedia.org/wiki/Baleine_%C3%A0_bosse',desc:'Pic de la saison des baleines à bosse sur le Pacifique'}],
     videos:[{id:'CZXon6FoRY0',title:'Costa Rica — Road trip estival'},{id:'Id7z5Mkqypc',title:'Costa Rica — drone 4K'}],
+    carbon:{total2p:5203,totalPP:2602,trajetPP:2482,localPP:120,comp2p:130,mode:'plane',label:'Vol Paris → San José',note:'Location voiture sur place (~1 200 km)'},
     info:[
       {icon:'💰',title:'Budget détaillé',c:'Vols ~750€ pp · Voiture ~450€ · Éco-lodges ~850€ · Nourriture & activités ~900€',col:'#0d9488'},
       {icon:'✈️',title:'Transport',c:'Paris → San José (~13h, escale Miami ou Panama) · Voiture indispensable hors San José',col:'#0d9488',sky:'https://www.skyscanner.fr/transport/vols/PAR/SJO/20260808/20260907/?adults=2'},
@@ -1134,6 +1343,7 @@ const DESTS = [
     budgetDetail:{total:3300,items:[{label:'✈️ Vols A/R',val:1300},{label:'🏨 Hébergement',val:550},{label:'🚗 Transport local',val:500},{label:'🎯 Activités',val:550},{label:'🍽️ Restauration',val:400}]},
     mustSee:[{name:'Sigiriya (UNESCO)',url:'https://fr.wikipedia.org/wiki/Sigiriya',desc:'Citadelle du 5e s. sur un rocher de 200m, fresques et jardins'},{name:'Train Kandy-Ella',url:'https://fr.wikipedia.org/wiki/Chemin_de_fer_Kandy-Badulla',desc:'Un des plus beaux trajets en train au monde'},{name:'Temple de la Dent Kandy (UNESCO)',url:'https://fr.wikipedia.org/wiki/Temple_de_la_Dent_sacr%C3%A9e',desc:'Le temple le plus sacré du bouddhisme sri-lankais'},{name:'Arugam Bay',url:'https://fr.wikipedia.org/wiki/Arugam_Bay',desc:'Top 10 mondial des spots de surf'},{name:'Baleines bleues de Mirissa',url:'https://fr.wikipedia.org/wiki/Mirissa',desc:'Meilleur spot mondial pour observer les baleines bleues'}],
     videos:[{id:'f-Sdk3Jjp3I',title:'Sri Lanka — Road trip estival'},{id:'r6HTCiPwJr8',title:'Sri Lanka — drone 4K'}],
+    carbon:{total2p:4884,totalPP:2442,trajetPP:2397,localPP:45,comp2p:122,mode:'plane',label:'Vol Paris → Colombo',note:'Train + tuk-tuk · Transport très faible empreinte'},
     info:[
       {icon:'💰',title:'Budget détaillé',c:'Vols ~650€ pp · Voiture + chauffeur ~500€ · Guesthouses ~550€ · Nourriture & activités ~700€',col:'#b45309'},
       {icon:'✈️',title:'Transport',c:'Paris → Colombo (~11h, escale Dubaï ou Doha) · Voiture avec chauffeur conseillé (~30€/j)',col:'#b45309',sky:'https://www.skyscanner.fr/transport/vols/PAR/CMB/20260808/20260907/?adults=2'},
@@ -1158,6 +1368,7 @@ const DESTS = [
     budgetDetail:{total:5200,items:[{label:'✈️ Vols A/R',val:1800},{label:'🏨 Hébergement',val:1100},{label:'🚗 Transport local',val:1050},{label:'🎯 Activités',val:650},{label:'🍽️ Restauration',val:600}]},
     mustSee:[{name:'Fushimi Inari Taisha Kyoto',url:'https://fr.wikipedia.org/wiki/Fushimi_Inari-taisha',desc:'5 000 torii orangés gravissant la montagne — icône du Japon'},{name:'Mont Fuji & Hakone',url:'https://fr.wikipedia.org/wiki/Mont_Fuji',desc:'Le symbole du Japon, mirroir dans le lac Ashi'},{name:'Lavandes de Furano Hokkaido',url:'https://fr.wikipedia.org/wiki/Furano',desc:'Pic juillet-août : champs de lavande à perte de vue'},{name:'Hiroshima & Miyajima (UNESCO)',url:'https://en.wikipedia.org/wiki/Hiroshima_Peace_Memorial',desc:'Mémorial de la Paix + torii flottant, expérience émouvante'},{name:'Quartier Gion Kyoto',url:'https://fr.wikipedia.org/wiki/Gion',desc:'Quartier des geishas depuis l Ère Edo, magique au crépuscule'}],
     videos:[{id:'csgiI_TquGA',title:'Japon — Road trip estival'},{id:'G5RpJwCJDqc',title:'Japon — drone 4K'}],
+    carbon:{total2p:5507,totalPP:2753,trajetPP:2735,localPP:18,comp2p:138,mode:'plane',label:'Vol Paris → Tokyo',note:'Shinkansen + métro · Transport exemplaire'},
     info:[
       {icon:'💰',title:'Budget détaillé',c:'Vols ~900€ pp · JR Pass 21j ~650€ · Voiture Hokkaido ~400€ · Ryokan/camping ~1 100€ · Activités ~900€',col:'#c2410c'},
       {icon:'✈️',title:'Transport',c:'Vol Paris→Sapporo (escale Tokyo, ~13h) · Retour Fukuoka→Paris · JR Pass',col:'#c2410c',sky:'https://www.skyscanner.fr/transport/vols/PAR/TYO/20260808/20260907/?adults=2'},
@@ -1186,6 +1397,7 @@ const DESTS = [
     budgetDetail:{total:3400,items:[{label:'✈️ Vols A/R',val:1100},{label:'🏨 Hébergement',val:750},{label:'🚗 Transport local',val:550},{label:'🎯 Activités',val:600},{label:'🍽️ Restauration',val:400}]},
     mustSee:[{name:'Carthagène des Indes (UNESCO)',url:'https://fr.wikipedia.org/wiki/Cartagena_de_Indias',desc:'Joyau colonial espagnol aux couleurs vives'},{name:'Vallée de Cocora Salento',url:'https://fr.wikipedia.org/wiki/Vall%C3%A9e_de_Cocora',desc:'Palmiers de cire géants dans un décor de conte'},{name:'Commune 13 Medellín',url:'https://en.wikipedia.org/wiki/El_Poblado',desc:'Transformation urbaine fascinante, street art monumental'},{name:'Parc Tayrona',url:'https://fr.wikipedia.org/wiki/Parc_national_naturel_de_Tayrona',desc:'Jungle tropicale plongeant dans la mer des Caraïbes'},{name:'Musée de l Or Bogotá',url:'https://en.wikipedia.org/wiki/Gold_Museum,_Bogot%C3%A1',desc:'Plus grande collection d orfèvrerie précolombienne au monde'}],
     videos:[{id:'tJ-WBdrR_ak',title:'Colombie — Road trip estival'},{id:'OpRiGjb4y38',title:'Colombie — drone 4K'}],
+    carbon:{total2p:5436,totalPP:2718,trajetPP:2538,localPP:180,comp2p:136,mode:'plane',label:'Vol Paris → Bogotá',note:'Bus + 2 vols internes (Bogotá → Cartagène → Santa Marta)'},
     info:[
       {icon:'💰',title:'Budget détaillé',c:'Vols ~700€ pp · Vols internes ~200€ · Hostels/éco-lodges ~600€ · Nourriture ~750€',col:'#16a34a'},
       {icon:'✈️',title:'Transport',c:'Paris → Cartagena (~12h, escale) · Vols internes Avianca < 80€',col:'#16a34a',sky:'https://www.skyscanner.fr/transport/vols/PAR/CTG/20260808/20260907/?adults=2'},
@@ -1210,6 +1422,7 @@ const DESTS = [
     budgetDetail:{total:5000,items:[{label:'✈️ Vols A/R',val:1600},{label:'🏨 Hébergement',val:1400},{label:'🚗 Transport local',val:600},{label:'🎯 Activités',val:1000},{label:'🍽️ Restauration',val:400}]},
     mustSee:[{name:'Table Mountain Le Cap',url:'https://fr.wikipedia.org/wiki/Montagne_de_la_Table',desc:'Vue à 360° sur l océan depuis le plateau sommital'},{name:'Parc national Kruger',url:'https://fr.wikipedia.org/wiki/Parc_national_Kruger',desc:'Un des meilleurs parcs d Afrique pour les Big Five'},{name:'Cap de Bonne-Espérance',url:'https://fr.wikipedia.org/wiki/Cap_de_Bonne-Esp%C3%A9rance',desc:'Bout du continent africain, manchots et babouins'},{name:'Blyde River Canyon',url:'https://fr.wikipedia.org/wiki/Canyon_de_la_Blyde',desc:'3e plus grand canyon du monde'},{name:'Robben Island (UNESCO)',url:'https://fr.wikipedia.org/wiki/%C3%8Ele_Robben',desc:'Île-prison de Mandela, visites par d anciens prisonniers'}],
     videos:[{id:'Shw0HEMuq_k',title:'Afrique du Sud — Road trip estival'},{id:'hb4p6nstPK4',title:'Afrique du Sud — drone 4K'}],
+    carbon:{total2p:5636,totalPP:2818,trajetPP:2538,localPP:280,comp2p:141,mode:'plane',label:'Vol Paris → Johannesburg',note:'Voiture Garden Route + Kruger (~2 500 km)'},
     info:[
       {icon:'💰',title:'Budget détaillé',c:'Vols ~850€ pp · Voiture ~700€ · Lodges/B&B ~900€ · Nourriture ~900€',col:'#b45309'},
       {icon:'✈️',title:'Transport',c:'Paris → Cape Town (~13h, escale) · Retour Johannesburg · Conduite à gauche',col:'#b45309',sky:'https://www.skyscanner.fr/transport/vols/PAR/CPT/20260808/20260907/?adults=2'},
@@ -1235,6 +1448,7 @@ const DESTS = [
     budgetDetail:{total:6000,items:[{label:'✈️ Vols A/R',val:3200},{label:'🏨 Hébergement',val:1100},{label:'🚗 Transport local',val:400},{label:'🎯 Activités',val:700},{label:'🍽️ Restauration',val:600}]},
     mustSee:[{name:'Lagon de Bora Bora',url:'https://fr.wikipedia.org/wiki/Bora-Bora',desc:'Le lagon aux 50 nuances de bleu — le plus beau du monde'},{name:'Marae Taputapuatea (UNESCO)',url:'https://whc.unesco.org/en/list/1529',desc:'Temple polynésien UNESCO, centre spirituel de Polynésie'},{name:'Baies de Moorea',url:'https://fr.wikipedia.org/wiki/Moorea',desc:'Baie de Cook et d Opunohu, parmi les plus belles du monde'},{name:'Dauphins Moorea',url:'https://fr.wikipedia.org/wiki/Moorea',desc:'Nager avec les dauphins dans le lagon'},{name:'Huahine authentique',url:'https://fr.wikipedia.org/wiki/Huahine',desc:'La Polynésie avant le tourisme de masse'}],
     videos:[{id:'UPbV_r9I_0A',title:'Tahiti — Road trip estival'},{id:'YbUkAJHCgd0',title:'Tahiti — drone 4K'}],
+    carbon:{total2p:9155,totalPP:4577,trajetPP:4427,localPP:150,comp2p:229,mode:'plane',label:'Vol Paris → Papeete',note:'Vols inter-îles (Moorea · Bora Bora · Huahine) + bateaux'},
     info:[
       {icon:'💰',title:'Budget détaillé',c:'Vols A/R ~1 600€ pp · Air Tahiti inter-îles ~400€ · Pensions locales ~1 100€ · Activités & repas ~800€',col:'#c8943a'},
       {icon:'✈️',title:'Comment y aller',c:'Air Tahiti Nui depuis Paris CDG · ~22h avec escale · Inter-îles : Air Tahiti ou ferry goélette local',col:'#c8943a',sky:'https://www.skyscanner.fr/transport/vols/PAR/PPT/20260808/20260907/?adults=2'},
@@ -1274,10 +1488,17 @@ DESTS.forEach(d => {
         ${d.visited?'<div class="badge-visited">Déjà visités</div>':''}
         ${d.marionVisited?'<div class="badge-marion">Déjà vu par Marion</div>':''}
       </div>
-      <div class="card-flag">${d.flag}</div>
+      <div class="card-flag">${d.flagImg
+        ? '<img src="'+d.flagImg+'" alt="'+d.name+'" style="width:32px;height:24px;border-radius:3px;object-fit:cover;box-shadow:0 1px 4px rgba(0,0,0,.3)">'
+        : d.flag}</div>
     </div>
     <div class="card-body">
-      <h3>${d.name}</h3>
+      <h3 style="display:flex;align-items:center;gap:.5rem">
+        ${d.flagImg
+          ? '<img src="'+d.flagImg+'" alt="'+d.name+'" style="width:22px;height:16px;border-radius:2px;object-fit:cover;flex-shrink:0">'
+          : '<span style="font-size:1rem">'+d.flag+'</span>'}
+        ${d.name}
+      </h3>
       <div class="card-sub">${d.sub}</div>
       <div class="card-budget" style="background:${d.color}18;color:${d.color};border:1px solid ${d.color}40">
         💰 ${d.budget}
@@ -1370,6 +1591,7 @@ function openModal(id) {
       </div>`).join('')}
       <div class="mbudget-note">* Estimation moyenne — varie selon confort et date de réservation</div>
     </div>`;}
+  renderCarbon(d);
   // Videos in left column
   if(d.videos&&d.videos.length){
     document.getElementById('mVideos').innerHTML=`<div class="mvid-section">
@@ -1449,8 +1671,15 @@ document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
 
 function applyTheme(theme) {
   document.documentElement.setAttribute('data-theme', theme);
-  const btn = document.getElementById('themeToggle');
-  if (btn) btn.textContent = theme === 'dark' ? '☀️' : '🌙';
+  const icon  = document.getElementById('ttIcon');
+  const label = document.getElementById('ttLabel');
+  if (theme === 'dark') {
+    if (icon)  icon.textContent  = '☀️';
+    if (label) label.textContent = 'Mode clair';
+  } else {
+    if (icon)  icon.textContent  = '🌙';
+    if (label) label.textContent = 'Mode sombre';
+  }
   localStorage.setItem('theme', theme);
 }
 
@@ -1460,6 +1689,112 @@ function toggleTheme() {
   const current = document.documentElement.getAttribute('data-theme');
   applyTheme(current === 'dark' ? 'light' : 'dark');
   setTimeout(() => document.body.classList.remove('theme-transitioning'), 400);
+}
+
+
+// ══════════════════════════════════════════════════════════════════
+// WIDGET CARBONE
+// ══════════════════════════════════════════════════════════════════
+const CARBON_MAX = 4577; // Tahiti — référence max pour les barres
+
+function renderCarbon(d) {
+  const el = document.getElementById('mCarbon');
+  if (!el || !d.carbon) return;
+  const c = d.carbon;
+
+  // Pourcentage pour la barre globale
+  const pct = Math.round((c.totalPP / CARBON_MAX) * 100);
+  const pctTrajet = Math.round((c.trajetPP / c.totalPP) * 100);
+  const pctLocal = 100 - pctTrajet;
+
+  // Classe couleur selon niveau
+  let barClass = 'mcarbon-bar-fill';
+  if (pct > 70) barClass += ' very-high';
+  else if (pct > 40) barClass += ' high';
+
+  // Équivalences parlantes
+  const kg = c.totalPP;
+  const beefKg = Math.round(kg / 27);        // 27 kg CO2 par kg de boeuf
+  const kmVoiture = Math.round(kg / 0.21);   // 210 g CO2/km voiture essence
+  const annuelPct = Math.round((kg / 9400) * 100); // 9.4t = empreinte fr moyenne
+
+  // Tonnes ou kg selon la valeur
+  const fmt = (v) => v >= 1000 ? (v/1000).toFixed(2).replace('.',',') + ' t' : v + ' kg';
+
+  const modeLabel = c.mode === 'car'
+    ? '<span class="mcarbon-mode-badge car">🚗 Voiture</span>'
+    : '<span class="mcarbon-mode-badge plane">✈️ Avion</span>';
+
+  el.innerHTML = `
+    <div class="mcarbon">
+      <div class="mcarbon-header">
+        <div>
+          <div class="mcarbon-title">🌿 Empreinte carbone du voyage</div>
+          <div class="mcarbon-total">${fmt(c.total2p)} CO₂</div>
+          <div class="mcarbon-pp">${fmt(c.totalPP)} par personne · 2 voyageurs</div>
+        </div>
+      </div>
+      <div class="mcarbon-body">
+        ${modeLabel}
+
+        <div class="mcarbon-row">
+          <div class="mcarbon-icon">${c.mode === 'car' ? '🚗' : '✈️'}</div>
+          <div class="mcarbon-detail">
+            <div class="mcarbon-detail-label">${c.label}</div>
+            <div class="mcarbon-bar-wrap">
+              <div class="mcarbon-bar-bg">
+                <div class="${barClass}" style="width:${pctTrajet}%"></div>
+              </div>
+            </div>
+            <div class="mcarbon-detail-sub">${c.note.split('·')[0].trim()}</div>
+          </div>
+          <div class="mcarbon-val">${fmt(c.trajetPP)}</div>
+        </div>
+
+        <div class="mcarbon-row">
+          <div class="mcarbon-icon">🚌</div>
+          <div class="mcarbon-detail">
+            <div class="mcarbon-detail-label">Transports sur place</div>
+            <div class="mcarbon-bar-wrap">
+              <div class="mcarbon-bar-bg">
+                <div class="mcarbon-bar-fill${pctLocal < 20 ? '' : ' high'}" style="width:${pctLocal}%"></div>
+              </div>
+            </div>
+            <div class="mcarbon-detail-sub">${c.note.includes('·') ? c.note.split('·').slice(1).join('·').trim() : c.note}</div>
+          </div>
+          <div class="mcarbon-val">${fmt(c.localPP)}</div>
+        </div>
+
+        <div class="mcarbon-divider"></div>
+
+        <div class="mcarbon-row" style="align-items:center">
+          <div class="mcarbon-icon">📊</div>
+          <div class="mcarbon-detail">
+            <div class="mcarbon-detail-label">Impact global / personne</div>
+            <div class="mcarbon-bar-wrap">
+              <div class="mcarbon-bar-bg">
+                <div class="${barClass}" style="width:${pct}%"></div>
+              </div>
+            </div>
+            <div class="mcarbon-detail-sub">= ${annuelPct}% de l'empreinte annuelle française moyenne</div>
+          </div>
+          <div class="mcarbon-val">${fmt(c.totalPP)}</div>
+        </div>
+
+        <div class="mcarbon-equiv">
+          💡 Équivaut à <strong style="margin:0 .25rem">${beefKg} kg de bœuf</strong> ou <strong style="margin:0 .25rem">${kmVoiture.toLocaleString('fr-FR')} km</strong> en voiture essence
+        </div>
+
+        <div class="mcarbon-comp">
+          <div>
+            <div class="mcarbon-comp-label">🌱 Compensation carbone (Gold Standard)</div>
+            <div style="font-size:.68rem;color:var(--slate);margin-top:.15rem">~25 €/tonne CO₂ · Sources : ADEME 2023</div>
+          </div>
+          <div class="mcarbon-comp-val">≈ ${c.comp2p} €</div>
+        </div>
+
+      </div>
+    </div>`;
 }
 
 // ══════════════════════════════════════════════════════════════════
@@ -1499,6 +1834,18 @@ setInterval(updateCountdown, 60000);
     if (el) observer.observe(el);
   });
 })();
+
+
+// Helper : drapeau image ou emoji fallback
+function flagHtml(d, size) {
+  const s = size || 20;
+  if (d.flagImg) {
+    return '<img src="' + d.flagImg + '" alt="' + d.name
+      + '" style="width:' + s + 'px;height:' + Math.round(s*0.75) + 'px;'
+      + 'border-radius:2px;object-fit:cover;vertical-align:middle;flex-shrink:0">';
+  }
+  return '<span style="font-size:' + (s*0.08) + 'rem">' + d.flag + '</span>';
+}
 
 // ══════════════════════════════════════════════════════════════════
 // CUSTOM DROPDOWNS
@@ -1706,12 +2053,18 @@ function renderCompare() {
   const totalA = dA.budgetDetail ? dA.budgetDetail.total : 0;
   const totalB = dB.budgetDetail ? dB.budgetDetail.total : 0;
   const winnerBudget = totalA < totalB ? 'A' : totalB < totalA ? 'B' : null;
+  const co2A = dA.carbon ? dA.carbon.totalPP : Infinity;
+  const co2B = dB.carbon ? dB.carbon.totalPP : Infinity;
+  const winnerCarbon = co2A < co2B ? 'A' : co2B < co2A ? 'B' : null;
 
-  grid.innerHTML = buildCompareCard(dA, dA, dB, winnerBudget === 'A') + buildCompareCard(dB, dB, dA, winnerBudget === 'B');
+  grid.innerHTML = buildCompareCard(dA, dA, dB, winnerBudget === 'A', winnerCarbon === 'A')
+                 + buildCompareCard(dB, dB, dA, winnerBudget === 'B', winnerCarbon === 'B');
 }
 
-function buildCompareCard(d, self, other, isCheaper) {
+function buildCompareCard(d, self, other, isCheaper, isGreener) {
   if (!d) return '<div class="compare-placeholder">Sélectionne une destination</div>';
+
+  // ── Budget ──
   const total = d.budgetDetail ? d.budgetDetail.total : 0;
   const otherTotal = other && other.budgetDetail ? other.budgetDetail.total : total;
   const maxTotal = Math.max(total, otherTotal) || 1;
@@ -1731,6 +2084,59 @@ function buildCompareCard(d, self, other, isCheaper) {
       <span class="compare-val" style="color:${cheaper && otherItem ? '#059669' : 'var(--dark)'}">${it.val.toLocaleString('fr-FR')} €</span>
     </div>`;
   }).join('') : '';
+
+  // ── Carbone ──
+  const fmtC = v => v >= 1000 ? (v/1000).toFixed(2).replace('.',',') + ' t' : v + ' kg';
+  let carbonBlock = '';
+  if (d.carbon) {
+    const c = d.carbon;
+    const otherCO2 = other && other.carbon ? other.carbon.totalPP : c.totalPP;
+    const maxCO2 = Math.max(c.totalPP, otherCO2) || 1;
+    const co2Pct = Math.round((c.totalPP / maxCO2) * 100);
+    const otherCO2Trajet = other && other.carbon ? other.carbon.trajetPP : c.trajetPP;
+    const maxT = Math.max(c.trajetPP, otherCO2Trajet) || 1;
+    const tPct = Math.round((c.trajetPP / maxT) * 100);
+    const otherCO2Local = other && other.carbon ? other.carbon.localPP : c.localPP;
+    const maxL = Math.max(c.localPP, otherCO2Local) || 1;
+    const lPct = Math.round((c.localPP / maxL) * 100);
+    // couleur barre selon niveau global
+    const barCol = co2Pct > 70 ? '#dc2626' : co2Pct > 40 ? '#d97706' : '#059669';
+    const modeIcon = c.mode === 'car' ? '🚗' : '✈️';
+
+    carbonBlock = `
+    <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)">
+      <div style="font-size:.78rem;color:var(--slate);margin-bottom:.7rem;font-weight:600">🌿 Empreinte carbone / personne</div>
+
+      <div class="compare-row">
+        <span class="compare-label">${modeIcon} ${c.mode === 'car' ? 'Voiture' : 'Vol A/R'}</span>
+        <div style="flex:1;margin:0 .8rem">
+          <div class="compare-bar-bg"><div class="compare-bar-fill" style="width:${tPct}%;background:${barCol}"></div></div>
+        </div>
+        <span class="compare-val" style="color:${tPct <= 50 ? '#059669' : 'var(--dark)'}">${fmtC(c.trajetPP)}</span>
+      </div>
+
+      <div class="compare-row">
+        <span class="compare-label">🚌 Sur place</span>
+        <div style="flex:1;margin:0 .8rem">
+          <div class="compare-bar-bg"><div class="compare-bar-fill" style="width:${lPct}%;background:${barCol}"></div></div>
+        </div>
+        <span class="compare-val" style="color:${lPct <= 50 ? '#059669' : 'var(--dark)'}">${fmtC(c.localPP)}</span>
+      </div>
+
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:.8rem;padding-top:.6rem;border-top:2px solid var(--border)">
+        <div>
+          <div style="font-weight:700;font-size:.9rem">Total CO₂/pers.</div>
+          <div style="font-size:.68rem;color:var(--slate);margin-top:.1rem">Compensation ≈ ${c.comp2p} € (2 pers.)</div>
+        </div>
+        <span style="font-weight:800;font-size:1.15rem;color:${barCol}">${fmtC(c.totalPP)}</span>
+      </div>
+      <div style="margin-top:.5rem">
+        <div class="compare-bar-bg" style="height:8px">
+          <div class="compare-bar-fill" style="width:${co2Pct}%;background:${barCol};height:8px"></div>
+        </div>
+      </div>
+    </div>`;
+  }
 
   const tags3 = (d.tags || []).slice(0,3).join(' · ');
 
@@ -1763,7 +2169,11 @@ function buildCompareCard(d, self, other, isCheaper) {
       </div>
     </div>
     <div class="compare-bar-wrap"><div class="compare-bar-bg"><div class="compare-bar-fill" style="width:${pct}%;background:${d.color}"></div></div></div>
-    ${isCheaper ? '<div class="compare-winner">✓ Option la moins chère</div>' : ''}
+    ${carbonBlock}
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.8rem">
+      ${isCheaper ? '<div class="compare-winner">💰 Option la moins chère</div>' : ''}
+      ${isGreener ? '<div class="compare-winner" style="background:linear-gradient(135deg,#059669,#10b981)">🌿 Option la plus verte</div>' : ''}
+    </div>
   </div>`;
 }
 
@@ -1960,7 +2370,10 @@ function quizShowResults() {
     <div class="qz-dest" onclick="openModal('${item.d.id}')">
       <div class="qz-rank">${MEDALS[i]}</div>
       <div class="qz-info">
-        <strong>${item.d.flag} ${item.d.name}</strong>
+        <span style="display:flex;align-items:center;gap:.35rem">
+          ${item.d.flagImg ? '<img src="'+item.d.flagImg+'" style="width:20px;height:15px;border-radius:2px;object-fit:cover">' : item.d.flag}
+          <strong>${item.d.name}</strong>
+        </span>
         <span>${item.d.sub}</span>
       </div>
       <div class="qz-pct">${item.pct}%</div>
@@ -2021,7 +2434,10 @@ window.addEventListener('load',function(){
     </div>`,{maxWidth:220});
     mk.on('mouseover',function(){this.openPopup();});
     const p=document.createElement('span');
-    p.className='wmap-pill';p.textContent=d.flag+' '+d.name;
+    p.className='wmap-pill';
+    p.innerHTML=(d.flagImg
+      ? '<img src="'+d.flagImg+'" style="width:18px;height:13px;border-radius:2px;object-fit:cover;vertical-align:middle;margin-right:5px">'
+      : d.flag+' ')+d.name;
     p.onclick=()=>{wm.setView(c,5,{animate:true,duration:1});mk.openPopup();};
     leg.appendChild(p);
   });
@@ -2158,7 +2574,9 @@ function renderLeaderboard() {
     return '<div class="lb-card ' + cls + '">'
       + '<div class="lb-rank">' + medal + '</div>'
       + '<div class="lb-info">'
-      + '<div class="lb-name">' + d.flag + ' ' + d.name + '</div>'
+      + '<div class="lb-name">'
+      + (d.flagImg ? '<img src="' + d.flagImg + '" style="width:20px;height:15px;border-radius:2px;object-fit:cover;vertical-align:middle;margin-right:5px">' : d.flag + ' ')
+      + d.name + '</div>'
       + '<div class="lb-count">' + d.count + ' ' + voteWord + '</div>'
       + '<div class="lb-bar-wrap"><div class="lb-bar" style="width:' + pct + '%;background:' + d.color + '"></div></div>'
       + '</div></div>';
